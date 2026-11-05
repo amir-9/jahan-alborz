@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Design tokens - see :root below */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Persian font family token */
+  --font-sans: var(--font-vazirmatn), "Vazirmatn", "Tahoma", sans-serif;
+}
+
+:root {
+  /* Brand palette */
+  --primary: #142d4e; /* deep navy blue */
+  --primary-foreground: #ffffff;
+
+  --secondary: #f28c28; /* warm orange */
+  --secondary-foreground: #ffffff;
+
+  /* Neutrals */
+  --background: #f5f7fa;
+  --foreground: #263445;
+  --surface: #ffffff;
+  --muted: #eef2f7;
+  --muted-foreground: #5b6b7f;
+  --border: #e2e8f0;
+  --input: #cbd5e1;
+  --ring: #142d4e;
+
+  /* Font */
+  --font-vazirmatn: "Vazirmatn", "Tahoma", "Helvetica Neue", Arial, sans-serif;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/Vazirmatn.woff2") format("woff2");
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "liga" 0, "calt" 0;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-vazirmatn);
+    min-height: 100vh;
+  }
+}
