@@ -1,49 +1,83 @@
-import NextAuth from "next-auth/next";
+import type { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/db/prisma";
-import { createOtp, verifyOtp } from "@/lib/auth/otp";
-import { getSmsProvider } from "@/lib/sms/sms";
+import { getPrisma } from "@/lib/db/prisma";
+import { verifyOtp } from "@/lib/auth/otp";
+import { verifyPassword } from "@/lib/auth/password";
+import { isAdminRole } from "@/lib/auth/permissions";
+import { consumeRateLimit } from "@/lib/security/rate-limit";
+import {
+  isValidIranMobile,
+  normalizeIranMobile,
+} from "@/lib/utils/normalize";
 
-const CUSTOMER_PURPOSE_LOGIN = "login";
-const CUSTOMER_PURPOSE_REGISTER = "register";
+const CUSTOMER_OTP_PURPOSE = "login";
 
-export const authOptions = {
+const LOGIN_WINDOW_MS = 15 * 60 * 1000;
+const MAX_PASSWORD_ATTEMPTS = 10;
+
+async function isLoginRateLimited(key: string): Promise<boolean> {
+  const result = await consumeRateLimit(
+    key,
+    MAX_PASSWORD_ATTEMPTS,
+    LOGIN_WINDOW_MS,
+  );
+
+  return !result.allowed;
+}
+
+export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     Credentials({
       id: "customer-password",
-      name: "Customer",
+      name: "Customer password",
       credentials: {
         identifier: { label: "Phone Number", type: "tel" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const identifier = credentials?.identifier;
+        const rawIdentifier = credentials?.identifier?.trim();
         const password = credentials?.password;
 
-        if (!identifier || !password) {
+        if (!rawIdentifier || !password || !isValidIranMobile(rawIdentifier)) {
           return null;
         }
 
-        const user = await prisma.user.findUnique({
-          where: { phone: identifier },
-        });
+        const phone = normalizeIranMobile(rawIdentifier);
 
-        if (!user?.passwordHash) {
+        try {
+          if (await isLoginRateLimited(`auth:password:${phone}`)) {
+            return null;
+          }
+
+          const prisma = getPrisma();
+          const user = await prisma.user.findUnique({ where: { phone } });
+
+          if (!user?.passwordHash || !user.isActive) {
+            return null;
+          }
+
+          const isValid = await verifyPassword(password, user.passwordHash);
+          if (!isValid) {
+            return null;
+          }
+
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { lastLoginAt: new Date() },
+          });
+
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            role: user.role,
+          };
+        } catch (error) {
+          console.error("[auth] password login failed", error);
           return null;
         }
-
-        const isValid = await bcrypt.compare(password, user.passwordHash);
-        if (!isValid) {
-          return null;
-        }
-
-        return {
-          id: user.id,
-          name: user.name,
-          phone: user.phone,
-          role: user.role,
-        };
       },
     }),
     Credentials({
@@ -54,37 +88,51 @@ export const authOptions = {
         password: { label: "OTP Code", type: "password" },
       },
       async authorize(credentials) {
-        const identifier = credentials?.identifier;
-        const code = credentials?.password;
+        const rawIdentifier = credentials?.identifier?.trim();
+        const code = credentials?.password?.trim();
 
-        if (!identifier || !code) {
+        if (!rawIdentifier || !code || !isValidIranMobile(rawIdentifier)) {
           return null;
         }
 
-        const verification = await verifyOtp(
-          identifier,
-          code,
-          CUSTOMER_PURPOSE_LOGIN,
-        );
+        const phone = normalizeIranMobile(rawIdentifier);
 
-        if (!verification.valid) {
+        try {
+          const verification = await verifyOtp(
+            phone,
+            code,
+            CUSTOMER_OTP_PURPOSE,
+          );
+
+          if (!verification.valid) {
+            return null;
+          }
+
+          const prisma = getPrisma();
+          const user = await prisma.user.upsert({
+            where: { phone },
+            create: {
+              phone,
+              lastLoginAt: new Date(),
+            },
+            update: { lastLoginAt: new Date() },
+          });
+
+          if (!user.isActive) {
+            return null;
+          }
+
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            role: user.role,
+          };
+        } catch (error) {
+          console.error("[auth] OTP login failed", error);
           return null;
         }
-
-        const user = await prisma.user.findUnique({
-          where: { phone: identifier },
-        });
-
-        if (!user) {
-          return null;
-        }
-
-        return {
-          id: user.id,
-          name: user.name,
-          phone: user.phone,
-          role: user.role,
-        };
       },
     }),
     Credentials({
@@ -95,60 +143,66 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const email = credentials?.email;
+        const email = credentials?.email?.trim().toLowerCase();
         const password = credentials?.password;
 
         if (!email || !password) {
           return null;
         }
 
-        const adminUser = await prisma.user.findFirst({
-          where: { email, role: { in: ["ADMIN", "SUPER_ADMIN"] } },
-        });
+        try {
+          if (await isLoginRateLimited(`auth:admin:${email}`)) {
+            return null;
+          }
 
-        if (!adminUser?.passwordHash) {
+          const prisma = getPrisma();
+          const adminUser = await prisma.user.findUnique({ where: { email } });
+
+          if (
+            !adminUser?.passwordHash ||
+            !adminUser.isActive ||
+            !isAdminRole(adminUser.role)
+          ) {
+            return null;
+          }
+
+          const isValid = await verifyPassword(
+            password,
+            adminUser.passwordHash,
+          );
+          if (!isValid) {
+            return null;
+          }
+
+          await prisma.user.update({
+            where: { id: adminUser.id },
+            data: { lastLoginAt: new Date() },
+          });
+
+          return {
+            id: adminUser.id,
+            name: adminUser.name,
+            email: adminUser.email,
+            phone: adminUser.phone,
+            role: adminUser.role,
+          };
+        } catch (error) {
+          console.error("[auth] admin login failed", error);
           return null;
         }
-
-        const isValid = await bcrypt.compare(password, adminUser.passwordHash);
-        if (!isValid) {
-          return null;
-        }
-
-        return {
-          id: adminUser.id,
-          name: adminUser.name,
-          email: adminUser.email,
-          role: adminUser.role,
-        };
       },
     }),
   ],
   session: {
-    strategy: "jwt" as const,
-    maxAge: 60 * 60,
+    strategy: "jwt",
+    maxAge: 7 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
   },
   pages: {
     signIn: "/auth/login",
   },
   callbacks: {
-    async jwt({
-      token,
-      user,
-      account,
-      profile,
-      trigger,
-      isNewUser,
-      session,
-    }: {
-      token: JWT;
-      user: User;
-      account: { provider?: string; providerAccountId?: string } | null;
-      profile?: { sub?: string; name?: string; email?: string; picture?: string };
-      trigger?: "signIn" | "signUp" | "update";
-      isNewUser?: boolean;
-      session?: unknown;
-    }): Promise<JWT> {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.phone = user.phone;
@@ -156,27 +210,15 @@ export const authOptions = {
       }
       return token;
     },
-    async session({
-      session,
-      token,
-      user,
-      newSession,
-      trigger,
-    }: {
-      session: Session;
-      token: JWT;
-      user: User;
-      newSession: unknown;
-      trigger: "update";
-    }): Promise<Session> {
+    async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
-        session.user.phone = token.phone as string;
-        session.user.role = token.role as string;
+        session.user.id = token.id;
+        session.user.phone = token.phone;
+        session.user.role = token.role;
       }
       return session;
     },
   },
 };
 
-export default NextAuth(authOptions);
+export default authOptions;

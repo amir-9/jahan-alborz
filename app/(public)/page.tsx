@@ -1,435 +1,730 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { connection } from "next/server";
 import {
-  Flame,
-  Package,
-  PlugZap,
+  ArrowLeft,
+  CalendarCheck,
+  Check,
+  ClipboardList,
+  Clock,
+  Headset,
+  Mail,
+  MapPin,
+  PackageCheck,
+  Phone,
+  Quote,
   ShieldCheck,
-  Star,
-  Thermometer,
   Truck,
   Wrench,
 } from "lucide-react";
+import { Hero } from "@/components/home/hero";
+import { CategoryCard } from "@/components/shop/category-card";
+import { ProductCard } from "@/components/shop/product-card";
+import { ServiceCard } from "@/components/services/service-card";
+import { ProductVisual } from "@/components/shared/product-visual";
+import { Reveal } from "@/components/shared/reveal";
+import { SectionHeading } from "@/components/shared/section-heading";
+import { StarRating } from "@/components/shared/star-rating";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config/site";
+import { customerReviews, repairServices } from "@/lib/data/catalog";
 import {
-  blogPosts,
-  customerReviews,
-  productCategories,
-  products,
-  repairServices,
-} from "@/lib/data/catalog";
+  getBlogPosts,
+  getCategories,
+  getProducts,
+} from "@/lib/data/catalog-repository";
+import {
+  formatDate,
+  formatNumber,
+  toTelHref,
+  toWhatsAppHref,
+} from "@/lib/utils/format";
 
-function formatPrice(value: number) {
-  return `${value.toLocaleString("fa-IR")} تومان`;
-}
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
-export default function Home() {
-  const featuredProducts = products.filter((product) => product.isFeatured);
-  const bestSellerProducts = products.filter((product) => product.isBestSeller);
-  const categories = productCategories;
+const trustItems = [
+  {
+    icon: Truck,
+    title: "ارسال به سراسر ایران",
+    description: "روش و هزینه ارسال پیش از تأیید سفارش هماهنگ می‌شود",
+  },
+  {
+    icon: Wrench,
+    title: "خدمات در قزوین",
+    description: "تعمیر، سرویس دوره‌ای و نصب با هماهنگی قبلی",
+  },
+  {
+    icon: PackageCheck,
+    title: "تأمین قطعات یدکی",
+    description: "قطعات مصرفی و یدکی پکیج و رادیاتور",
+  },
+  {
+    icon: Headset,
+    title: "مشاوره پیش از خرید",
+    description: "بررسی نیاز فنی و انتخاب ظرفیت مناسب",
+  },
+];
+
+const whyUs = [
+  {
+    icon: Headset,
+    title: "مشاوره فنی، پیش از خرید",
+    description:
+      "ظرفیت گرمایشی، ابعاد فضا و شرایط نصب را بررسی می‌کنیم تا انتخاب متناسب‌تری داشته باشید.",
+  },
+  {
+    icon: PackageCheck,
+    title: "تأمین قطعات و لوازم",
+    description:
+      "قطعات مصرفی و یدکی پکیج و رادیاتور با هماهنگی موجودی و مدل دستگاه تأمین می‌شود.",
+  },
+  {
+    icon: Wrench,
+    title: "خدمات میدانی در قزوین",
+    description:
+      "بازدید، عیب‌یابی، نصب و سرویس با زمان‌بندی هماهنگ‌شده و توضیح شفاف مراحل کار.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "پیگیری پس از فروش",
+    description:
+      "پس از خرید یا خدمات، برای پیگیری وضعیت و پاسخ به سوالات فنی در دسترس هستیم.",
+  },
+];
+
+const processSteps = [
+  {
+    icon: ClipboardList,
+    title: "بررسی نیاز",
+    description:
+      "متراژ فضا، وضعیت لوله‌کشی و نیاز گرمایشی شما را بررسی می‌کنیم.",
+  },
+  {
+    icon: Headset,
+    title: "مشاوره و انتخاب",
+    description:
+      "گزینه‌های مناسب بودجه و شرایط محل را با توضیح مزایا و محدودیت‌ها مقایسه می‌کنیم.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "هماهنگی خرید و خدمات",
+    description:
+      "موجودی، قیمت و زمان ارسال یا مراجعه تکنسین به‌صورت شفاف هماهنگ می‌شود.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "اجرا و پیگیری",
+    description:
+      "پس از تحویل یا نصب، وضعیت کار بررسی و نکات نگهداری به شما توضیح داده می‌شود.",
+  },
+];
+
+/** The homepage reads catalog data from the database on each request. */
+export const instant = false;
+
+export default async function HomePage() {
+  await connection();
+
+  const [products, productCategories, blogPosts] = await Promise.all([
+    getProducts(),
+    getCategories(),
+    getBlogPosts(),
+  ]);
+
+  const featuredProducts = products
+    .filter((product) => product.isFeatured)
+    .slice(0, 4);
+  const bestSellers = products
+    .filter((product) => product.isBestSeller)
+    .slice(0, 4);
+  const posts = blogPosts.slice(0, 3);
+  const heroProduct =
+    featuredProducts.find(
+      (product) =>
+        product.purchasingMode === "FIXED" && product.inventory > 0,
+    ) ??
+    products.find(
+      (product) =>
+        product.purchasingMode === "FIXED" && product.inventory > 0,
+    ) ??
+    null;
+  const productsPerCategory = new Map<string, number>();
+
+  for (const product of products) {
+    productsPerCategory.set(
+      product.categorySlug,
+      (productsPerCategory.get(product.categorySlug) ?? 0) + 1,
+    );
+  }
+
+  const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.country}`,
+  )}`;
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-primary text-primary-foreground">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-6 px-4 py-20 text-center sm:px-6 sm:py-28 lg:py-32">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm">
-            <ShieldCheck className="h-4 w-4 text-secondary" aria-hidden="true" />
-            فروشگاه تخصصی تجهیزات گرمایشی
-          </span>
-          <h1 className="max-w-3xl text-3xl font-bold leading-10 tracking-tight sm:text-5xl sm:leading-12">
-            گرم کردن خانه، ساده و مطمئن
-          </h1>
-          <p className="max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
-            فروش پکیج و رادیاتور، خدمات تعمیر و نگهداری و نصب تخصصی در
-            قزوین. با ما هدفون وای‌رسانی و راحتی را تجربه کنید.
-          </p>
-          <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
-            <Button
-              size="lg"
-              asChild
-              className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
-            >
-              <Link href="/shop">مشاهده محصولات</Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white/40 bg-transparent text-primary-foreground hover:bg-white/10 hover:text-primary-foreground"
-              asChild
-            >
-              <Link href="/services/request">درخواست خدمات تعمیر</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <Hero featuredProduct={heroProduct} />
 
-      {/* Business advantages & trust indicators */}
-      <section className="bg-background">
-        <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="flex gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <Truck className="h-6 w-6" aria-hidden="true" />
-              </div>
+      {/* Trust strip */}
+      <div className="page-container relative z-10 -mt-8">
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-soft sm:grid-cols-2 lg:grid-cols-4">
+          {trustItems.map((item) => (
+            <div
+              key={item.title}
+              className="flex items-start gap-3 bg-surface p-5"
+            >
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
+                <item.icon className="h-5 w-5" aria-hidden="true" />
+              </span>
               <div>
-                <h2 className="text-base font-semibold text-foreground">
-                  فروش سراسر ایران
-                </h2>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  ارسال محلی و بین‌شهری با هزینه‌های مدیریت‌شده.
+                <p className="text-[13px] font-bold text-foreground">
+                  {item.title}
+                </p>
+                <p className="mt-1 text-[11px] leading-5 text-muted-foreground">
+                  {item.description}
                 </p>
               </div>
             </div>
-            <div className="flex gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <Wrench className="h-6 w-6" aria-hidden="true" />
-              </div>
-              <div>
-                <h2 className="text-base font-semibold text-foreground">
-                  خدمات در قزوین
-                </h2>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  تعمیر و نگهداری تخصصی با پوشش شهر قزوین.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <ShieldCheck className="h-6 w-6" aria-hidden="true" />
-              </div>
-              <div>
-                <h2 className="text-base font-semibold text-foreground">
-                  پشتیبانی فنی
-                </h2>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  تیم متخصص در کنار شما برای هرگام از درد.
-                </p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* Product categories */}
-      <section className="bg-surface">
-        <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-                دسته‌بندی محصولات
-              </h2>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                جامعیت در انواع تجهیزات گرمایشی.
-              </p>
-            </div>
-            <Button variant="outline" asChild>
-              <Link href="/shop">مشاهده همه محصولات</Link>
-            </Button>
-          </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((category) => {
-              const Icon = category.slug === "pki" ? Flame : category.slug === "radiator" ? Thermometer : category.slug === "spare-parts" ? Package : PlugZap;
-              return (
-                <Link
-                  key={category.slug}
-                  href="/shop"
-                  className="rounded-xl border border-border bg-background p-6 transition-shadow hover:shadow-md"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Icon className="h-6 w-6" aria-hidden="true" />
-                  </div>
-                  <h3 className="mt-4 text-base font-semibold text-foreground">
-                    {category.name}
-                  </h3>
-                  <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                    {category.description}
-                  </p>
-                </Link>
-              );
-            })}
+      {/* Categories */}
+      <section className="py-16 sm:py-20 lg:py-24">
+        <div className="page-container">
+          <Reveal>
+            <SectionHeading
+              eyebrow="دسته‌بندی محصولات"
+              title="از پکیج تا قطعات یدکی، همه در یک‌جا"
+              description="محصولات فروشگاه در چهار دسته اصلی دسته‌بندی شده‌اند تا سریع‌تر به آنچه نیاز دارید برسید."
+              action={
+                <Button asChild variant="outline">
+                  <Link href="/shop">
+                    همه محصولات
+                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              }
+            />
+          </Reveal>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {productCategories.map((category, index) => (
+              <Reveal key={category.slug} delay={index * 0.07}>
+                <CategoryCard
+                  category={category}
+                  productCount={productsPerCategory.get(category.slug) ?? 0}
+                  className="h-full"
+                />
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Featured products */}
-      <section className="bg-background">
-        <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-                محصولات ویژه
-              </h2>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                گزینه‌های برتر فروشگاه.
-              </p>
-            </div>
-            <Button variant="outline" asChild>
-              <Link href="/shop">مشاهده محصولات</Link>
-            </Button>
+      <section className="border-y border-border bg-surface py-16 sm:py-20 lg:py-24">
+        <div className="page-container">
+          <Reveal>
+            <SectionHeading
+              eyebrow="منتخب فروشگاه"
+              title="پیشنهادهای ویژه جهان البرز"
+              description="چند محصول پرکاربرد برای شروع؛ قیمت و موجودی پیش از تأیید سفارش بررسی می‌شود."
+              action={
+                <Button asChild variant="ghost">
+                  <Link href="/shop">
+                    مشاهده فروشگاه
+                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              }
+            />
+          </Reveal>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredProducts.map((product, index) => (
+              <Reveal key={product.id} delay={index * 0.07}>
+                <ProductCard product={product} className="h-full" />
+              </Reveal>
+            ))}
           </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredProducts.map((product) => (
-              <div
-                key={product.id}
-                className="rounded-xl border border-border bg-surface p-6"
-              >
-                <span className="inline-flex items-center gap-1 rounded-full bg-secondary/10 px-3 py-1 text-xs font-medium text-secondary">
-                  {product.brand}
-                </span>
-                <h3 className="mt-4 text-base font-semibold text-foreground">
-                  {product.name}
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {product.inventory > 0 ? `${product.inventory} عدد در انبار` : "ناموجود"}
-                </p>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-lg font-bold text-primary">
-                    {formatPrice(product.discountedPrice ?? product.price)}
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="py-16 sm:py-20 lg:py-24">
+        <div className="page-container">
+          <Reveal>
+            <SectionHeading
+              eyebrow="خدمات تخصصی"
+              title="نصب، سرویس و تعمیر تجهیزات گرمایشی"
+              description="خدمات میدانی در شهر قزوین انجام می‌شود. برای هماهنگی بازدید، درخواست خود را ثبت کنید یا تلفنی تماس بگیرید."
+            />
+          </Reveal>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_20rem]">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {repairServices.slice(0, 4).map((service, index) => (
+                <Reveal key={service.slug} delay={index * 0.06}>
+                  <ServiceCard service={service} showFeatures={false} className="h-full" />
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal delay={0.1}>
+              <div className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-primary-900 p-6 text-primary-foreground">
+                <div className="absolute inset-0 bg-grid-light opacity-60" aria-hidden="true" />
+                <div className="relative flex flex-1 flex-col">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-secondary">
+                    <Wrench className="h-5 w-5" aria-hidden="true" />
                   </span>
+                  <h3 className="mt-5 text-lg font-bold">درخواست خدمات</h3>
+                  <p className="mt-2 text-[12px] leading-7 text-primary-foreground/70">
+                    نوع خدمت، محدوده و زمان پیشنهادی را در فرم ثبت کنید. برای
+                    هماهنگی نهایی با شما تماس می‌گیریم.
+                  </p>
+                  <ul className="mt-4 space-y-2 text-[11px] text-primary-foreground/75">
+                    {repairServices.slice(0, 3).map((service) => (
+                      <li key={service.slug} className="flex items-center gap-2">
+                        <Check className="h-3.5 w-3.5 text-secondary" aria-hidden="true" />
+                        {service.name}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto space-y-2 pt-6">
+                    <Button asChild variant="secondary" className="w-full">
+                      <Link href="/services/request">ثبت درخواست خدمات</Link>
+                    </Button>
+                    <a
+                      href={toTelHref(siteConfig.contact.phone)}
+                      className="flex items-center justify-center gap-2 rounded-xl border border-white/15 px-4 py-2.5 text-xs font-semibold text-white/85 transition-colors hover:bg-white/10"
+                      dir="ltr"
+                    >
+                      <Phone className="h-4 w-4" aria-hidden="true" />
+                      {siteConfig.contact.phone}
+                    </a>
+                  </div>
                 </div>
               </div>
-            ))}
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Best sellers */}
-      <section className="bg-surface">
-        <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-6">
+      {/* Why us */}
+      <section className="relative overflow-hidden bg-primary-900 py-16 text-primary-foreground sm:py-20 lg:py-24">
+        <div className="absolute inset-0 bg-grid-light opacity-60" aria-hidden="true" />
+        <div
+          className="absolute -end-32 top-10 h-80 w-80 rounded-full bg-secondary/15 blur-3xl"
+          aria-hidden="true"
+        />
+        <div className="page-container relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <Reveal>
             <div>
-              <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-                پرفروش‌ترین محصولات
+              <div className="flex items-center gap-2 text-xs font-semibold text-secondary">
+                <span className="h-px w-6 bg-current" aria-hidden="true" />
+                چرا جهان البرز
+              </div>
+              <h2 className="mt-3 text-2xl font-extrabold leading-[1.5] sm:text-3xl">
+                انتخابی آگاهانه،
+                <br />
+                با همراهی در تمام مسیر
               </h2>
+              <p className="mt-4 max-w-md text-[13px] leading-8 text-primary-foreground/70">
+                خرید تجهیزات گرمایشی فقط انتخاب یک محصول نیست؛ ظرفیت، نحوه
+                نصب و سرویس دوره‌ای در عملکرد و دوام سیستم اثر دارد. ما این
+                مسیر را با شما مرور می‌کنیم.
+              </p>
+
+              <ul className="mt-6 space-y-3">
+                {[
+                  "توضیح شفاف گزینه‌ها و محدودیت‌ها",
+                  "هماهنگی زمان ارسال یا مراجعه تکنسین",
+                  "پاسخ‌گویی به سوالات فنی پس از خرید",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-[12.5px] text-primary-foreground/80">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-secondary/20 text-secondary">
+                      <Check className="h-3 w-3" aria-hidden="true" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button asChild variant="secondary">
+                  <Link href="/about">درباره ما</Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-white/25 bg-transparent text-white hover:border-white/40 hover:bg-white/10 hover:text-white"
+                >
+                  <Link href="/contact">تماس با ما</Link>
+                </Button>
+              </div>
             </div>
-            <Button variant="outline" asChild>
-              <Link href="/shop">مشاهده محصولات</Link>
-            </Button>
-          </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {bestSellerProducts.map((product) => (
-              <div
-                key={product.id}
-                className="rounded-xl border border-border bg-background p-6"
-              >
-                <h3 className="text-base font-semibold text-foreground">
-                  {product.name}
-                </h3>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-lg font-bold text-primary">
-                    {formatPrice(product.discountedPrice ?? product.price)}
+          </Reveal>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {whyUs.map((item, index) => (
+              <Reveal key={item.title} delay={index * 0.08}>
+                <div className="h-full rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm transition-colors duration-300 hover:border-secondary/30 hover:bg-white/[0.09]">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/15 text-secondary">
+                    <item.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
+                  <h3 className="mt-4 text-[13.5px] font-bold">{item.title}</h3>
+                  <p className="mt-2 text-[11.5px] leading-6 text-primary-foreground/65">
+                    {item.description}
+                  </p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Repair services */}
-      <section className="bg-background">
-        <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-                خدمات تعمیر و نگهداری
-              </h2>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                پوشش تعمیر در شهر قزوین.
-              </p>
-            </div>
-            <Button asChild>
-              <Link href="/services/request">ثبت درخواست تعمیر</Link>
-            </Button>
-          </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {repairServices.map((service) => (
-              <div
-                key={service.slug}
-                className="rounded-xl border border-border bg-surface p-6"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Wrench className="h-6 w-6" aria-hidden="true" />
+      {/* Process */}
+      <section className="py-16 sm:py-20 lg:py-24">
+        <div className="page-container">
+          <Reveal>
+            <SectionHeading
+              align="center"
+              eyebrow="مسیر همکاری"
+              title="از مشاوره تا تحویل، در چهار قدم"
+              description="فرایند خرید و خدمات را ساده و قابل پیگیری نگه داشته‌ایم."
+            />
+          </Reveal>
+
+          <div className="relative mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div
+              className="pointer-events-none absolute inset-x-16 top-8 hidden border-t border-dashed border-primary/20 lg:block"
+              aria-hidden="true"
+            />
+            {processSteps.map((step, index) => (
+              <Reveal key={step.title} delay={index * 0.08}>
+                <div className="relative h-full rounded-2xl border border-border bg-surface p-5 shadow-soft">
+                  <div className="flex items-center justify-between">
+                    <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-secondary shadow-sm">
+                      <step.icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <span className="text-2xl font-extrabold text-primary/10">
+                      {formatNumber(index + 1)}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-[13.5px] font-bold text-primary">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-[11.5px] leading-6 text-muted-foreground">
+                    {step.description}
+                  </p>
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-foreground">
-                  {service.name}
-                </h3>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  {service.description}
-                </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why choose us */}
-      <section className="bg-surface">
-        <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-            چرا جهان البرز؟
-          </h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <div className="rounded-xl border border-border bg-background p-6">
-              <h3 className="text-base font-semibold text-foreground">
-                تخصص فنی
-              </h3>
-              <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                تیم متخصص و باتجربه برای هر مدل از پکیج و رادیاتور.
-              </p>
-            </div>
-            <div className="rounded-xl border border-border bg-background p-6">
-              <h3 className="text-base font-semibold text-foreground">
-                قیمت‌های شفاف
-              </h3>
-              <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                هزینه‌های بدون غیرضروری و پرداخت به‌صورت مقرون‌به‌صرفه.
-              </p>
-            </div>
-            <div className="rounded-xl border border-border bg-background p-6">
-              <h3 className="text-base font-semibold text-foreground">
-                پشتیبانی پس از فروش
-              </h3>
-              <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                خدمات بعد از فروش و سرویس دوره‌ای برای تمام محصولات.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Bestsellers */}
+      <section className="border-y border-border bg-surface py-16 sm:py-20 lg:py-24">
+        <div className="page-container">
+          <Reveal>
+            <SectionHeading
+              eyebrow="پرفروش‌ترین‌ها"
+              title="محصولاتی که بیشتر انتخاب می‌شوند"
+              description="محصولاتی که بیشتر انتخاب می‌شوند؛ پس از ثبت سفارش، موجودی و زمان ارسال نهایی می‌شود."
+              action={
+                <Button asChild variant="outline">
+                  <Link href="/shop">
+                    خرید از فروشگاه
+                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              }
+            />
+          </Reveal>
 
-      {/* How to request repair */}
-      <section className="bg-background">
-        <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-            نحوه درخواست خدمات تعمیر
-          </h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {[
-              { step: "۱", title: "ثبت درخواست", text: "فرم سفارش خدمات یا تماس با ما." },
-              { step: "۲", title: "همکاری فنی", text: "تحویل یا ارسال محل، بررسی تخصصی." },
-              { step: "۳", title: "انجام خدمات", text: "اصلاح، تعمیر یا نصب." },
-            ].map((item) => (
-              <div key={item.step} className="rounded-xl border border-border bg-surface p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-sm font-bold text-secondary-foreground">
-                  {item.step}
-                </span>
-                <h3 className="mt-4 text-base font-semibold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  {item.text}
-                </p>
-              </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {bestSellers.map((product, index) => (
+              <Reveal key={product.id} delay={index * 0.07}>
+                <ProductCard product={product} className="h-full" compact />
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Reviews */}
-      <section className="bg-surface">
-        <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-            نظرات مشتریان
-          </h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {customerReviews.map((review) => (
-              <div key={review.id} className="rounded-xl border border-border bg-background p-6">
-                <div className="flex items-center gap-2">
-                  {Array.from({ length: review.rating }).map((_, index) => (
-                    <Star
-                      key={index}
-                      className="h-4 w-4 fill-secondary text-secondary"
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
-                <h3 className="mt-4 text-base font-semibold text-foreground">
-                  {review.title}
-                </h3>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  {review.comment}
-                </p>
-                <p className="mt-3 text-sm font-medium text-foreground">
-                  — {review.author}
-                </p>
-              </div>
+      <section className="py-16 sm:py-20 lg:py-24">
+        <div className="page-container">
+          <Reveal>
+            <SectionHeading
+              eyebrow="تجربه مشتریان"
+              title="آنچه مشتریان درباره ما می‌گویند"
+              description="این نظرات برای نمایش ساختار صفحه درج شده‌اند و نمونه نمایشی هستند؛ تأیید هویت یا صحت آن‌ها انجام نشده است."
+              action={<Badge variant="outline">نمونه نمایشی</Badge>}
+            />
+          </Reveal>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {customerReviews.map((review, index) => (
+              <Reveal key={review.id} delay={index * 0.08}>
+                <figure className="flex h-full flex-col rounded-2xl border border-border bg-surface p-6 shadow-soft">
+                  <Quote className="h-7 w-7 text-secondary/40" aria-hidden="true" />
+                  <blockquote className="mt-3 text-[12.5px] leading-7 text-muted-foreground">
+                    {review.comment}
+                  </blockquote>
+                  <figcaption className="mt-auto flex items-center justify-between gap-3 border-t border-border pt-4">
+                    <div>
+                      <p className="text-[13px] font-bold text-foreground">
+                        {review.title}
+                      </p>
+                      <p className="mt-0.5 text-[11px] text-muted-foreground">
+                        {review.author}، {review.city}
+                      </p>
+                    </div>
+                    <StarRating value={review.rating} />
+                  </figcaption>
+                </figure>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Blog */}
-      <section className="bg-background">
-        <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-                آموزش‌های گرمایشی
-              </h2>
-            </div>
-            <Button variant="outline" asChild>
-              <Link href="/blog">مشاهده مقالات</Link>
-            </Button>
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {blogPosts.map((post) => (
-              <Link
-                key={post.id}
-                href="/blog"
-                className="rounded-xl border border-border bg-surface p-6 transition-shadow hover:shadow-md"
-              >
-                <h3 className="text-lg font-semibold text-foreground">
-                  {post.title}
-                </h3>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  {post.excerpt}
-                </p>
-                <p className="mt-3 text-xs text-muted-foreground">
-                  {post.readTime} دقیقه مطالعه
-                </p>
-              </Link>
+      <section className="border-y border-border bg-surface py-16 sm:py-20 lg:py-24">
+        <div className="page-container">
+          <Reveal>
+            <SectionHeading
+              eyebrow="وبلاگ"
+              title="راهنماهای خرید و نگهداری"
+              description="مقالاتی کوتاه برای انتخاب بهتر و استفاده صحیح‌تر از تجهیزات گرمایشی."
+              action={
+                <Button asChild variant="ghost">
+                  <Link href="/blog">
+                    همه مقالات
+                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              }
+            />
+          </Reveal>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {posts.map((post, index) => (
+              <Reveal key={post.id} delay={index * 0.07}>
+                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift">
+                  <div className="relative flex h-40 items-center justify-center overflow-hidden border-b border-border bg-gradient-to-br from-primary-50 via-surface to-secondary-50">
+                    <div className="absolute inset-0 bg-dots opacity-60" aria-hidden="true" />
+                    <ProductVisual
+                      variant={index === 0 ? "boiler" : index === 1 ? "radiator" : "parts"}
+                      className="relative h-32 w-auto opacity-90 transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="flex items-center gap-2 text-[10.5px] text-muted-foreground">
+                      <Badge variant="secondary">{post.category}</Badge>
+                      <span className="inline-flex items-center gap-1">
+                        <Clock className="h-3 w-3" aria-hidden="true" />
+                        {formatNumber(post.readTime)} دقیقه مطالعه
+                      </span>
+                    </div>
+                    <h3 className="mt-3 text-[14px] font-bold leading-7 text-foreground transition-colors group-hover:text-primary">
+                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                    </h3>
+                    <p className="mt-2 line-clamp-2 text-[11.5px] leading-6 text-muted-foreground">
+                      {post.excerpt}
+                    </p>
+                    <div className="mt-auto flex items-center justify-between pt-4 text-[10.5px] text-muted-foreground">
+                      <span>{formatDate(post.publishedAt)}</span>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="inline-flex items-center gap-1 font-bold text-primary transition-colors hover:text-secondary-600"
+                      >
+                        ادامه مطلب
+                        <ArrowLeft className="h-3 w-3" aria-hidden="true" />
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Store location & contact */}
-      <section className="bg-surface">
-        <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-2">
+      {/* Location & contact */}
+      <section className="py-16 sm:py-20 lg:py-24">
+        <div className="page-container grid gap-8 lg:grid-cols-2">
+          <Reveal>
             <div>
-              <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-                شفارفتار فروشگاه
-              </h2>
-              <p className="mt-4 text-sm leading-8 text-muted-foreground">
-                {siteConfig.address.fullAddress}
-              </p>
-              <p className="mt-2 text-sm leading-8 text-muted-foreground">
-                شارژ محلات شمالی و جنوبی قزوین.
-              </p>
+              <SectionHeading
+                eyebrow="آدرس و تماس"
+                title="در قزوین، در دسترس شما"
+                description="برای بازدید حضوری، استعلام موجودی یا هماهنگی خدمات، پیش از مراجعه تماس بگیرید تا زمان دقیق هماهنگ شود."
+              />
+
+              <div className="mt-8 space-y-4">
+                <div className="flex items-start gap-3 rounded-2xl border border-border bg-surface p-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
+                    <MapPin className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold text-foreground">آدرس فروشگاه</p>
+                    <p className="mt-1 text-[12px] leading-6 text-muted-foreground">
+                      {siteConfig.address.fullAddress}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <a
+                    href={toTelHref(siteConfig.contact.phone)}
+                    className="flex items-start gap-3 rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-primary/25"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
+                      <Phone className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <div>
+                      <p className="text-xs font-bold text-foreground">تلفن</p>
+                      <p className="mt-1 text-[12px] text-muted-foreground" dir="ltr">
+                        {siteConfig.contact.phone}
+                      </p>
+                    </div>
+                  </a>
+
+                  <div className="flex items-start gap-3 rounded-2xl border border-border bg-surface p-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
+                      <Clock className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <div>
+                      <p className="text-xs font-bold text-foreground">ساعت کاری</p>
+                      <p className="mt-1 text-[12px] leading-6 text-muted-foreground">
+                        {siteConfig.business.workHours.days}
+                        <br />
+                        {siteConfig.business.workHours.hours}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <a
+                  href={`mailto:${siteConfig.contact.email}`}
+                  className="flex items-start gap-3 rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-primary/25"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
+                    <Mail className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold text-foreground">ایمیل</p>
+                    <p className="mt-1 text-[12px] text-muted-foreground" dir="ltr">
+                      {siteConfig.contact.email}
+                    </p>
+                  </div>
+                </a>
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button asChild>
+                  <Link href="/contact">جزئیات تماس</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <a
+                    href={toWhatsAppHref(siteConfig.contact.whatsapp)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    گفت‌وگو در واتساپ
+                  </a>
+                </Button>
+              </div>
             </div>
-            <div className="rounded-xl border border-border bg-background p-6">
-              <h3 className="text-base font-semibold text-foreground">
-                تماس با ما
-              </h3>
-              <div className="mt-4 space-y-3 text-sm text-muted-foreground">
-                <p>
-                  تلفن: <span className="font-medium text-foreground">{siteConfig.contact.phone}</span>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="relative h-full min-h-[22rem] overflow-hidden rounded-3xl border border-border bg-primary-50">
+              <div className="absolute inset-0 bg-grid opacity-80" aria-hidden="true" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-900/10 to-transparent" aria-hidden="true" />
+
+              <div className="absolute start-6 top-6 rounded-xl border border-border bg-surface/95 px-3.5 py-2 text-[11px] font-semibold text-primary shadow-soft backdrop-blur">
+                قزوین، خیابان دانشگاه
+              </div>
+
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative">
+                  <span className="absolute -inset-6 animate-ping rounded-full bg-secondary/15" aria-hidden="true" />
+                  <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-primary text-secondary shadow-lift">
+                    <MapPin className="h-7 w-7" aria-hidden="true" />
+                  </span>
+                </div>
+              </div>
+
+              <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-border bg-surface p-4 shadow-soft">
+                <p className="text-[11px] leading-6 text-muted-foreground">
+                  موقعیت دقیق فروشگاه روی نقشه در این نسخه ثبت نشده است. برای
+                  مسیریابی، از لینک زیر استفاده کنید یا پیش از مراجعه تماس
+                  بگیرید.
                 </p>
-                <p>
-                  واتساپ:{" "}
-                  <span className="font-medium text-foreground">{siteConfig.contact.whatsapp}</span>
+                <a
+                  href={mapHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-bold text-primary transition-colors hover:text-secondary-600"
+                >
+                  مسیریابی در نقشه
+                  <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="page-container pb-20">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-3xl bg-primary-900 px-6 py-12 text-primary-foreground sm:px-10 lg:px-14">
+            <div className="absolute inset-0 bg-grid-light opacity-70" aria-hidden="true" />
+            <div
+              className="absolute -start-16 -top-16 h-56 w-56 rounded-full bg-secondary/20 blur-3xl"
+              aria-hidden="true"
+            />
+            <div className="relative flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
+              <div className="max-w-xl">
+                <h2 className="text-2xl font-extrabold leading-[1.5] sm:text-3xl">
+                  برای انتخاب درست، از مشاوره ما استفاده کنید
+                </h2>
+                <p className="mt-3 text-[12.5px] leading-7 text-primary-foreground/70">
+                  پیش از خرید پکیج یا رادیاتور، نیاز فضای خود را با کارشناسان
+                  ما بررسی کنید. برای خدمات تعمیر و نصب هم می‌توانید درخواست
+                  خود را ثبت کنید.
                 </p>
-                <p>
-                  ایمیل:{" "}
-                  <span className="font-medium text-foreground">{siteConfig.contact.email}</span>
-                </p>
+              </div>
+              <div className="flex w-full flex-col gap-2.5 sm:w-auto sm:flex-row">
+                <Button asChild variant="secondary" size="lg">
+                  <Link href="/services/request">ثبت درخواست خدمات</Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="border-white/25 bg-transparent text-white hover:border-white/40 hover:bg-white/10 hover:text-white"
+                >
+                  <a href={toTelHref(siteConfig.contact.phone)} dir="ltr">
+                    <Phone className="h-4 w-4" aria-hidden="true" />
+                    {siteConfig.contact.phone}
+                  </a>
+                </Button>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   );

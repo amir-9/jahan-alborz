@@ -1,65 +1,330 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                      */
+/* ------------------------------------------------------------------ */
+
 @theme inline {
-  /* Design tokens - see :root below */
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-900: var(--primary-900);
+
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-50: var(--secondary-50);
+  --color-secondary-100: var(--secondary-100);
+  --color-secondary-600: var(--secondary-600);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-surface: var(--surface);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Persian font family token */
-  --font-sans: var(--font-vazirmatn), "Vazirmatn", "Tahoma", sans-serif;
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+
+  /* Typography */
+  --font-sans: var(--font-vazirmatn), "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+
+  /* Radii */
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  /* Elevation */
+  --shadow-soft: 0 1px 2px rgb(20 45 78 / 0.04), 0 12px 32px -18px rgb(20 45 78 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(20 45 78 / 0.04), 0 24px 48px -24px rgb(20 45 78 / 0.28);
+  --shadow-header: 0 8px 24px -20px rgb(20 45 78 / 0.45);
 }
 
 :root {
   /* Brand palette */
-  --primary: #142d4e; /* deep navy blue */
+  --primary: #142d4e;
   --primary-foreground: #ffffff;
+  --primary-50: #f1f5fa;
+  --primary-100: #dfe8f3;
+  --primary-200: #c2d3e6;
+  --primary-500: #2a4f7a;
+  --primary-600: #1d3c64;
+  --primary-700: #142d4e;
+  --primary-900: #0b1b30;
 
-  --secondary: #f28c28; /* warm orange */
+  --secondary: #f28c28;
   --secondary-foreground: #ffffff;
+  --secondary-50: #fff6ec;
+  --secondary-100: #fde7d1;
+  --secondary-600: #d9781a;
 
   /* Neutrals */
   --background: #f5f7fa;
   --foreground: #263445;
   --surface: #ffffff;
+  --surface-muted: #f8fafc;
   --muted: #eef2f7;
   --muted-foreground: #5b6b7f;
   --border: #e2e8f0;
   --input: #cbd5e1;
   --ring: #142d4e;
 
-  /* Font */
-  --font-vazirmatn: "Vazirmatn", "Tahoma", "Helvetica Neue", Arial, sans-serif;
+  --success: #0f766e;
+  --success-foreground: #ffffff;
+  --danger: #b91c1c;
+  --danger-foreground: #ffffff;
 }
 
-@font-face {
-  font-family: "Vazirmatn";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/fonts/Vazirmatn.woff2") format("woff2");
-}
+/* ------------------------------------------------------------------ */
+/* Base                                                               */
+/* ------------------------------------------------------------------ */
 
 @layer base {
+  * {
+    border-color: var(--border);
+  }
+
   html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: "liga" 0, "calt" 0;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: var(--font-vazirmatn);
+    font-family: var(--font-vazirmatn), "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
     min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.45;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Thin, unobtrusive scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--input) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--input);
+    border-radius: 9999px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilities                                                          */
+/* ------------------------------------------------------------------ */
+
+@layer utilities {
+  .page-container {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .page-container {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-container {
+      padding-inline: 2rem;
+    }
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(20 45 78 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(20 45 78 / 0.045) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .bg-grid-light {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.055) 1px, transparent 1px);
+    background-size: 52px 52px;
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(rgb(20 45 78 / 0.12) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .surface-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Fade the edges of horizontally scrollable rows */
+  .edge-fade {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 4%,
+      black 96%,
+      transparent
+    );
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion                                                             */
+/* ------------------------------------------------------------------ */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sheet-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sheet-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out both;
+}
+
+.sheet-overlay[data-state="open"] {
+  animation: fade-in 0.22s ease-out both;
+}
+
+.sheet-left[data-state="open"] {
+  animation: sheet-in-left 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.sheet-right[data-state="open"] {
+  animation: sheet-in-right 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.skeleton {
+  background-image: linear-gradient(
+    90deg,
+    rgb(226 232 240 / 0.6) 25%,
+    rgb(241 245 249 / 0.9) 37%,
+    rgb(226 232 240 / 0.6) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion                                                     */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

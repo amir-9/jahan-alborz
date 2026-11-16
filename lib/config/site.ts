@@ -24,26 +24,31 @@ export const siteConfig = {
   address: {
     street: "خیابان دانشگاه",
     city: "قزوین",
-    province: "اصفهان",
+    province: "قزوین",
     country: "ایران",
-    postalCode: "317000",
+    postalCode: "",
     fullAddress: "خیابان دانشگاه، قزوین، ایران",
   },
 
   business: {
-    experienceYears: 1,
+    experienceYears: 2,
     serviceCoverageCity: "قزوین",
     productCoverage: "سراسر ایران",
+    workHours: {
+      days: "شنبه تا پنجشنبه",
+      hours: "۹:۰۰ تا ۲۰:۰۰",
+      friday: "جمعه: تعطیل",
+    },
   },
 } as const;
 
 export const siteMetadata = {
   title: {
-    default: "جهان البرز",
-    template: `%s | جهان البرز`,
+    default: "جهان البرز | فروشگاه تخصصی تجهیزات گرمایشی در قزوین",
+    template: "%s | جهان البرز",
   },
   description:
-    "فروشگاه جهان البرز؛ فروش پکیج، رادیاتور، قطعات و لوازم یدکی و خدمات تعمیر و نگهداری تجهیزات گرمایشی در قزوین.",
+    "فروشگاه جهان البرز؛ فروش پکیج، رادیاتور، قطعات و لوازم یدکی با ارسال به سراسر ایران و خدمات تعمیر، سرویس و نصب تجهیزات گرمایشی در قزوین.",
   keywords: [
     "جهان البرز",
     "تجهیزات گرمایشی",
