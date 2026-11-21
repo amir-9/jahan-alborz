@@ -44,7 +44,7 @@ export function Hero({ featuredProduct }: HeroProps) {
       />
 
       <div className="page-container relative grid items-center gap-12 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-24">
-        <div className="animate-fade-up">
+        <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-caption font-medium text-on-primary-muted backdrop-blur">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-70" />
@@ -120,8 +120,7 @@ export function Hero({ featuredProduct }: HeroProps) {
         </div>
 
         <div
-          className="relative mx-auto w-full max-w-md animate-fade-up lg:max-w-none"
-          style={{ animationDelay: "120ms" }}
+          className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
           <div className="relative h-[28rem] overflow-hidden rounded-3xl border border-white/10 shadow-lift sm:h-[32rem]">
             <Image

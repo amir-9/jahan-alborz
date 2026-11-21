@@ -1,7 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils/cn";
 
 type RevealProps = {
@@ -12,7 +11,15 @@ type RevealProps = {
   once?: boolean;
 };
 
-/** Subtle scroll-triggered entrance that respects reduced-motion preferences. */
+/**
+ * Scroll-triggered entrance with a visibility-first fallback.
+ *
+ * The content is always visible in the server-rendered HTML and stays visible
+ * when JavaScript, IntersectionObserver or animation frames are unavailable
+ * (background tabs, static screenshot tools, reduced motion). The slide-in is
+ * applied only after mount as a progressive enhancement, with a safety timer
+ * that resets the transform even if the observer never fires.
+ */
 export function Reveal({
   children,
   className,
@@ -20,37 +27,53 @@ export function Reveal({
   y = 18,
   once = true,
 }: RevealProps) {
-  const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    if (typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    node.style.transform = `translateY(${y}px)`;
+
+    const show = () => {
+      node.style.transitionDelay = `${delay}s`;
+      node.style.transform = "";
+    };
+
+    const safety = window.setTimeout(show, 1500);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          window.clearTimeout(safety);
+          show();
+          if (once) observer.disconnect();
+        }
+      },
+      { rootMargin: "-64px" },
+    );
+
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(safety);
+      node.style.transform = "";
+      node.style.transitionDelay = "";
+    };
+  }, [delay, y, once]);
 
   return (
-    <motion.div
-      className={cn(className)}
-      initial={reduceMotion ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: "-64px" }}
-      transition={{
-        duration: reduceMotion ? 0 : 0.55,
-        delay: reduceMotion ? 0 : delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+    <div
+      ref={ref}
+      className={cn(
+        "transition-transform duration-500 ease-out motion-reduce:transition-none",
+        className,
+      )}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
-
-export const fadeUp = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-
-export const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
-  },
-};
