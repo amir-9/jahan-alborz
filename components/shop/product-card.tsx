@@ -6,7 +6,11 @@ import { AddToCartButton } from "@/components/shop/add-to-cart-button";
 import { Badge } from "@/components/ui/badge";
 import { productCategories, type Product } from "@/lib/data/catalog";
 import { cn } from "@/lib/utils/cn";
-import { formatNumber, formatPrice, getDiscountPercent } from "@/lib/utils/format";
+import {
+  formatPercent,
+  formatPrice,
+  getDiscountPercent,
+} from "@/lib/utils/format";
 
 type ProductCardProps = {
   product: Product;
@@ -35,11 +39,11 @@ export function ProductCard({
         className,
       )}
     >
-      <div className="relative overflow-hidden border-b border-border bg-gradient-to-b from-primary-50 via-surface to-surface">
+      <div className="relative overflow-hidden border-b border-border bg-surface-muted">
         <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-3">
           <div className="flex flex-col items-start gap-1.5">
             {discount ? (
-              <Badge variant="secondary">{formatNumber(discount)}٪ تخفیف</Badge>
+              <Badge variant="secondary">{formatPercent(discount)} تخفیف</Badge>
             ) : null}
             {product.isBestSeller ? (
               <Badge variant="outline">
@@ -59,20 +63,20 @@ export function ProductCard({
         <Link
           href={`/products/${product.slug}`}
           className={cn(
-            "block px-6 pt-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+            "relative block overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
             compact ? "aspect-[5/4]" : "aspect-[4/3]",
           )}
           aria-label={product.name}
         >
           <ProductVisual
             variant={product.visual}
-            className="transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+            className="transition-transform duration-500 ease-out group-hover:scale-[1.05]"
           />
         </Link>
       </div>
 
       <div className={cn("flex flex-1 flex-col", compact ? "p-4" : "p-5")}>
-        <div className="flex items-center justify-between gap-2 text-[11px] font-medium text-muted-foreground">
+        <div className="flex items-center justify-between gap-2 text-caption font-medium text-muted-foreground">
           <span>{category}</span>
           <span>{product.brand}</span>
         </div>
@@ -80,7 +84,7 @@ export function ProductCard({
         <h3
           className={cn(
             "mt-2 font-bold leading-7 text-foreground transition-colors group-hover:text-primary",
-            compact ? "text-sm" : "text-[15px]",
+            compact ? "text-sm" : "text-base",
           )}
         >
           <Link
@@ -99,14 +103,14 @@ export function ProductCard({
           {product.purchasingMode === "QUOTE" ? (
             <div>
               <p className="text-sm font-bold text-primary">استعلام قیمت</p>
-              <p className="mt-0.5 text-[11px] text-muted-foreground">
+              <p className="mt-0.5 text-caption text-muted-foreground">
                 بر اساس مدل و ظرفیت
               </p>
             </div>
           ) : (
             <div>
               {discount ? (
-                <p className="text-[11px] text-muted-foreground line-through">
+                <p className="text-caption text-muted-foreground line-through">
                   {formatPrice(product.price)}
                 </p>
               ) : null}

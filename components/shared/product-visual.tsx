@@ -1,5 +1,10 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils/cn";
 import type { ProductVisual as ProductVisualVariant } from "@/lib/data/catalog";
+import { getProductMedia } from "@/lib/media/catalog-media";
 
 type ProductVisualProps = {
   variant: ProductVisualVariant;
@@ -7,11 +12,38 @@ type ProductVisualProps = {
 };
 
 /**
- * Brand-styled schematic artwork used as a local, dependency-free product
- * placeholder. Real product photography will replace these through the admin
- * media manager in a later phase.
+ * Sample catalogue photo with a local schematic fallback.
+ *
+ * The photo is explicitly labelled as a sample in its alt text. If the file is
+ * unavailable for any reason, the original navy/orange schematic is rendered
+ * instead so the layout never collapses.
  */
 export function ProductVisual({ variant, className }: ProductVisualProps) {
+  const [failed, setFailed] = useState(false);
+  const media = getProductMedia(variant);
+
+  if (failed) {
+    return <ProductVisualSchematic variant={variant} className={className} />;
+  }
+
+  return (
+    <Image
+      src={media.src}
+      alt={media.alt}
+      width={1200}
+      height={900}
+      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
+      className={cn("h-full w-full object-cover", className)}
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
+/** Brand-styled schematic artwork used as an offline/media failure fallback. */
+function ProductVisualSchematic({
+  variant,
+  className,
+}: ProductVisualProps) {
   const common = {
     stroke: "#142d4e",
     strokeWidth: 3,

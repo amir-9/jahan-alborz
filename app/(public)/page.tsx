@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
 import {
@@ -21,7 +22,6 @@ import { Hero } from "@/components/home/hero";
 import { CategoryCard } from "@/components/shop/category-card";
 import { ProductCard } from "@/components/shop/product-card";
 import { ServiceCard } from "@/components/services/service-card";
-import { ProductVisual } from "@/components/shared/product-visual";
 import { Reveal } from "@/components/shared/reveal";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { StarRating } from "@/components/shared/star-rating";
@@ -29,6 +29,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config/site";
 import { customerReviews, repairServices } from "@/lib/data/catalog";
+import { getProductMedia } from "@/lib/media/catalog-media";
 import {
   getBlogPosts,
   getCategories,
@@ -138,7 +139,7 @@ export default async function HomePage() {
 
   const featuredProducts = products
     .filter((product) => product.isFeatured)
-    .slice(0, 4);
+    .slice(0, 3);
   const bestSellers = products
     .filter((product) => product.isBestSeller)
     .slice(0, 4);
@@ -182,10 +183,10 @@ export default async function HomePage() {
                 <item.icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <div>
-                <p className="text-[13px] font-bold text-foreground">
+                <p className="text-caption font-bold text-foreground">
                   {item.title}
                 </p>
-                <p className="mt-1 text-[11px] leading-5 text-muted-foreground">
+                <p className="mt-1 text-caption leading-5 text-muted-foreground">
                   {item.description}
                 </p>
               </div>
@@ -234,7 +235,7 @@ export default async function HomePage() {
             <SectionHeading
               eyebrow="منتخب فروشگاه"
               title="پیشنهادهای ویژه جهان البرز"
-              description="چند محصول پرکاربرد برای شروع؛ قیمت و موجودی پیش از تأیید سفارش بررسی می‌شود."
+              description="سه محصول پرکاربرد برای شروع؛ قیمت و موجودی پیش از تأیید سفارش بررسی می‌شود."
               action={
                 <Button asChild variant="ghost">
                   <Link href="/shop">
@@ -246,7 +247,7 @@ export default async function HomePage() {
             />
           </Reveal>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {featuredProducts.map((product, index) => (
               <Reveal key={product.id} delay={index * 0.07}>
                 <ProductCard product={product} className="h-full" />
@@ -284,11 +285,11 @@ export default async function HomePage() {
                     <Wrench className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <h3 className="mt-5 text-lg font-bold">درخواست خدمات</h3>
-                  <p className="mt-2 text-[12px] leading-7 text-primary-foreground/70">
+                  <p className="mt-2 text-caption leading-7 text-on-primary-muted">
                     نوع خدمت، محدوده و زمان پیشنهادی را در فرم ثبت کنید. برای
                     هماهنگی نهایی با شما تماس می‌گیریم.
                   </p>
-                  <ul className="mt-4 space-y-2 text-[11px] text-primary-foreground/75">
+                  <ul className="mt-4 space-y-2 text-caption text-on-primary-muted">
                     {repairServices.slice(0, 3).map((service) => (
                       <li key={service.slug} className="flex items-center gap-2">
                         <Check className="h-3.5 w-3.5 text-secondary" aria-hidden="true" />
@@ -302,7 +303,7 @@ export default async function HomePage() {
                     </Button>
                     <a
                       href={toTelHref(siteConfig.contact.phone)}
-                      className="flex items-center justify-center gap-2 rounded-xl border border-white/15 px-4 py-2.5 text-xs font-semibold text-white/85 transition-colors hover:bg-white/10"
+                      className="flex items-center justify-center gap-2 rounded-xl border border-white/15 px-4 py-2.5 text-xs font-semibold text-on-primary-muted transition-colors hover:bg-white/10"
                       dir="ltr"
                     >
                       <Phone className="h-4 w-4" aria-hidden="true" />
@@ -335,7 +336,7 @@ export default async function HomePage() {
                 <br />
                 با همراهی در تمام مسیر
               </h2>
-              <p className="mt-4 max-w-md text-[13px] leading-8 text-primary-foreground/70">
+              <p className="mt-4 max-w-md text-caption leading-8 text-on-primary-muted">
                 خرید تجهیزات گرمایشی فقط انتخاب یک محصول نیست؛ ظرفیت، نحوه
                 نصب و سرویس دوره‌ای در عملکرد و دوام سیستم اثر دارد. ما این
                 مسیر را با شما مرور می‌کنیم.
@@ -347,7 +348,7 @@ export default async function HomePage() {
                   "هماهنگی زمان ارسال یا مراجعه تکنسین",
                   "پاسخ‌گویی به سوالات فنی پس از خرید",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-[12.5px] text-primary-foreground/80">
+                  <li key={item} className="flex items-start gap-2.5 text-caption text-on-primary-muted">
                     <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-secondary/20 text-secondary">
                       <Check className="h-3 w-3" aria-hidden="true" />
                     </span>
@@ -371,17 +372,19 @@ export default async function HomePage() {
             </div>
           </Reveal>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
             {whyUs.map((item, index) => (
               <Reveal key={item.title} delay={index * 0.08}>
-                <div className="h-full rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm transition-colors duration-300 hover:border-secondary/30 hover:bg-white/[0.09]">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/15 text-secondary">
+                <div className="flex h-full gap-4 border-s-2 border-secondary/40 ps-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary/15 text-secondary">
                     <item.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
-                  <h3 className="mt-4 text-[13.5px] font-bold">{item.title}</h3>
-                  <p className="mt-2 text-[11.5px] leading-6 text-primary-foreground/65">
-                    {item.description}
-                  </p>
+                  <div>
+                    <h3 className="text-body-sm font-bold">{item.title}</h3>
+                    <p className="mt-1.5 text-caption leading-6 text-on-primary-muted">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -417,10 +420,10 @@ export default async function HomePage() {
                       {formatNumber(index + 1)}
                     </span>
                   </div>
-                  <h3 className="mt-4 text-[13.5px] font-bold text-primary">
+                  <h3 className="mt-4 text-body-sm font-bold text-primary">
                     {step.title}
                   </h3>
-                  <p className="mt-2 text-[11.5px] leading-6 text-muted-foreground">
+                  <p className="mt-2 text-caption leading-6 text-muted-foreground">
                     {step.description}
                   </p>
                 </div>
@@ -476,15 +479,15 @@ export default async function HomePage() {
               <Reveal key={review.id} delay={index * 0.08}>
                 <figure className="flex h-full flex-col rounded-2xl border border-border bg-surface p-6 shadow-soft">
                   <Quote className="h-7 w-7 text-secondary/40" aria-hidden="true" />
-                  <blockquote className="mt-3 text-[12.5px] leading-7 text-muted-foreground">
+                  <blockquote className="mt-3 text-caption leading-7 text-muted-foreground">
                     {review.comment}
                   </blockquote>
                   <figcaption className="mt-auto flex items-center justify-between gap-3 border-t border-border pt-4">
                     <div>
-                      <p className="text-[13px] font-bold text-foreground">
+                      <p className="text-caption font-bold text-foreground">
                         {review.title}
                       </p>
-                      <p className="mt-0.5 text-[11px] text-muted-foreground">
+                      <p className="mt-0.5 text-caption text-muted-foreground">
                         {review.author}، {review.city}
                       </p>
                     </div>
@@ -517,44 +520,52 @@ export default async function HomePage() {
           </Reveal>
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {posts.map((post, index) => (
-              <Reveal key={post.id} delay={index * 0.07}>
-                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="relative flex h-40 items-center justify-center overflow-hidden border-b border-border bg-gradient-to-br from-primary-50 via-surface to-secondary-50">
-                    <div className="absolute inset-0 bg-dots opacity-60" aria-hidden="true" />
-                    <ProductVisual
-                      variant={index === 0 ? "boiler" : index === 1 ? "radiator" : "parts"}
-                      className="relative h-32 w-auto opacity-90 transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col p-5">
-                    <div className="flex items-center gap-2 text-[10.5px] text-muted-foreground">
-                      <Badge variant="secondary">{post.category}</Badge>
-                      <span className="inline-flex items-center gap-1">
-                        <Clock className="h-3 w-3" aria-hidden="true" />
-                        {formatNumber(post.readTime)} دقیقه مطالعه
-                      </span>
+            {posts.map((post, index) => {
+              const media = getProductMedia(
+                index === 0 ? "boiler" : index === 1 ? "radiator" : "parts",
+              );
+
+              return (
+                <Reveal key={post.id} delay={index * 0.07}>
+                  <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift">
+                    <div className="relative h-44 overflow-hidden border-b border-border bg-primary-50">
+                      <Image
+                        src={media.src}
+                        alt={media.alt}
+                        fill
+                        sizes="(max-width: 768px) 90vw, 30vw"
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      />
                     </div>
-                    <h3 className="mt-3 text-[14px] font-bold leading-7 text-foreground transition-colors group-hover:text-primary">
-                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                    </h3>
-                    <p className="mt-2 line-clamp-2 text-[11.5px] leading-6 text-muted-foreground">
-                      {post.excerpt}
-                    </p>
-                    <div className="mt-auto flex items-center justify-between pt-4 text-[10.5px] text-muted-foreground">
-                      <span>{formatDate(post.publishedAt)}</span>
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="inline-flex items-center gap-1 font-bold text-primary transition-colors hover:text-secondary-600"
-                      >
-                        ادامه مطلب
-                        <ArrowLeft className="h-3 w-3" aria-hidden="true" />
-                      </Link>
+                    <div className="flex flex-1 flex-col p-5">
+                      <div className="flex items-center gap-2 text-caption text-muted-foreground">
+                        <Badge variant="secondary">{post.category}</Badge>
+                        <span className="inline-flex items-center gap-1">
+                          <Clock className="h-3 w-3" aria-hidden="true" />
+                          {formatNumber(post.readTime)} دقیقه مطالعه
+                        </span>
+                      </div>
+                      <h3 className="mt-3 text-body-sm font-bold leading-7 text-foreground transition-colors group-hover:text-primary">
+                        <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                      </h3>
+                      <p className="mt-2 line-clamp-2 text-caption leading-6 text-muted-foreground">
+                        {post.excerpt}
+                      </p>
+                      <div className="mt-auto flex items-center justify-between pt-4 text-caption text-muted-foreground">
+                        <span>{formatDate(post.publishedAt)}</span>
+                        <Link
+                          href={`/blog/${post.slug}`}
+                          className="inline-flex items-center gap-1 font-bold text-primary transition-colors hover:text-secondary-700"
+                        >
+                          ادامه مطلب
+                          <ArrowLeft className="h-3 w-3" aria-hidden="true" />
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
+                  </article>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -577,7 +588,7 @@ export default async function HomePage() {
                   </span>
                   <div>
                     <p className="text-xs font-bold text-foreground">آدرس فروشگاه</p>
-                    <p className="mt-1 text-[12px] leading-6 text-muted-foreground">
+                    <p className="mt-1 text-caption leading-6 text-muted-foreground">
                       {siteConfig.address.fullAddress}
                     </p>
                   </div>
@@ -593,7 +604,7 @@ export default async function HomePage() {
                     </span>
                     <div>
                       <p className="text-xs font-bold text-foreground">تلفن</p>
-                      <p className="mt-1 text-[12px] text-muted-foreground" dir="ltr">
+                      <p className="mt-1 text-caption text-muted-foreground" dir="ltr">
                         {siteConfig.contact.phone}
                       </p>
                     </div>
@@ -605,7 +616,7 @@ export default async function HomePage() {
                     </span>
                     <div>
                       <p className="text-xs font-bold text-foreground">ساعت کاری</p>
-                      <p className="mt-1 text-[12px] leading-6 text-muted-foreground">
+                      <p className="mt-1 text-caption leading-6 text-muted-foreground">
                         {siteConfig.business.workHours.days}
                         <br />
                         {siteConfig.business.workHours.hours}
@@ -623,7 +634,7 @@ export default async function HomePage() {
                   </span>
                   <div>
                     <p className="text-xs font-bold text-foreground">ایمیل</p>
-                    <p className="mt-1 text-[12px] text-muted-foreground" dir="ltr">
+                    <p className="mt-1 text-caption text-muted-foreground" dir="ltr">
                       {siteConfig.contact.email}
                     </p>
                   </div>
@@ -652,7 +663,7 @@ export default async function HomePage() {
               <div className="absolute inset-0 bg-grid opacity-80" aria-hidden="true" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary-900/10 to-transparent" aria-hidden="true" />
 
-              <div className="absolute start-6 top-6 rounded-xl border border-border bg-surface/95 px-3.5 py-2 text-[11px] font-semibold text-primary shadow-soft backdrop-blur">
+              <div className="absolute start-6 top-6 rounded-xl border border-border bg-surface/95 px-3.5 py-2 text-caption font-semibold text-primary shadow-soft backdrop-blur">
                 قزوین، خیابان دانشگاه
               </div>
 
@@ -666,7 +677,7 @@ export default async function HomePage() {
               </div>
 
               <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-border bg-surface p-4 shadow-soft">
-                <p className="text-[11px] leading-6 text-muted-foreground">
+                <p className="text-caption leading-6 text-muted-foreground">
                   موقعیت دقیق فروشگاه روی نقشه در این نسخه ثبت نشده است. برای
                   مسیریابی، از لینک زیر استفاده کنید یا پیش از مراجعه تماس
                   بگیرید.
@@ -675,7 +686,7 @@ export default async function HomePage() {
                   href={mapHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-bold text-primary transition-colors hover:text-secondary-600"
+                  className="mt-2 inline-flex items-center gap-1.5 text-caption font-bold text-primary transition-colors hover:text-secondary-700"
                 >
                   مسیریابی در نقشه
                   <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
@@ -700,7 +711,7 @@ export default async function HomePage() {
                 <h2 className="text-2xl font-extrabold leading-[1.5] sm:text-3xl">
                   برای انتخاب درست، از مشاوره ما استفاده کنید
                 </h2>
-                <p className="mt-3 text-[12.5px] leading-7 text-primary-foreground/70">
+                <p className="mt-3 text-caption leading-7 text-on-primary-muted">
                   پیش از خرید پکیج یا رادیاتور، نیاز فضای خود را با کارشناسان
                   ما بررسی کنید. برای خدمات تعمیر و نصب هم می‌توانید درخواست
                   خود را ثبت کنید.
