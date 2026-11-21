@@ -305,6 +305,84 @@
   animation: fade-in 0.5s ease-out both;
 }
 
+/* Entrance effects start at a high opacity so content is never blank in
+   background tabs, screenshots or reduced-motion mode. */
+@keyframes rise-in {
+  from {
+    opacity: 0.82;
+    transform: translateY(20px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0.85;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-start {
+  from {
+    opacity: 0.85;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-end {
+  from {
+    opacity: 0.85;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes soft-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.08);
+  }
+}
+
+.animate-rise {
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-pop {
+  animation: pop-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-slide-start {
+  animation: slide-in-start 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-slide-end {
+  animation: slide-in-end 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-soft-glow {
+  animation: soft-glow 7s ease-in-out infinite;
+}
+
 .sheet-overlay[data-state="open"] {
   animation: fade-in 0.22s ease-out both;
 }

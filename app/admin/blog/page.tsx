@@ -92,7 +92,7 @@ export default async function AdminBlogPage() {
                     ) : null}
                   </div>
 
-                  <p className="mt-1 text-caption text-muted-foreground">
+                  <p className="mt-1 break-words text-caption text-muted-foreground [overflow-wrap:anywhere]">
                     <span dir="ltr">{post.slug}</span>
                     {` · ${formatNumber(post.readTime)} دقیقه مطالعه`}
                     {post.publishedAt
@@ -101,7 +101,7 @@ export default async function AdminBlogPage() {
                     {` · آخرین ویرایش: ${formatDate(post.updatedAt)}`}
                   </p>
 
-                  <p className="mt-1.5 line-clamp-2 text-caption leading-5 text-muted-foreground">
+                  <p className="mt-1.5 line-clamp-2 break-words text-caption leading-5 text-muted-foreground [overflow-wrap:anywhere]">
                     {post.excerpt}
                   </p>
                 </div>

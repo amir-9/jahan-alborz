@@ -216,7 +216,7 @@ export default async function HomePage() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {productCategories.map((category, index) => (
-              <Reveal key={category.slug} delay={index * 0.07}>
+              <Reveal key={category.slug} delay={index * 0.07} variant="scale">
                 <CategoryCard
                   category={category}
                   productCount={productsPerCategory.get(category.slug) ?? 0}
@@ -249,7 +249,7 @@ export default async function HomePage() {
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {featuredProducts.map((product, index) => (
-              <Reveal key={product.id} delay={index * 0.07}>
+              <Reveal key={product.id} delay={index * 0.07} variant="scale">
                 <ProductCard product={product} className="h-full" />
               </Reveal>
             ))}
@@ -271,7 +271,7 @@ export default async function HomePage() {
           <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_20rem]">
             <div className="grid gap-4 sm:grid-cols-2">
               {repairServices.slice(0, 4).map((service, index) => (
-                <Reveal key={service.slug} delay={index * 0.06}>
+                <Reveal key={service.slug} delay={index * 0.06} variant="start">
                   <ServiceCard service={service} showFeatures={false} className="h-full" />
                 </Reveal>
               ))}
@@ -410,7 +410,7 @@ export default async function HomePage() {
               aria-hidden="true"
             />
             {processSteps.map((step, index) => (
-              <Reveal key={step.title} delay={index * 0.08}>
+              <Reveal key={step.title} delay={index * 0.08} variant="end">
                 <div className="relative h-full rounded-2xl border border-border bg-surface p-5 shadow-soft">
                   <div className="flex items-center justify-between">
                     <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-secondary shadow-sm">
@@ -454,7 +454,7 @@ export default async function HomePage() {
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {bestSellers.map((product, index) => (
-              <Reveal key={product.id} delay={index * 0.07}>
+              <Reveal key={product.id} delay={index * 0.07} variant="scale">
                 <ProductCard product={product} className="h-full" compact />
               </Reveal>
             ))}
@@ -476,7 +476,7 @@ export default async function HomePage() {
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {customerReviews.map((review, index) => (
-              <Reveal key={review.id} delay={index * 0.08}>
+              <Reveal key={review.id} delay={index * 0.08} variant="scale">
                 <figure className="flex h-full flex-col rounded-2xl border border-border bg-surface p-6 shadow-soft">
                   <Quote className="h-7 w-7 text-secondary/40" aria-hidden="true" />
                   <blockquote className="mt-3 text-caption leading-7 text-muted-foreground">
@@ -526,7 +526,7 @@ export default async function HomePage() {
               );
 
               return (
-                <Reveal key={post.id} delay={index * 0.07}>
+                <Reveal key={post.id} delay={index * 0.07} variant="start">
                   <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift">
                     <div className="relative h-44 overflow-hidden border-b border-border bg-primary-50">
                       <Image

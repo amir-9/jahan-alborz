@@ -121,6 +121,9 @@ export default async function AdminLayout({
                   {user.role ? roleLabels[user.role] : "مدیر"}
                 </p>
               </div>
+              <span className="text-[10px] font-semibold text-muted-foreground sm:hidden">
+                {user.role ? roleLabels[user.role] : "مدیر"}
+              </span>
             </div>
             <SignOutButton size="sm" variant="ghost" className="px-2.5" />
           </div>

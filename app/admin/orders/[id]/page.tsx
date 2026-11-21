@@ -182,7 +182,7 @@ export default async function AdminOrderDetailPage({
             </dl>
 
             {order.notes ? (
-              <p className="mt-4 rounded-xl bg-surface-muted px-3.5 py-2.5 text-caption leading-6 text-muted-foreground">
+              <p className="mt-4 break-words rounded-xl bg-surface-muted px-3.5 py-2.5 text-caption leading-6 text-muted-foreground [overflow-wrap:anywhere]">
                 یادداشت مشتری: {order.notes}
               </p>
             ) : null}

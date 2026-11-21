@@ -135,7 +135,7 @@ export default async function AdminUsersPage({
 
                     <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-caption text-muted-foreground">
                       {user.email ? (
-                        <span className="inline-flex items-center gap-1" dir="ltr">
+                        <span className="inline-flex min-w-0 items-center gap-1 break-all" dir="ltr">
                           <Mail className="h-3 w-3" aria-hidden="true" />
                           {user.email}
                         </span>

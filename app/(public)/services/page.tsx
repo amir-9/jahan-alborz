@@ -121,7 +121,7 @@ export default function ServicesPage() {
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {repairServices.map((service, index) => (
-            <Reveal key={service.slug} delay={index * 0.05}>
+            <Reveal key={service.slug} delay={index * 0.05} variant="scale">
               <ServiceCard service={service} className="h-full" />
             </Reveal>
           ))}

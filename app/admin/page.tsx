@@ -159,27 +159,31 @@ export default async function AdminDashboardPage() {
           </Badge>
         </div>
 
-        <div className="mt-5 flex h-44 items-end gap-2 sm:gap-4">
-          {data.salesByMonth.map((month) => (
-            <div
-              key={month.label}
-              className="flex h-full flex-1 flex-col items-center justify-end gap-1.5"
-            >
-              <span className="text-caption font-semibold text-muted-foreground">
-                {month.total > 0 ? formatNumber(Math.round(month.total / 1000)) + " هزار" : ""}
-              </span>
+        <div className="mt-5 overflow-x-auto pb-1">
+          <div className="flex h-44 min-w-[22rem] items-end gap-2 sm:gap-4">
+            {data.salesByMonth.map((month) => (
               <div
-                className="w-full rounded-t-lg bg-gradient-to-t from-primary to-primary-600/70 transition-[height] duration-500"
-                style={{
-                  height: `${Math.max(month.ratio * 100, month.total > 0 ? 6 : 1.5)}%`,
-                }}
-                aria-hidden="true"
-              />
-              <span className="text-caption text-muted-foreground">
-                {month.label}
-              </span>
-            </div>
-          ))}
+                key={month.label}
+                className="flex h-full min-w-0 flex-1 flex-col items-center justify-end gap-1.5"
+              >
+                <span className="text-[10px] font-semibold text-muted-foreground sm:text-caption">
+                  {month.total > 0
+                    ? formatNumber(Math.round(month.total / 1000)) + " هزار"
+                    : ""}
+                </span>
+                <div
+                  className="w-full rounded-t-lg bg-gradient-to-t from-primary to-primary-600/70 transition-[height] duration-500"
+                  style={{
+                    height: `${Math.max(month.ratio * 100, month.total > 0 ? 6 : 1.5)}%`,
+                  }}
+                  aria-hidden="true"
+                />
+                <span className="break-words text-center text-[10px] leading-4 text-muted-foreground sm:text-caption">
+                  {month.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

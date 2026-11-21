@@ -184,7 +184,7 @@ export default async function AdminProductsPage({
                       ) : null}
                     </div>
 
-                    <p className="mt-1 text-caption text-muted-foreground">
+                    <p className="mt-1 break-words text-caption text-muted-foreground [overflow-wrap:anywhere]">
                       <span dir="ltr">{product.slug}</span>
                       {product.category ? ` · ${product.category.name}` : " · بدون دسته"}
                       {product.brand ? ` · ${product.brand}` : ""}

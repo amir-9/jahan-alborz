@@ -3,8 +3,16 @@
  * All contact information and site-wide business details live here
  * so they can be updated easily without touching business logic.
  */
+import { formatPhone } from "@/lib/utils/format";
 
 const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+const configuredPhone = formatPhone(
+  process.env.NEXT_PUBLIC_PHONE ?? "+98 9100000000",
+);
+const configuredWhatsapp = formatPhone(
+  process.env.NEXT_PUBLIC_WHATSAPP ?? "+98 9110000000",
+);
 
 export const siteConfig = {
   name: "جهان البرز",
@@ -14,9 +22,9 @@ export const siteConfig = {
   url: configuredUrl,
 
   contact: {
-    phone: process.env.NEXT_PUBLIC_PHONE ?? "+98 9100000000",
+    phone: configuredPhone,
     phoneLabel: "تلفن",
-    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "+98 9110000000",
+    whatsapp: configuredWhatsapp,
     whatsappLabel: "واتساپ",
     email: process.env.NEXT_PUBLIC_EMAIL ?? "info@jahan-alborz.ir",
   },

@@ -140,13 +140,13 @@ export default async function AdminServicesPage({
                 </div>
 
                 {request.problemDescription ? (
-                  <p className="mt-2 line-clamp-2 rounded-xl bg-surface-muted px-3 py-2 text-caption leading-5 text-muted-foreground">
+                  <p className="mt-2 line-clamp-2 break-words rounded-xl bg-surface-muted px-3 py-2 text-caption leading-5 text-muted-foreground [overflow-wrap:anywhere]">
                     {request.problemDescription}
                   </p>
                 ) : null}
 
-                <div className="mt-3 flex items-center justify-between gap-2 border-t border-border pt-3">
-                  <p className="text-caption text-muted-foreground">
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3">
+                  <p className="min-w-0 break-all text-caption text-muted-foreground">
                     کد پیگیری:{" "}
                     <span dir="ltr" className="font-semibold text-foreground">
                       {request.id.slice(0, 8)}

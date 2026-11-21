@@ -100,8 +100,8 @@ export default async function AdminOrdersPage({
         </div>
       ) : (
         <>
-          <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
-            <div className="hidden grid-cols-[1.4fr_1.3fr_1fr_0.9fr_0.9fr_auto] gap-3 border-b border-border bg-surface-muted px-4 py-2.5 text-caption font-bold text-muted-foreground lg:grid">
+          <div className="overflow-x-auto rounded-2xl border border-border bg-surface shadow-soft">
+            <div className="hidden min-w-[46rem] grid-cols-[1.4fr_1.3fr_1fr_0.9fr_0.9fr_auto] gap-3 border-b border-border bg-surface-muted px-4 py-2.5 text-caption font-bold text-muted-foreground lg:grid">
               <span>شماره سفارش / مشتری</span>
               <span>تاریخ</span>
               <span>مبلغ</span>
@@ -114,7 +114,7 @@ export default async function AdminOrdersPage({
               {result.orders.map((order) => (
                 <div
                   key={order.id}
-                  className="grid gap-2 px-4 py-3.5 transition-colors hover:bg-primary-50/20 lg:grid-cols-[1.4fr_1.3fr_1fr_0.9fr_0.9fr_auto] lg:items-center lg:gap-3"
+                  className="grid gap-2 px-4 py-3.5 transition-colors hover:bg-primary-50/20 lg:min-w-[46rem] lg:grid-cols-[1.4fr_1.3fr_1fr_0.9fr_0.9fr_auto] lg:items-center lg:gap-3"
                 >
                   <div className="min-w-0">
                     <p className="text-caption font-bold text-foreground">
@@ -122,7 +122,7 @@ export default async function AdminOrdersPage({
                     </p>
                     <p
                       dir="ltr"
-                      className="mt-0.5 text-start text-caption text-muted-foreground"
+                      className="mt-0.5 break-all text-start text-caption text-muted-foreground"
                     >
                       {order.orderNumber}
                     </p>

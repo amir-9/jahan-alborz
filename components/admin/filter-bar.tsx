@@ -30,7 +30,7 @@ export function AdminFilterBar({
       action={action}
       className="flex flex-wrap items-end gap-2 rounded-2xl border border-border bg-surface p-3 shadow-soft"
     >
-      <label className="flex min-w-[12rem] flex-1 flex-col gap-1">
+      <label className="flex w-full min-w-0 flex-1 flex-col gap-1 sm:w-auto sm:min-w-[12rem]">
         <span className="text-caption font-semibold text-muted-foreground">
           جستجو
         </span>
@@ -53,14 +53,14 @@ export function AdminFilterBar({
 
       <button
         type="submit"
-        className="h-10 rounded-xl bg-primary px-4 text-caption font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="h-10 w-full rounded-xl bg-primary px-4 text-caption font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:w-auto"
       >
         اعمال فیلتر
       </button>
 
       <Link
         href={resetHref}
-        className="inline-flex h-10 items-center rounded-xl px-3 text-caption font-semibold text-muted-foreground transition-colors hover:text-primary"
+        className="inline-flex h-10 w-full items-center justify-center rounded-xl px-3 text-caption font-semibold text-muted-foreground transition-colors hover:text-primary sm:w-auto"
       >
         حذف فیلترها
       </Link>
@@ -82,7 +82,7 @@ export function AdminSelectFilter({
   options,
 }: AdminSelectFilterProps) {
   return (
-    <label className="flex min-w-[9rem] flex-col gap-1">
+    <label className="flex w-full min-w-0 flex-col gap-1 sm:w-auto sm:min-w-[9rem]">
       <span className="text-caption font-semibold text-muted-foreground">
         {label}
       </span>

@@ -74,8 +74,8 @@ export default async function AdminCategoriesPage() {
           </p>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
-          <div className="hidden grid-cols-[1.4fr_1fr_0.7fr_auto] gap-3 border-b border-border bg-surface-muted px-4 py-2.5 text-caption font-bold text-muted-foreground md:grid">
+        <div className="overflow-x-auto rounded-2xl border border-border bg-surface shadow-soft">
+          <div className="hidden min-w-[40rem] grid-cols-[1.4fr_1fr_0.7fr_auto] gap-3 border-b border-border bg-surface-muted px-4 py-2.5 text-caption font-bold text-muted-foreground md:grid">
             <span>نام / نامک</span>
             <span>توضیح</span>
             <span>تعداد محصول</span>
@@ -86,7 +86,7 @@ export default async function AdminCategoriesPage() {
             {categories.map((category) => (
               <div
                 key={category.id}
-                className="grid gap-2 px-4 py-3.5 md:grid-cols-[1.4fr_1fr_0.7fr_auto] md:items-center md:gap-3"
+                className="grid gap-2 px-4 py-3.5 md:min-w-[40rem] md:grid-cols-[1.4fr_1fr_0.7fr_auto] md:items-center md:gap-3"
               >
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-1.5">
@@ -99,13 +99,13 @@ export default async function AdminCategoriesPage() {
                   </div>
                   <p
                     dir="ltr"
-                    className="mt-0.5 text-start text-caption text-muted-foreground"
+                    className="mt-0.5 break-all text-start text-caption text-muted-foreground"
                   >
                     {category.slug}
                   </p>
                 </div>
 
-                <p className="text-caption leading-5 text-muted-foreground">
+                <p className="line-clamp-2 break-words text-caption leading-5 text-muted-foreground">
                   {category.description?.trim() || "—"}
                 </p>
 

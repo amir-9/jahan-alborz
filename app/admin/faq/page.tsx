@@ -85,7 +85,7 @@ export default async function AdminFaqPage() {
                       <Badge variant="outline">{faq.category}</Badge>
                     ) : null}
                   </div>
-                  <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
+                  <p className="mt-1.5 break-words text-caption leading-6 text-muted-foreground [overflow-wrap:anywhere]">
                     {faq.answer}
                   </p>
                 </div>

@@ -1,6 +1,7 @@
 /**
  * Formatting helpers for Persian (fa-IR) UI output.
  */
+import { normalizeIranMobile } from "@/lib/utils/normalize";
 
 const faNumber = new Intl.NumberFormat("fa-IR");
 
@@ -29,15 +30,27 @@ export function getDiscountPercent(
   return ((price - discountedPrice) / price) * 100;
 }
 
-/** Build a tel: link from a display phone number without inventing digits. */
-export function toTelHref(phone: string): string {
-  const normalized = phone.replace(/[^\d+]/g, "");
-  return `tel:${normalized}`;
+/**
+ * Normalize a phone number for local display, e.g. "+98 9100000000" becomes
+ * "09100000000". Unknown formats are returned untouched so no digits are
+ * invented or dropped.
+ */
+export function formatPhone(phone: string): string {
+  return normalizeIranMobile(phone);
 }
 
-/** Build a wa.me link from a display phone number. */
+/** Build a tel: link from a local or international phone number. */
+export function toTelHref(phone: string): string {
+  const digits = normalizeIranMobile(phone).replace(/[^\d]/g, "");
+  if (digits.startsWith("0")) return `tel:+98${digits.slice(1)}`;
+  if (digits.startsWith("98")) return `tel:+${digits}`;
+  return `tel:${digits}`;
+}
+
+/** Build a wa.me link (country code, no plus) from a local or international number. */
 export function toWhatsAppHref(phone: string, message?: string): string {
-  const normalized = phone.replace(/\D/g, "");
+  const digits = normalizeIranMobile(phone).replace(/[^\d]/g, "");
+  const normalized = digits.startsWith("0") ? `98${digits.slice(1)}` : digits;
   const query = message ? `?text=${encodeURIComponent(message)}` : "";
   return `https://wa.me/${normalized}${query}`;
 }

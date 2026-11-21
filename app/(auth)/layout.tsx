@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { siteConfig } from "@/lib/config/site";
+import { toTelHref } from "@/lib/utils/format";
 
 type AuthLayoutProps = {
   children: ReactNode;
@@ -48,7 +49,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
           <p>
             پشتیبانی:{" "}
             <a
-              href={`tel:${siteConfig.contact.phone.replace(/[^\d+]/g, "")}`}
+              href={toTelHref(siteConfig.contact.phone)}
               dir="ltr"
               className="font-semibold text-primary hover:underline"
             >

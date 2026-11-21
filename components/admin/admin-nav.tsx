@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -42,11 +43,19 @@ const icons = {
 
 export function AdminNav({ items }: { items: AdminNavItem[] }) {
   const pathname = usePathname();
+  const activeRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    activeRef.current?.scrollIntoView({
+      block: "nearest",
+      inline: "center",
+    });
+  }, [pathname]);
 
   return (
     <nav
       aria-label="بخش‌های مدیریت"
-      className="flex gap-1 overflow-x-auto rounded-2xl border border-border bg-surface p-1.5 shadow-soft lg:flex-col lg:overflow-visible"
+      className="edge-fade flex gap-1 overflow-x-auto rounded-2xl border border-border bg-surface p-1.5 shadow-soft lg:flex-col lg:overflow-visible lg:[mask-image:none]"
     >
       {items.map((item) => {
         const active = item.exact
@@ -57,6 +66,7 @@ export function AdminNav({ items }: { items: AdminNavItem[] }) {
         return (
           <Link
             key={item.href}
+            ref={active ? activeRef : undefined}
             href={item.href}
             aria-current={active ? "page" : undefined}
             className={cn(

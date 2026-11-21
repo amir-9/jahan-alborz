@@ -144,7 +144,7 @@ export default async function AdminServiceDetailPage({
               <Wrench className="h-4 w-4 text-secondary" aria-hidden="true" />
               شرح درخواست
             </h2>
-            <p className="mt-3 whitespace-pre-line rounded-xl bg-surface-muted px-3.5 py-3 text-caption leading-7 text-muted-foreground">
+            <p className="mt-3 whitespace-pre-line break-words rounded-xl bg-surface-muted px-3.5 py-3 text-caption leading-7 text-muted-foreground [overflow-wrap:anywhere]">
               {request.problemDescription?.trim() ||
                 "مشتری توضیح تکمیلی ثبت نکرده است."}
             </p>
@@ -155,7 +155,7 @@ export default async function AdminServiceDetailPage({
               </p>
             ) : null}
             {request.notes ? (
-              <p className="mt-2 text-caption leading-6 text-muted-foreground">
+              <p className="mt-2 break-words text-caption leading-6 text-muted-foreground [overflow-wrap:anywhere]">
                 یادداشت ثبت‌شده هنگام درخواست: {request.notes}
               </p>
             ) : null}
@@ -176,7 +176,7 @@ export default async function AdminServiceDetailPage({
                     key={note.id}
                     className="rounded-xl border border-border px-3.5 py-2.5"
                   >
-                    <p className="text-caption leading-6 text-foreground">
+                    <p className="break-words text-caption leading-6 text-foreground [overflow-wrap:anywhere]">
                       {note.note}
                     </p>
                     <p className="mt-1 text-caption text-muted-foreground">

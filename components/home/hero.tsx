@@ -39,13 +39,16 @@ export function Hero({ featuredProduct }: HeroProps) {
         aria-hidden="true"
       />
       <div
-        className="absolute -start-32 -top-32 h-[26rem] w-[26rem] rounded-full bg-secondary/20 blur-3xl"
+        className="animate-soft-glow absolute -start-32 -top-32 h-[26rem] w-[26rem] rounded-full bg-secondary/20 blur-3xl"
         aria-hidden="true"
       />
 
       <div className="page-container relative grid items-center gap-12 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-24">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-caption font-medium text-on-primary-muted backdrop-blur">
+          <span
+            className="animate-slide-start inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-caption font-medium text-on-primary-muted backdrop-blur"
+            style={{ animationDelay: "0.04s" }}
+          >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
@@ -53,7 +56,10 @@ export function Hero({ featuredProduct }: HeroProps) {
             فروشگاه تخصصی تجهیزات گرمایشی در قزوین
           </span>
 
-          <h1 className="mt-6 max-w-xl text-[2rem] font-extrabold leading-[1.4] tracking-tight sm:text-4xl lg:text-[2.9rem] lg:leading-[1.35]">
+          <h1
+            className="animate-rise mt-6 max-w-xl text-[2rem] font-extrabold leading-[1.4] tracking-tight sm:text-4xl lg:text-[2.9rem] lg:leading-[1.35]"
+            style={{ animationDelay: "0.1s" }}
+          >
             گرمای مطمئن خانه،
             <br className="hidden sm:block" /> با{" "}
             <span className="relative inline-block text-secondary">
@@ -75,13 +81,19 @@ export function Hero({ featuredProduct }: HeroProps) {
             </span>
           </h1>
 
-          <p className="mt-6 max-w-lg text-caption leading-8 text-on-primary-muted sm:text-sm sm:leading-8">
+          <p
+            className="animate-rise mt-6 max-w-lg text-caption leading-8 text-on-primary-muted sm:text-sm sm:leading-8"
+            style={{ animationDelay: "0.18s" }}
+          >
             از پکیج و رادیاتور تا قطعات یدکی، نصب و سرویس دوره‌ای؛ جهان البرز
             در تمام مسیر گرمایش خانه در کنار شماست. پیش از خرید، نیاز فنی
             فضای‌تان را با ما بررسی کنید.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div
+            className="animate-rise mt-8 flex flex-wrap items-center gap-3"
+            style={{ animationDelay: "0.26s" }}
+          >
             <Button asChild variant="secondary" size="lg">
               <Link href="/shop">
                 مشاهده فروشگاه
@@ -106,7 +118,10 @@ export function Hero({ featuredProduct }: HeroProps) {
             </a>
           </div>
 
-          <ul className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-caption text-on-primary-muted">
+          <ul
+            className="animate-rise mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-caption text-on-primary-muted"
+            style={{ animationDelay: "0.34s" }}
+          >
             {highlights.map((item) => (
               <li key={item.label} className="inline-flex items-center gap-2">
                 <item.icon
@@ -120,7 +135,8 @@ export function Hero({ featuredProduct }: HeroProps) {
         </div>
 
         <div
-          className="relative mx-auto w-full max-w-md lg:max-w-none"
+          className="animate-pop relative mx-auto w-full max-w-md lg:max-w-none"
+          style={{ animationDelay: "0.14s" }}
         >
           <div className="relative h-[28rem] overflow-hidden rounded-3xl border border-white/10 shadow-lift sm:h-[32rem]">
             <Image

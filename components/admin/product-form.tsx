@@ -265,7 +265,7 @@ export function ProductForm({ categories, initial }: ProductFormProps) {
         <section className="rounded-2xl border border-border bg-surface p-5 shadow-soft">
           <h2 className="text-sm font-bold text-primary">قیمت و موجودی</h2>
 
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Field
               label="قیمت (تومان)"
               htmlFor="product-price"

@@ -252,7 +252,7 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
         {isStaff ? (
           <>
             <FormField label="ایمیل کارکنان" htmlFor="staff-email" required>
-              <div className="relative">
+              <div className="relative" dir="ltr">
                 <Mail
                   className="pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
                   aria-hidden="true"
@@ -303,7 +303,7 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
               required
               hint="مثال: ۰۹۱۲۳۴۵۶۷۸۹"
             >
-              <div className="relative">
+              <div className="relative" dir="ltr">
                 <Phone
                   className="pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
                   aria-hidden="true"

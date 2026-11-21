@@ -3,22 +3,39 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils/cn";
 
+type RevealVariant = "up" | "scale" | "start" | "end";
+
 type RevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
   y?: number;
   once?: boolean;
+  variant?: RevealVariant;
 };
+
+function hiddenTransform(variant: RevealVariant, distance: number): string {
+  switch (variant) {
+    case "scale":
+      return `scale(${Math.max(0.9, 1 - distance / 220)})`;
+    case "start":
+      return `translateX(${distance}px)`;
+    case "end":
+      return `translateX(${-distance}px)`;
+    default:
+      return `translateY(${distance}px)`;
+  }
+}
 
 /**
  * Scroll-triggered entrance with a visibility-first fallback.
  *
  * The content is always visible in the server-rendered HTML and stays visible
  * when JavaScript, IntersectionObserver or animation frames are unavailable
- * (background tabs, static screenshot tools, reduced motion). The slide-in is
- * applied only after mount as a progressive enhancement, with a safety timer
- * that resets the transform even if the observer never fires.
+ * (background tabs, static screenshot tools, reduced motion). The entrance is
+ * applied only after mount as a progressive enhancement: a subtle transform
+ * and an opacity never lower than 0.88, with a safety timer that clears both
+ * even if the observer never fires.
  */
 export function Reveal({
   children,
@@ -26,6 +43,7 @@ export function Reveal({
   delay = 0,
   y = 18,
   once = true,
+  variant = "up",
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -35,11 +53,13 @@ export function Reveal({
     if (typeof IntersectionObserver === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    node.style.transform = `translateY(${y}px)`;
+    node.style.transform = hiddenTransform(variant, y);
+    node.style.opacity = "0.88";
 
     const show = () => {
       node.style.transitionDelay = `${delay}s`;
       node.style.transform = "";
+      node.style.opacity = "";
     };
 
     const safety = window.setTimeout(show, 1500);
@@ -61,15 +81,16 @@ export function Reveal({
       observer.disconnect();
       window.clearTimeout(safety);
       node.style.transform = "";
+      node.style.opacity = "";
       node.style.transitionDelay = "";
     };
-  }, [delay, y, once]);
+  }, [delay, y, once, variant]);
 
   return (
     <div
       ref={ref}
       className={cn(
-        "transition-transform duration-500 ease-out motion-reduce:transition-none",
+        "transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none",
         className,
       )}
     >
