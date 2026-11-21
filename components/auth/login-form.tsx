@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -44,6 +44,7 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
   const [error, setError] = useState<string | null>(initialError ?? null);
   const [notice, setNotice] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     if (cooldown <= 0) {
@@ -62,6 +63,26 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
     setError(null);
     setNotice(null);
     setCode("");
+  }
+
+  /** Roving tabindex keyboard support for the RTL login-mode tablist. */
+  function handleTabKeyDown(
+    event: React.KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
+    const last = modes.length - 1;
+    let nextIndex: number | null = null;
+
+    if (event.key === "ArrowLeft") nextIndex = index === last ? 0 : index + 1;
+    if (event.key === "ArrowRight") nextIndex = index === 0 ? last : index - 1;
+    if (event.key === "Home") nextIndex = 0;
+    if (event.key === "End") nextIndex = last;
+
+    if (nextIndex === null) return;
+
+    event.preventDefault();
+    switchMode(modes[nextIndex].value);
+    tabRefs.current[nextIndex]?.focus();
   }
 
   async function handleSendOtp() {
@@ -164,7 +185,7 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
           <KeyRound className="h-6 w-6" aria-hidden="true" />
         </span>
         <h1 className="mt-4 text-xl font-extrabold text-primary">ورود به حساب</h1>
-        <p className="mt-2 text-[12px] leading-6 text-muted-foreground">
+        <p className="mt-2 text-caption leading-6 text-muted-foreground">
           برای پیگیری سفارش‌ها و درخواست‌های خدمات وارد شوید. ورود مشتریان با
           شماره موبایل انجام می‌شود.
         </p>
@@ -175,15 +196,22 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
         role="tablist"
         aria-label="روش ورود"
       >
-        {modes.map((item) => (
+        {modes.map((item, index) => (
           <button
             key={item.value}
+            ref={(node) => {
+              tabRefs.current[index] = node;
+            }}
+            id={`login-tab-${item.value}`}
             type="button"
             role="tab"
             aria-selected={mode === item.value}
+            aria-controls={`login-panel-${item.value}`}
+            tabIndex={mode === item.value ? 0 : -1}
             onClick={() => switchMode(item.value)}
+            onKeyDown={(event) => handleTabKeyDown(event, index)}
             className={cn(
-              "rounded-lg px-2 py-2 text-[10.5px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              "rounded-lg px-2 py-2 text-caption font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
               mode === item.value
                 ? "bg-surface text-primary shadow-sm"
                 : "text-muted-foreground hover:text-primary",
@@ -194,10 +222,17 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="mt-5 flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        role="tabpanel"
+        id={`login-panel-${mode}`}
+        aria-labelledby={`login-tab-${mode}`}
+        className="mt-5 flex flex-col gap-4"
+      >
         {error ? (
           <div
-            className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-[11px] leading-6 text-danger"
+            className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-caption leading-6 text-danger"
             role="alert"
           >
             <CircleExclamationPoint
@@ -209,7 +244,7 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
         ) : null}
 
         {notice && !error ? (
-          <div className="rounded-xl border border-teal-200 bg-teal-50 px-3.5 py-2.5 text-[11px] leading-6 text-teal-800">
+          <div className="rounded-xl border border-teal-200 bg-teal-50 px-3.5 py-2.5 text-caption leading-6 text-teal-800">
             {notice}
           </div>
         ) : null}
@@ -251,7 +286,7 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
               />
             </FormField>
 
-            <p className="flex items-start gap-1.5 rounded-xl bg-surface-muted px-3 py-2 text-[10.5px] leading-5 text-muted-foreground">
+            <p className="flex items-start gap-1.5 rounded-xl bg-surface-muted px-3 py-2 text-caption leading-5 text-muted-foreground">
               <ShieldCheck
                 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-success"
                 aria-hidden="true"
@@ -338,7 +373,7 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
             )}
 
             {mode === "otp" ? (
-              <div className="flex items-center justify-between gap-2 text-[10.5px]">
+              <div className="flex items-center justify-between gap-2 text-caption">
                 <span className="text-muted-foreground">
                   {otpSent
                     ? "کد را دریافت نکردید؟"
@@ -374,7 +409,7 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
       </form>
 
       {!isStaff ? (
-        <p className="mt-5 text-center text-[11.5px] text-muted-foreground">
+        <p className="mt-5 text-center text-caption text-muted-foreground">
           حساب کاربری ندارید؟{" "}
           <Link
             href={`/auth/register?callbackUrl=${encodeURIComponent(callbackUrl)}`}
@@ -385,7 +420,7 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
         </p>
       ) : null}
 
-      <p className="mt-4 border-t border-border pt-4 text-center text-[10px] leading-5 text-muted-foreground">
+      <p className="mt-4 border-t border-border pt-4 text-center text-caption leading-5 text-muted-foreground">
         با ورود،{" "}
         <Link
           href="/terms"

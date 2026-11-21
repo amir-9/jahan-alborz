@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { Check, Phone, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -37,6 +38,7 @@ export function AddToCartButton({
   const addItem = useCartStore((state) => state.addItem);
   const openCart = useCartStore((state) => state.openCart);
   const [isPending, setIsPending] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   if (product.purchasingMode === "QUOTE") {
     return (
@@ -99,7 +101,14 @@ export function AddToCartButton({
       className={cn(fullWidth && "w-full", className)}
     >
       {isPending ? (
-        <Check className="h-4 w-4" aria-hidden="true" />
+        <motion.span
+          initial={reduceMotion ? false : { scale: 0.4, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: reduceMotion ? 0 : 0.25 }}
+          className="inline-flex"
+        >
+          <Check className="h-4 w-4" aria-hidden="true" />
+        </motion.span>
       ) : withIcon ? (
         <ShoppingCart className="h-4 w-4" aria-hidden="true" />
       ) : null}

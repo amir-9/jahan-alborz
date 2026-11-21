@@ -84,7 +84,7 @@ export function ShopCatalog({
 
   return (
     <div className={cn("flex flex-col gap-6", className)}>
-      <div className="rounded-2xl border border-border bg-surface p-4 shadow-soft">
+      <div className="rounded-2xl border border-border bg-surface p-4 shadow-soft lg:sticky lg:top-20 lg:z-20">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
           <div className="relative flex-1">
             <Search
@@ -105,7 +105,7 @@ export function ShopCatalog({
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+            <div className="flex items-center gap-1.5 text-caption text-muted-foreground">
               <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden="true" />
               <span className="hidden sm:inline">مرتب‌سازی</span>
             </div>
@@ -125,15 +125,20 @@ export function ShopCatalog({
         </div>
 
         {showCategoryFilter ? (
-          <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-border pt-4">
+          <div
+            className="mt-4 flex flex-wrap items-center gap-2 border-t border-border pt-4"
+            role="group"
+            aria-label="فیلتر دستهبندی محصولات"
+          >
             <button
               type="button"
+              aria-pressed={category === "all"}
               onClick={() => {
                 setCategory("all");
                 setVisibleCount(PAGE_SIZE);
               }}
               className={cn(
-                "rounded-full border px-3.5 py-1.5 text-[11px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "rounded-full border px-3.5 py-1.5 text-caption font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 category === "all"
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border bg-surface text-muted-foreground hover:border-primary/30 hover:text-primary",
@@ -145,12 +150,13 @@ export function ShopCatalog({
               <button
                 key={item.slug}
                 type="button"
+                aria-pressed={category === item.slug}
                 onClick={() => {
                   setCategory(item.slug);
                   setVisibleCount(PAGE_SIZE);
                 }}
                 className={cn(
-                  "rounded-full border px-3.5 py-1.5 text-[11px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  "rounded-full border px-3.5 py-1.5 text-caption font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   category === item.slug
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border bg-surface text-muted-foreground hover:border-primary/30 hover:text-primary",
@@ -160,23 +166,38 @@ export function ShopCatalog({
               </button>
             ))}
 
-            {hasActiveFilters ? (
-              <button
-                type="button"
-                onClick={resetFilters}
-                className="ms-auto inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-[11px] font-semibold text-danger transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <X className="h-3 w-3" aria-hidden="true" />
-                حذف فیلترها
-              </button>
+          </div>
+        ) : null}
+
+        {hasActiveFilters ? (
+          <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-border pt-3">
+            <span className="text-caption text-muted-foreground">فیلترهای فعال:</span>
+            {search.trim() ? (
+              <Badge variant="default">جستوجو: {search.trim()}</Badge>
             ) : null}
+            {!lockedCategory && category !== "all" ? (
+              <Badge variant="default">
+                {categories.find((item) => item.slug === category)?.name ?? category}
+              </Badge>
+            ) : null}
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="ms-auto inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-caption font-semibold text-danger transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <X className="h-3 w-3" aria-hidden="true" />
+              حذف فیلترها
+            </button>
           </div>
         ) : null}
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-[12px] text-muted-foreground" aria-live="polite">
-          {formatNumber(filtered.length)} محصول یافت شد
+        <p className="text-caption text-muted-foreground" aria-live="polite">
+          <span className="font-bold text-foreground">
+            {formatNumber(filtered.length)}
+          </span>{" "}
+          محصول یافت شد
         </p>
         <Badge variant="outline">قیمت‌ها پیش از تأیید</Badge>
       </div>
@@ -188,7 +209,7 @@ export function ShopCatalog({
           </span>
           <div>
             <p className="font-bold text-foreground">محصولی پیدا نشد</p>
-            <p className="mt-2 max-w-sm text-[12px] leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-sm text-caption leading-6 text-muted-foreground">
               عبارت جست‌وجو یا دسته‌بندی را تغییر دهید. اگر محصول مورد نظر را
               پیدا نکردید، برای استعلام موجودی با ما تماس بگیرید.
             </p>
@@ -223,7 +244,7 @@ export function ShopCatalog({
         </>
       )}
 
-      <p className="rounded-xl border border-dashed border-border bg-surface px-4 py-3 text-[11px] leading-6 text-muted-foreground">
+      <p className="rounded-xl border border-dashed border-border bg-surface px-4 py-3 text-caption leading-6 text-muted-foreground">
         قیمت، موجودی و زمان ارسال پیش از نهایی‌سازی سفارش توسط فروشگاه بررسی
         و در صورت نیاز با شما هماهنگ می‌شود.
       </p>
