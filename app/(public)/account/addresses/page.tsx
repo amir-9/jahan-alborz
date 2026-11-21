@@ -34,14 +34,14 @@ export default async function AccountAddressesPage() {
     <div className="flex flex-col gap-4">
       <div>
         <h2 className="text-base font-extrabold text-primary">آدرس‌های من</h2>
-        <p className="mt-1 text-[11.5px] leading-6 text-muted-foreground">
+        <p className="mt-1 text-caption leading-6 text-muted-foreground">
           آدرس‌های ذخیره‌شده را مدیریت کنید. در مرحله نهایی سفارش می‌توانید آدرس
           تحویل را انتخاب یا ویرایش کنید.
         </p>
       </div>
 
       {failed ? (
-        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11.5px] leading-6 text-amber-800">
+        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           <CircleExclamationPoint
             className="mt-0.5 h-4 w-4 shrink-0"
             aria-hidden="true"
@@ -53,7 +53,7 @@ export default async function AccountAddressesPage() {
       <AddressForm />
 
       {addresses.length === 0 && !failed ? (
-        <div className="rounded-2xl border border-dashed border-border bg-surface px-5 py-8 text-center text-[11.5px] leading-6 text-muted-foreground shadow-soft">
+        <div className="rounded-2xl border border-dashed border-border bg-surface px-5 py-8 text-center text-caption leading-6 text-muted-foreground shadow-soft">
           هنوز آدرسی ذخیره نکرده‌اید. با افزودن آدرس، ثبت سفارش سریع‌تر می‌شود.
         </div>
       ) : null}
@@ -66,10 +66,10 @@ export default async function AccountAddressesPage() {
           >
             <div className="flex items-start justify-between gap-2">
               <div>
-                <p className="text-[11.5px] font-bold text-primary">
+                <p className="text-caption font-bold text-primary">
                   {address.label?.trim() || "آدرس تحویل"}
                 </p>
-                <p className="mt-1 text-[11px] text-foreground">
+                <p className="mt-1 text-caption text-foreground">
                   {address.recipient}
                 </p>
               </div>
@@ -78,10 +78,10 @@ export default async function AccountAddressesPage() {
               ) : null}
             </div>
 
-            <p className="mt-2 text-[11px] leading-6 text-muted-foreground">
+            <p className="mt-2 text-caption leading-6 text-muted-foreground">
               {address.province}، {address.city}، {address.street}
             </p>
-            <p className="mt-1 text-[10.5px] text-muted-foreground" dir="ltr">
+            <p className="mt-1 text-caption text-muted-foreground" dir="ltr">
               {address.phone}
               {address.postalCode ? ` · ${address.postalCode}` : ""}
             </p>

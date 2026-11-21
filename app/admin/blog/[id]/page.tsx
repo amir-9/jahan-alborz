@@ -68,7 +68,7 @@ export default async function AdminEditBlogPostPage({
 
   if (failed || !post) {
     return (
-      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-[11.5px] leading-6 text-amber-800">
+      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-caption leading-6 text-amber-800">
         <p className="flex items-center gap-2 font-bold">
           <CircleExclamationPoint className="h-4 w-4" aria-hidden="true" />
           دریافت اطلاعات مطلب در حال حاضر ممکن نیست.
@@ -86,7 +86,7 @@ export default async function AdminEditBlogPostPage({
         <div>
           <Link
             href="/admin/blog"
-            className="inline-flex items-center gap-1 text-[10.5px] font-semibold text-muted-foreground hover:text-primary"
+            className="inline-flex items-center gap-1 text-caption font-semibold text-muted-foreground hover:text-primary"
           >
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             همه مطالب
@@ -94,7 +94,7 @@ export default async function AdminEditBlogPostPage({
           <h1 className="mt-1 text-lg font-extrabold text-primary sm:text-xl">
             ویرایش مطلب
           </h1>
-          <p className="mt-1 text-[10.5px] text-muted-foreground">
+          <p className="mt-1 text-caption text-muted-foreground">
             آخرین ویرایش: {formatDate(post.updatedAt)}
             {post.publishedAt
               ? ` · تاریخ انتشار: ${formatDate(post.publishedAt)}`

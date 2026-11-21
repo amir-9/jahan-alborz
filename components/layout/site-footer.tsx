@@ -83,8 +83,8 @@ export function SiteFooter({
                 <item.icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <div>
-                <p className="text-[13px] font-bold">{item.title}</p>
-                <p className="mt-0.5 text-[11px] leading-5 text-primary-foreground/60">
+                <p className="text-caption font-bold">{item.title}</p>
+                <p className="mt-0.5 text-caption leading-5 text-on-primary-muted">
                   {item.description}
                 </p>
               </div>
@@ -95,15 +95,15 @@ export function SiteFooter({
         <div className="grid gap-10 py-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <Logo variant="light" className="w-fit" />
-            <p className="mt-5 max-w-sm text-[13px] leading-8 text-primary-foreground/65">
+            <p className="mt-5 max-w-sm text-caption leading-8 text-on-primary-muted">
               {siteConfig.tagline} در قزوین؛ از انتخاب و خرید پکیج و رادیاتور تا
               نصب، سرویس دوره‌ای و تأمین قطعات یدکی.
             </p>
 
-            <div className="mt-6 space-y-3 text-[12px]">
+            <div className="mt-6 space-y-3 text-caption">
               <a
                 href={toTelHref(siteConfig.contact.phone)}
-                className="flex items-center gap-2.5 text-primary-foreground/80 transition-colors hover:text-secondary"
+                className="flex items-center gap-2.5 text-on-primary-muted transition-colors hover:text-secondary"
                 dir="ltr"
               >
                 <Phone className="h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
@@ -111,7 +111,7 @@ export function SiteFooter({
               </a>
               <a
                 href={toWhatsAppHref(siteConfig.contact.whatsapp)}
-                className="flex items-center gap-2.5 text-primary-foreground/80 transition-colors hover:text-secondary"
+                className="flex items-center gap-2.5 text-on-primary-muted transition-colors hover:text-secondary"
                 dir="ltr"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -121,17 +121,17 @@ export function SiteFooter({
               </a>
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="flex items-center gap-2.5 text-primary-foreground/80 transition-colors hover:text-secondary"
+                className="flex items-center gap-2.5 text-on-primary-muted transition-colors hover:text-secondary"
                 dir="ltr"
               >
                 <Mail className="h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
                 {siteConfig.contact.email}
               </a>
-              <p className="flex items-start gap-2.5 text-primary-foreground/70">
+              <p className="flex items-start gap-2.5 text-on-primary-muted">
                 <MapPin className="mt-1 h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
                 {siteConfig.address.fullAddress}
               </p>
-              <p className="flex items-start gap-2.5 text-primary-foreground/70">
+              <p className="flex items-start gap-2.5 text-on-primary-muted">
                 <Clock className="mt-1 h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
                 {siteConfig.business.workHours.days}،{" "}
                 {siteConfig.business.workHours.hours}
@@ -146,7 +146,7 @@ export function SiteFooter({
                 <li key={category.slug}>
                   <Link
                     href={`/categories/${category.slug}`}
-                    className="text-[12.5px] text-primary-foreground/65 transition-colors hover:text-secondary"
+                    className="text-caption text-on-primary-muted transition-colors hover:text-secondary"
                   >
                     {category.name}
                   </Link>
@@ -155,7 +155,7 @@ export function SiteFooter({
               <li>
                 <Link
                   href="/shop"
-                  className="text-[12.5px] font-semibold text-secondary transition-colors hover:text-secondary-100"
+                  className="text-caption font-semibold text-secondary transition-colors hover:text-secondary-100"
                 >
                   همه محصولات
                 </Link>
@@ -170,7 +170,7 @@ export function SiteFooter({
                 <li key={service.slug}>
                   <Link
                     href="/services"
-                    className="text-[12.5px] text-primary-foreground/65 transition-colors hover:text-secondary"
+                    className="text-caption text-on-primary-muted transition-colors hover:text-secondary"
                   >
                     {service.name}
                   </Link>
@@ -186,7 +186,7 @@ export function SiteFooter({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[12.5px] text-primary-foreground/65 transition-colors hover:text-secondary"
+                    className="text-caption text-on-primary-muted transition-colors hover:text-secondary"
                   >
                     {link.label}
                   </Link>
@@ -198,7 +198,7 @@ export function SiteFooter({
 
         <Separator className="bg-white/10" />
 
-        <div className="flex flex-col gap-3 py-6 text-[11px] text-primary-foreground/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 py-6 text-caption text-on-primary-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © <CopyrightYear /> {siteConfig.name}. تمامی حقوق محفوظ
             است.

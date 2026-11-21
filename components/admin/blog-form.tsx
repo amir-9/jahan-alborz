@@ -174,7 +174,7 @@ export function BlogForm({ initial }: { initial?: BlogFormInitial }) {
       {!isEdit ? (
         <Link
           href="/admin/blog"
-          className="inline-flex w-fit items-center gap-1 text-[10.5px] font-semibold text-muted-foreground hover:text-primary"
+          className="inline-flex w-fit items-center gap-1 text-caption font-semibold text-muted-foreground hover:text-primary"
         >
           <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           همه مطالب
@@ -183,7 +183,7 @@ export function BlogForm({ initial }: { initial?: BlogFormInitial }) {
 
       {result ? (
         <p
-          className={`flex items-start gap-2 rounded-2xl px-4 py-3 text-[11px] leading-6 ${
+          className={`flex items-start gap-2 rounded-2xl px-4 py-3 text-caption leading-6 ${
             result.ok
               ? "border border-teal-200 bg-teal-50 text-teal-800"
               : "border border-red-200 bg-red-50 text-danger"
@@ -214,7 +214,7 @@ export function BlogForm({ initial }: { initial?: BlogFormInitial }) {
               required
             />
             {fieldErrors.title ? (
-              <p className="text-[10px] text-danger">{fieldErrors.title[0]}</p>
+              <p className="text-caption text-danger">{fieldErrors.title[0]}</p>
             ) : null}
           </div>
 
@@ -232,7 +232,7 @@ export function BlogForm({ initial }: { initial?: BlogFormInitial }) {
                 required
               />
               {fieldErrors.slug ? (
-                <p className="text-[10px] text-danger">{fieldErrors.slug[0]}</p>
+                <p className="text-caption text-danger">{fieldErrors.slug[0]}</p>
               ) : null}
             </div>
 
@@ -259,13 +259,13 @@ export function BlogForm({ initial }: { initial?: BlogFormInitial }) {
               required
             />
             {fieldErrors.excerpt ? (
-              <p className="text-[10px] text-danger">{fieldErrors.excerpt[0]}</p>
+              <p className="text-caption text-danger">{fieldErrors.excerpt[0]}</p>
             ) : null}
           </div>
 
           <div className="rounded-xl border border-dashed border-border bg-surface-muted/60 p-3">
             <div className="flex items-center justify-between gap-2">
-              <p className="text-[11px] font-bold text-primary">بخش‌های مطلب</p>
+              <p className="text-caption font-bold text-primary">بخش‌های مطلب</p>
               <Button type="button" size="sm" variant="outline" onClick={addSection}>
                 <Plus className="h-3.5 w-3.5" aria-hidden="true" />
                 بخش جدید
@@ -325,9 +325,9 @@ export function BlogForm({ initial }: { initial?: BlogFormInitial }) {
 
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-5 shadow-soft">
-            <p className="text-[11px] font-bold text-primary">تنظیمات انتشار</p>
+            <p className="text-caption font-bold text-primary">تنظیمات انتشار</p>
 
-            <label className="flex items-center gap-2 rounded-xl border border-border px-3 py-2.5 text-[11px] font-semibold text-foreground">
+            <label className="flex items-center gap-2 rounded-xl border border-border px-3 py-2.5 text-caption font-semibold text-foreground">
               <input
                 type="checkbox"
                 checked={values.isPublished}
@@ -367,7 +367,7 @@ export function BlogForm({ initial }: { initial?: BlogFormInitial }) {
               </div>
             </div>
 
-            <p className="text-[10px] leading-5 text-muted-foreground">
+            <p className="text-caption leading-5 text-muted-foreground">
               مطلب منتشرنشده در وبلاگ نمایش داده نمی‌شود. تاریخ انتشار نخستین
               انتشار حفظ می‌شود.
             </p>
@@ -441,7 +441,7 @@ export function BlogRowActions({
       </Button>
 
       {result && !result.ok ? (
-        <p className="max-w-[12rem] text-end text-[9.5px] leading-4 text-danger">
+        <p className="max-w-[12rem] text-end text-caption leading-4 text-danger">
           {result.message}
         </p>
       ) : null}

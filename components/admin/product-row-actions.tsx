@@ -112,7 +112,7 @@ export function ProductRowActions({
       </div>
       {error ? (
         <p
-          className="flex items-center gap-1 text-[10px] text-danger"
+          className="flex items-center gap-1 text-caption text-danger"
           role="alert"
         >
           <CircleExclamationPoint className="h-3 w-3" aria-hidden="true" />

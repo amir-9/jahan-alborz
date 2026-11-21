@@ -52,7 +52,7 @@ export default async function AdminUsersPage({
         <h1 className="text-lg font-extrabold text-primary sm:text-xl">
           کاربران و نقش‌ها
         </h1>
-        <p className="mt-1.5 text-[11.5px] leading-6 text-muted-foreground">
+        <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
           نقش کاربران را تغییر دهید، حساب‌ها را فعال یا غیرفعال کنید و برای کارکنان
           حساب ورود بسازید. تغییر نقش پس از ورود بعدی کاربر اعمال می‌شود.
         </p>
@@ -75,7 +75,7 @@ export default async function AdminUsersPage({
       <CreateStaffForm />
 
       {!result ? (
-        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11.5px] leading-6 text-amber-800">
+        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           <CircleExclamationPoint
             className="mt-0.5 h-4 w-4 shrink-0"
             aria-hidden="true"
@@ -88,10 +88,10 @@ export default async function AdminUsersPage({
           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 text-primary">
             <UserRound className="h-6 w-6" aria-hidden="true" />
           </span>
-          <p className="mt-4 text-[12.5px] font-bold text-primary">
+          <p className="mt-4 text-caption font-bold text-primary">
             کاربری با این فیلترها یافت نشد
           </p>
-          <p className="mt-1.5 text-[11px] text-muted-foreground">
+          <p className="mt-1.5 text-caption text-muted-foreground">
             عبارت جستجو یا فیلتر نقش را تغییر دهید.
           </p>
         </div>
@@ -105,7 +105,7 @@ export default async function AdminUsersPage({
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <div className="flex min-w-0 items-start gap-2.5">
                   <span
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-[11px] font-extrabold ${
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-caption font-extrabold ${
                       user.isActive
                         ? "bg-primary text-primary-foreground"
                         : "bg-surface-muted text-muted-foreground"
@@ -115,7 +115,7 @@ export default async function AdminUsersPage({
                     {user.name?.trim().charAt(0) || "؟"}
                   </span>
                   <div className="min-w-0">
-                    <p className="flex flex-wrap items-center gap-1.5 text-[12px] font-bold text-foreground">
+                    <p className="flex flex-wrap items-center gap-1.5 text-caption font-bold text-foreground">
                       {user.name?.trim() || "بدون نام"}
                       {user.id === currentUser.id ? (
                         <Badge variant="secondary">حساب شما</Badge>
@@ -133,7 +133,7 @@ export default async function AdminUsersPage({
                       </Badge>
                     </p>
 
-                    <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-muted-foreground">
+                    <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-caption text-muted-foreground">
                       {user.email ? (
                         <span className="inline-flex items-center gap-1" dir="ltr">
                           <Mail className="h-3 w-3" aria-hidden="true" />
@@ -170,14 +170,14 @@ export default async function AdminUsersPage({
             </article>
           ))}
 
-          <p className="text-[10.5px] text-muted-foreground">
+          <p className="text-caption text-muted-foreground">
             نمایش {formatNumber(result.users.length)} کاربر از{" "}
             {formatNumber(result.total)} مورد مطابق فیلتر.
           </p>
         </div>
       )}
 
-      <p className="rounded-2xl border border-dashed border-border bg-surface px-4 py-3 text-[10px] leading-5 text-muted-foreground">
+      <p className="rounded-2xl border border-dashed border-border bg-surface px-4 py-3 text-caption leading-5 text-muted-foreground">
         محافظت‌ها: آخرین مدیر ارشد فعال قابل حذف یا غیرفعال‌سازی نیست و هر مدیر
         نمی‌تواند نقش یا وضعیت حساب خودش را تغییر دهد. این قواعد در سرور نیز
         اعمال می‌شوند، نه فقط در رابط کاربری.

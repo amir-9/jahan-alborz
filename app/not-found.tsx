@@ -30,7 +30,7 @@ export default function NotFound() {
         <h1 className="-mt-4 text-xl font-extrabold text-primary sm:text-2xl">
           این صفحه پیدا نشد
         </h1>
-        <p className="mt-3 text-[12.5px] leading-7 text-muted-foreground">
+        <p className="mt-3 text-caption leading-7 text-muted-foreground">
           ممکن است آدرس تغییر کرده باشد یا محصول مورد نظر از فروشگاه حذف شده
           باشد. از مسیرهای زیر ادامه دهید.
         </p>
@@ -50,7 +50,7 @@ export default function NotFound() {
           </Button>
         </div>
 
-        <div className="mt-5 flex flex-wrap justify-center gap-x-4 gap-y-2 text-[11px] text-muted-foreground">
+        <div className="mt-5 flex flex-wrap justify-center gap-x-4 gap-y-2 text-caption text-muted-foreground">
           {[
             { label: "خدمات", href: "/services" },
             { label: "وبلاگ", href: "/blog" },

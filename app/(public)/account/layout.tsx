@@ -28,12 +28,12 @@ export default async function AccountLayout({ children }: AccountLayoutProps) {
               {initial}
             </span>
             <div>
-              <p className="text-[10.5px] text-muted-foreground">حساب کاربری</p>
+              <p className="text-caption text-muted-foreground">حساب کاربری</p>
               <h1 className="text-base font-extrabold text-primary">
                 {user.name?.trim() || "مشتری جهان البرز"}
               </h1>
               {user.phone ? (
-                <p className="mt-0.5 text-[11px] text-muted-foreground" dir="ltr">
+                <p className="mt-0.5 text-caption text-muted-foreground" dir="ltr">
                   {user.phone}
                 </p>
               ) : null}

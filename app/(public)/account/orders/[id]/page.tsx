@@ -68,7 +68,7 @@ export default async function AccountOrderDetailPage({
           className="mx-auto h-7 w-7 text-amber-600"
           aria-hidden="true"
         />
-        <p className="mt-3 text-[12.5px] font-semibold text-primary">
+        <p className="mt-3 text-caption font-semibold text-primary">
           دریافت جزئیات سفارش در حال حاضر ممکن نیست.
         </p>
         <Button asChild variant="outline" size="sm" className="mt-4">
@@ -84,7 +84,7 @@ export default async function AccountOrderDetailPage({
         <div>
           <Link
             href="/account/orders"
-            className="inline-flex items-center gap-1 text-[11px] font-semibold text-muted-foreground hover:text-primary"
+            className="inline-flex items-center gap-1 text-caption font-semibold text-muted-foreground hover:text-primary"
           >
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             همه سفارش‌ها
@@ -95,7 +95,7 @@ export default async function AccountOrderDetailPage({
               {order.orderNumber}
             </span>
           </h2>
-          <p className="mt-1 text-[10.5px] text-muted-foreground">
+          <p className="mt-1 text-caption text-muted-foreground">
             ثبت‌شده در {formatDate(order.createdAt)}
           </p>
         </div>
@@ -111,7 +111,7 @@ export default async function AccountOrderDetailPage({
 
       {order.paymentStatus === "PENDING" &&
       order.paymentMethod === "ONLINE" ? (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11px] leading-6 text-amber-800">
+        <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           درگاه پرداخت آنلاین در این نسخه فعال نشده است. سفارش شما ثبت شده و برای
           هماهنگی پرداخت با شما تماس می‌گیریم. سفارش تا زمان تأیید پرداخت، پرداخت
           نشده محسوب می‌شود.
@@ -133,16 +133,16 @@ export default async function AccountOrderDetailPage({
               <div className="min-w-0">
                 <Link
                   href={`/products/${item.productSlug}`}
-                  className="text-[12px] font-semibold text-primary hover:underline"
+                  className="text-caption font-semibold text-primary hover:underline"
                 >
                   {item.productName}
                 </Link>
-                <p className="mt-0.5 text-[10.5px] text-muted-foreground">
+                <p className="mt-0.5 text-caption text-muted-foreground">
                   {formatNumber(item.quantity)} عدد ×{" "}
                   {formatPrice(Number(item.productPrice))}
                 </p>
               </div>
-              <p className="text-[11.5px] font-bold text-primary">
+              <p className="text-caption font-bold text-primary">
                 {formatPrice(Number(item.lineTotal))}
               </p>
             </div>
@@ -151,7 +151,7 @@ export default async function AccountOrderDetailPage({
 
         <Separator className="my-4" />
 
-        <dl className="flex flex-col gap-2 text-[11.5px]">
+        <dl className="flex flex-col gap-2 text-caption">
           <div className="flex items-center justify-between">
             <dt className="text-muted-foreground">جمع کالاها</dt>
             <dd className="font-semibold text-foreground">
@@ -181,7 +181,7 @@ export default async function AccountOrderDetailPage({
             <MapPin className="h-4 w-4 text-secondary" aria-hidden="true" />
             اطلاعات تحویل
           </h3>
-          <div className="mt-3 space-y-1.5 text-[11.5px] leading-6 text-muted-foreground">
+          <div className="mt-3 space-y-1.5 text-caption leading-6 text-muted-foreground">
             <p className="font-semibold text-foreground">{order.customerName}</p>
             <p dir="ltr" className="text-start">
               {order.customerPhone}
@@ -197,7 +197,7 @@ export default async function AccountOrderDetailPage({
                 <span dir="ltr">{order.postalCode}</span>
               </p>
             ) : null}
-            <p className="inline-flex items-center gap-1.5 rounded-lg bg-surface-muted px-2.5 py-1 text-[10.5px]">
+            <p className="inline-flex items-center gap-1.5 rounded-lg bg-surface-muted px-2.5 py-1 text-caption">
               <Truck className="h-3.5 w-3.5" aria-hidden="true" />
               روش ارسال: {shippingMethodLabels[order.shippingMethod]}
             </p>
@@ -224,7 +224,7 @@ export default async function AccountOrderDetailPage({
           </h3>
           <ol className="mt-3 space-y-3">
             {order.statusHistory.length === 0 ? (
-              <li className="text-[11.5px] text-muted-foreground">
+              <li className="text-caption text-muted-foreground">
                 هنوز رویدادی ثبت نشده است.
               </li>
             ) : (
@@ -238,10 +238,10 @@ export default async function AccountOrderDetailPage({
                     )}
                   </span>
                   <div>
-                    <p className="text-[11.5px] font-semibold text-foreground">
+                    <p className="text-caption font-semibold text-foreground">
                       {orderStatusLabels[event.status]}
                     </p>
-                    <p className="text-[10px] text-muted-foreground">
+                    <p className="text-caption text-muted-foreground">
                       {formatDate(event.createdAt)}
                     </p>
                   </div>
@@ -253,7 +253,7 @@ export default async function AccountOrderDetailPage({
       </div>
 
       {order.notes ? (
-        <p className="rounded-2xl border border-dashed border-border bg-surface px-4 py-3 text-[11px] leading-6 text-muted-foreground">
+        <p className="rounded-2xl border border-dashed border-border bg-surface px-4 py-3 text-caption leading-6 text-muted-foreground">
           یادداشت سفارش: {order.notes}
         </p>
       ) : null}

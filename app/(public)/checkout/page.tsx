@@ -94,7 +94,7 @@ export default async function CheckoutPage() {
           <h1 className="mt-3 text-2xl font-extrabold text-primary sm:text-3xl">
             تکمیل سفارش
           </h1>
-          <p className="mt-2 max-w-2xl text-[12px] leading-7 text-muted-foreground">
+          <p className="mt-2 max-w-2xl text-caption leading-7 text-muted-foreground">
             اطلاعات تحویل را وارد کنید. پس از ثبت، موجودی و هزینه ارسال توسط
             فروشگاه بررسی و برای تأیید نهایی با شما تماس گرفته می‌شود.
           </p>

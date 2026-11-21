@@ -56,7 +56,7 @@ export default async function AdminServicesPage({
         <h1 className="text-lg font-extrabold text-primary sm:text-xl">
           درخواست‌های خدمات
         </h1>
-        <p className="mt-1.5 text-[11.5px] leading-6 text-muted-foreground">
+        <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
           درخواست‌های تعمیر، سرویس و نصب را بررسی، به تکنسین ارجاع و وضعیت آن‌ها
           را پیگیری کنید.
         </p>
@@ -77,7 +77,7 @@ export default async function AdminServicesPage({
       </AdminFilterBar>
 
       {!result ? (
-        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11.5px] leading-6 text-amber-800">
+        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           <CircleExclamationPoint
             className="mt-0.5 h-4 w-4 shrink-0"
             aria-hidden="true"
@@ -90,10 +90,10 @@ export default async function AdminServicesPage({
           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 text-primary">
             <Inbox className="h-6 w-6" aria-hidden="true" />
           </span>
-          <p className="mt-4 text-[12.5px] font-bold text-primary">
+          <p className="mt-4 text-caption font-bold text-primary">
             درخواستی با این فیلترها یافت نشد
           </p>
-          <p className="mt-1.5 text-[11px] text-muted-foreground">
+          <p className="mt-1.5 text-caption text-muted-foreground">
             فیلتر وضعیت را تغییر دهید یا عبارت جستجو را حذف کنید.
           </p>
         </div>
@@ -107,10 +107,10 @@ export default async function AdminServicesPage({
               >
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
-                    <p className="text-[12px] font-bold text-primary">
+                    <p className="text-caption font-bold text-primary">
                       {request.serviceType}
                     </p>
-                    <p className="mt-1 text-[10.5px] text-muted-foreground">
+                    <p className="mt-1 text-caption text-muted-foreground">
                       {formatDate(request.createdAt)}
                       {request.city ? ` · ${request.city}` : ""}
                     </p>
@@ -120,7 +120,7 @@ export default async function AdminServicesPage({
                   </Badge>
                 </div>
 
-                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10.5px] text-muted-foreground">
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-caption text-muted-foreground">
                   <span className="font-semibold text-foreground">
                     {request.customerName}
                   </span>
@@ -140,13 +140,13 @@ export default async function AdminServicesPage({
                 </div>
 
                 {request.problemDescription ? (
-                  <p className="mt-2 line-clamp-2 rounded-xl bg-surface-muted px-3 py-2 text-[10.5px] leading-5 text-muted-foreground">
+                  <p className="mt-2 line-clamp-2 rounded-xl bg-surface-muted px-3 py-2 text-caption leading-5 text-muted-foreground">
                     {request.problemDescription}
                   </p>
                 ) : null}
 
                 <div className="mt-3 flex items-center justify-between gap-2 border-t border-border pt-3">
-                  <p className="text-[9.5px] text-muted-foreground">
+                  <p className="text-caption text-muted-foreground">
                     کد پیگیری:{" "}
                     <span dir="ltr" className="font-semibold text-foreground">
                       {request.id.slice(0, 8)}
@@ -173,7 +173,7 @@ export default async function AdminServicesPage({
         </>
       )}
 
-      <p className="text-[10px] text-muted-foreground">
+      <p className="text-caption text-muted-foreground">
         مجموع درخواست‌های مطابق فیلتر: {result ? formatNumber(result.total) : "—"}
       </p>
     </div>

@@ -22,7 +22,7 @@ export default function CartPage() {
           <h1 className="mt-3 text-2xl font-extrabold text-primary sm:text-3xl">
             بازبینی سبد خرید
           </h1>
-          <p className="mt-2 text-[12px] leading-7 text-muted-foreground">
+          <p className="mt-2 text-caption leading-7 text-muted-foreground">
             تعداد و اقلام سبد را بررسی کنید؛ سپس اطلاعات تحویل را در مرحله بعد
             تکمیل کنید.
           </p>

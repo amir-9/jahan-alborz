@@ -43,7 +43,7 @@ export function SectionHeading({
           <div
             className={cn(
               "flex items-center gap-2 text-xs font-semibold",
-              isLight ? "text-secondary" : "text-secondary-600",
+              isLight ? "text-secondary" : "text-secondary-700",
               align === "center" && "justify-center",
             )}
           >
@@ -62,8 +62,8 @@ export function SectionHeading({
         {description ? (
           <p
             className={cn(
-              "mt-3 text-sm leading-8 text-pretty sm:text-[15px]",
-              isLight ? "text-white/70" : "text-muted-foreground",
+              "mt-3 text-sm leading-8 text-pretty sm:text-base",
+              isLight ? "text-on-primary-muted" : "text-muted-foreground",
             )}
           >
             {description}

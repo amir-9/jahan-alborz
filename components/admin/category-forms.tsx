@@ -122,7 +122,7 @@ export function CategoryForm({ visualOptions }: CategoryFormProps) {
 
       {error ? (
         <p
-          className="mt-3 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-[10.5px] leading-5 text-danger"
+          className="mt-3 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-caption leading-5 text-danger"
           role="alert"
         >
           <CircleExclamationPoint className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
@@ -132,7 +132,7 @@ export function CategoryForm({ visualOptions }: CategoryFormProps) {
 
       {success ? (
         <p
-          className="mt-3 flex items-start gap-2 rounded-xl border border-teal-200 bg-teal-50 px-3 py-2 text-[10.5px] leading-5 text-teal-800"
+          className="mt-3 flex items-start gap-2 rounded-xl border border-teal-200 bg-teal-50 px-3 py-2 text-caption leading-5 text-teal-800"
           role="status"
         >
           <CircleCheck className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
@@ -203,7 +203,7 @@ export function CategoryToggle({
         {isActive ? "غیرفعال‌سازی" : "فعال‌سازی"}
       </Button>
       {error ? (
-        <p className="text-[10px] text-danger" role="alert">
+        <p className="text-caption text-danger" role="alert">
           {error}
         </p>
       ) : null}

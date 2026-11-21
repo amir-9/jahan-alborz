@@ -15,7 +15,7 @@ type BreadcrumbsProps = {
 export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
   return (
     <nav aria-label="مسیر صفحه" className={cn(className)}>
-      <ol className="flex flex-wrap items-center gap-1 text-[11px] text-muted-foreground">
+      <ol className="flex flex-wrap items-center gap-1 text-caption text-muted-foreground">
         <li>
           <Link
             href="/"

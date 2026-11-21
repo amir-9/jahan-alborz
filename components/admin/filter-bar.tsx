@@ -31,7 +31,7 @@ export function AdminFilterBar({
       className="flex flex-wrap items-end gap-2 rounded-2xl border border-border bg-surface p-3 shadow-soft"
     >
       <label className="flex min-w-[12rem] flex-1 flex-col gap-1">
-        <span className="text-[10px] font-semibold text-muted-foreground">
+        <span className="text-caption font-semibold text-muted-foreground">
           جستجو
         </span>
         <span className="relative">
@@ -44,7 +44,7 @@ export function AdminFilterBar({
             name={searchName}
             defaultValue={searchValue ?? ""}
             placeholder={searchPlaceholder}
-            className="h-10 w-full rounded-xl border border-input bg-surface px-3 pe-9 text-[12px] text-foreground shadow-sm transition-colors placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/10"
+            className="h-10 w-full rounded-xl border border-input bg-surface px-3 pe-9 text-caption text-foreground shadow-sm transition-colors placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/10"
           />
         </span>
       </label>
@@ -53,14 +53,14 @@ export function AdminFilterBar({
 
       <button
         type="submit"
-        className="h-10 rounded-xl bg-primary px-4 text-[11.5px] font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="h-10 rounded-xl bg-primary px-4 text-caption font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         اعمال فیلتر
       </button>
 
       <Link
         href={resetHref}
-        className="inline-flex h-10 items-center rounded-xl px-3 text-[11px] font-semibold text-muted-foreground transition-colors hover:text-primary"
+        className="inline-flex h-10 items-center rounded-xl px-3 text-caption font-semibold text-muted-foreground transition-colors hover:text-primary"
       >
         حذف فیلترها
       </Link>
@@ -83,13 +83,13 @@ export function AdminSelectFilter({
 }: AdminSelectFilterProps) {
   return (
     <label className="flex min-w-[9rem] flex-col gap-1">
-      <span className="text-[10px] font-semibold text-muted-foreground">
+      <span className="text-caption font-semibold text-muted-foreground">
         {label}
       </span>
       <select
         name={name}
         defaultValue={value ?? ""}
-        className="h-10 w-full rounded-xl border border-input bg-surface px-3 text-[12px] text-foreground shadow-sm focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/10"
+        className="h-10 w-full rounded-xl border border-input bg-surface px-3 text-caption text-foreground shadow-sm focus-visible:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/10"
       >
         <option value="">همه</option>
         {options.map((option) => (
@@ -119,7 +119,7 @@ export function AdminPagination({
 }: AdminPaginationProps) {
   if (pageCount <= 1) {
     return (
-      <p className="text-[10.5px] text-muted-foreground">
+      <p className="text-caption text-muted-foreground">
         {total > 0 ? `${formatNumber(total)} مورد` : "موردی یافت نشد"}
       </p>
     );
@@ -141,7 +141,7 @@ export function AdminPagination({
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-3">
-      <p className="text-[10.5px] text-muted-foreground">
+      <p className="text-caption text-muted-foreground">
         {formatNumber(total)} مورد · صفحه {formatNumber(page)} از{" "}
         {formatNumber(pageCount)}
       </p>
@@ -149,7 +149,7 @@ export function AdminPagination({
         {page > 1 ? (
           <Link
             href={hrefFor(page - 1)}
-            className="inline-flex h-8 items-center rounded-lg border border-border px-3 text-[10.5px] font-semibold text-foreground hover:border-primary/30 hover:text-primary"
+            className="inline-flex h-8 items-center rounded-lg border border-border px-3 text-caption font-semibold text-foreground hover:border-primary/30 hover:text-primary"
           >
             صفحه قبل
           </Link>
@@ -157,7 +157,7 @@ export function AdminPagination({
         {page < pageCount ? (
           <Link
             href={hrefFor(page + 1)}
-            className="inline-flex h-8 items-center rounded-lg border border-border px-3 text-[10.5px] font-semibold text-foreground hover:border-primary/30 hover:text-primary"
+            className="inline-flex h-8 items-center rounded-lg border border-border px-3 text-caption font-semibold text-foreground hover:border-primary/30 hover:text-primary"
           >
             صفحه بعد
           </Link>

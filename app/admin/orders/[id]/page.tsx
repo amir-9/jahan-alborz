@@ -66,7 +66,7 @@ export default async function AdminOrderDetailPage({
 
   if (failed || !order) {
     return (
-      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-[11.5px] leading-6 text-amber-800">
+      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-caption leading-6 text-amber-800">
         <p className="flex items-center gap-2 font-bold">
           <CircleExclamationPoint className="h-4 w-4" aria-hidden="true" />
           دریافت جزئیات سفارش در حال حاضر ممکن نیست.
@@ -84,7 +84,7 @@ export default async function AdminOrderDetailPage({
         <div>
           <Link
             href="/admin/orders"
-            className="inline-flex items-center gap-1 text-[10.5px] font-semibold text-muted-foreground hover:text-primary"
+            className="inline-flex items-center gap-1 text-caption font-semibold text-muted-foreground hover:text-primary"
           >
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             همه سفارش‌ها
@@ -95,7 +95,7 @@ export default async function AdminOrderDetailPage({
               {order.orderNumber}
             </span>
           </h1>
-          <p className="mt-1 text-[10.5px] text-muted-foreground">
+          <p className="mt-1 text-caption text-muted-foreground">
             ثبت‌شده در {formatDate(order.createdAt)}
           </p>
         </div>
@@ -113,7 +113,7 @@ export default async function AdminOrderDetailPage({
       </div>
 
       {order.status === "AWAITING_PAYMENT" ? (
-        <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[10.5px] leading-6 text-amber-800">
+        <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           این سفارش در انتظار پرداخت آنلاین است. درگاه پرداخت در نسخه فعلی فعال
           نیست؛ پرداخت فقط پس از تأیید واقعی واریز، دستی ثبت شود.
         </p>
@@ -136,16 +136,16 @@ export default async function AdminOrderDetailPage({
                   <div className="min-w-0">
                     <Link
                       href={`/products/${item.productSlug}`}
-                      className="text-[11.5px] font-semibold text-primary hover:underline"
+                      className="text-caption font-semibold text-primary hover:underline"
                     >
                       {item.productName}
                     </Link>
-                    <p className="mt-0.5 text-[10px] text-muted-foreground">
+                    <p className="mt-0.5 text-caption text-muted-foreground">
                       {formatNumber(item.quantity)} عدد ×{" "}
                       {formatPrice(Number(item.productPrice))}
                     </p>
                   </div>
-                  <p className="text-[11px] font-bold text-primary">
+                  <p className="text-caption font-bold text-primary">
                     {formatPrice(Number(item.lineTotal))}
                   </p>
                 </div>
@@ -154,7 +154,7 @@ export default async function AdminOrderDetailPage({
 
             <Separator className="my-4" />
 
-            <dl className="flex flex-col gap-2 text-[11.5px]">
+            <dl className="flex flex-col gap-2 text-caption">
               <div className="flex items-center justify-between">
                 <dt className="text-muted-foreground">جمع کالاها</dt>
                 <dd className="font-semibold text-foreground">
@@ -182,7 +182,7 @@ export default async function AdminOrderDetailPage({
             </dl>
 
             {order.notes ? (
-              <p className="mt-4 rounded-xl bg-surface-muted px-3.5 py-2.5 text-[10.5px] leading-6 text-muted-foreground">
+              <p className="mt-4 rounded-xl bg-surface-muted px-3.5 py-2.5 text-caption leading-6 text-muted-foreground">
                 یادداشت مشتری: {order.notes}
               </p>
             ) : null}
@@ -195,7 +195,7 @@ export default async function AdminOrderDetailPage({
             </h2>
 
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-border px-3.5 py-3 text-[11px] leading-6">
+              <div className="rounded-xl border border-border px-3.5 py-3 text-caption leading-6">
                 <p className="flex items-center gap-1.5 font-bold text-foreground">
                   <UserRound className="h-3.5 w-3.5" aria-hidden="true" />
                   {order.customerName}
@@ -209,18 +209,18 @@ export default async function AdminOrderDetailPage({
                   {order.customerPhone}
                 </a>
                 {order.customerEmail ? (
-                  <p className="mt-1 text-[10.5px] text-muted-foreground" dir="ltr">
+                  <p className="mt-1 text-caption text-muted-foreground" dir="ltr">
                     {order.customerEmail}
                   </p>
                 ) : null}
-                <p className="mt-1 text-[10.5px] text-muted-foreground">
+                <p className="mt-1 text-caption text-muted-foreground">
                   {order.user
                     ? `حساب کاربری: ${order.user.name ?? "بدون نام"} (${order.user.isActive ? "فعال" : "غیرفعال"})`
                     : "خرید مهمان بدون حساب کاربری"}
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border px-3.5 py-3 text-[11px] leading-6">
+              <div className="rounded-xl border border-border px-3.5 py-3 text-caption leading-6">
                 <p className="font-bold text-foreground">
                   {[order.province, order.city].filter(Boolean).join("، ")}
                 </p>
@@ -228,11 +228,11 @@ export default async function AdminOrderDetailPage({
                   {order.shippingAddress}
                 </p>
                 {order.postalCode ? (
-                  <p className="mt-1 text-[10.5px] text-muted-foreground">
+                  <p className="mt-1 text-caption text-muted-foreground">
                     کد پستی: <span dir="ltr">{order.postalCode}</span>
                   </p>
                 ) : null}
-                <p className="mt-1 text-[10.5px] text-muted-foreground">
+                <p className="mt-1 text-caption text-muted-foreground">
                   روش ارسال: {shippingMethodLabels[order.shippingMethod]}
                 </p>
               </div>
@@ -246,7 +246,7 @@ export default async function AdminOrderDetailPage({
             </h2>
             <ol className="mt-3 space-y-3">
               {order.statusHistory.length === 0 ? (
-                <li className="text-[11px] text-muted-foreground">
+                <li className="text-caption text-muted-foreground">
                   هنوز رویدادی ثبت نشده است.
                 </li>
               ) : (
@@ -260,10 +260,10 @@ export default async function AdminOrderDetailPage({
                       )}
                     </span>
                     <div>
-                      <p className="text-[11px] font-semibold text-foreground">
+                      <p className="text-caption font-semibold text-foreground">
                         {orderStatusLabels[event.status]}
                       </p>
-                      <p className="text-[10px] text-muted-foreground">
+                      <p className="text-caption text-muted-foreground">
                         {formatDate(event.createdAt)}
                         {event.note ? ` · ${event.note}` : ""}
                       </p>
@@ -298,10 +298,10 @@ export default async function AdminOrderDetailPage({
 
           {order.payment ? (
             <div className="rounded-2xl border border-border bg-surface p-4 shadow-soft">
-              <p className="text-[10.5px] font-bold text-primary">
+              <p className="text-caption font-bold text-primary">
                 اطلاعات پرداخت ثبت‌شده
               </p>
-              <dl className="mt-2 space-y-1 text-[10.5px] text-muted-foreground">
+              <dl className="mt-2 space-y-1 text-caption text-muted-foreground">
                 <div className="flex justify-between gap-2">
                   <dt>مبلغ</dt>
                   <dd className="font-semibold text-foreground">

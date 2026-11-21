@@ -144,7 +144,7 @@ export function ProductForm({ categories, initial }: ProductFormProps) {
       <div className="flex flex-col gap-4">
         {result ? (
           <p
-            className={`flex items-start gap-2 rounded-2xl px-4 py-3 text-[11px] leading-6 ${
+            className={`flex items-start gap-2 rounded-2xl px-4 py-3 text-caption leading-6 ${
               result.ok
                 ? "border border-teal-200 bg-teal-50 text-teal-800"
                 : "border border-red-200 bg-red-50 text-danger"
@@ -369,7 +369,7 @@ export function ProductForm({ categories, initial }: ProductFormProps) {
             </Field>
 
             <div className="flex flex-col justify-end gap-2">
-              <label className="flex items-center gap-2 text-[11px] font-semibold text-foreground">
+              <label className="flex items-center gap-2 text-caption font-semibold text-foreground">
                 <input
                   type="checkbox"
                   checked={values.isActive}
@@ -380,7 +380,7 @@ export function ProductForm({ categories, initial }: ProductFormProps) {
                 />
                 نمایش در فروشگاه
               </label>
-              <label className="flex items-center gap-2 text-[11px] font-semibold text-foreground">
+              <label className="flex items-center gap-2 text-caption font-semibold text-foreground">
                 <input
                   type="checkbox"
                   checked={values.isFeatured}
@@ -391,7 +391,7 @@ export function ProductForm({ categories, initial }: ProductFormProps) {
                 />
                 محصول ویژه
               </label>
-              <label className="flex items-center gap-2 text-[11px] font-semibold text-foreground">
+              <label className="flex items-center gap-2 text-caption font-semibold text-foreground">
                 <input
                   type="checkbox"
                   checked={values.isBestSeller}
@@ -409,19 +409,19 @@ export function ProductForm({ categories, initial }: ProductFormProps) {
 
       <aside className="flex flex-col gap-4 xl:sticky xl:top-24">
         <div className="rounded-2xl border border-border bg-surface p-4 shadow-soft">
-          <p className="text-[10.5px] font-bold text-primary">پیش‌نمایش</p>
+          <p className="text-caption font-bold text-primary">پیش‌نمایش</p>
           <div className="mt-2 flex h-32 items-center justify-center rounded-xl bg-gradient-to-b from-primary-50/60 to-surface">
             <ProductVisual variant={values.visual} className="h-28 w-28" />
           </div>
-          <p className="mt-3 truncate text-[11.5px] font-bold text-primary">
+          <p className="mt-3 truncate text-caption font-bold text-primary">
             {values.name.trim() || "نام محصول"}
           </p>
-          <p className="mt-1 text-[11px] font-extrabold text-secondary">
+          <p className="mt-1 text-caption font-extrabold text-secondary">
             {effectivePrice > 0
               ? `${new Intl.NumberFormat("fa-IR").format(effectivePrice)} تومان`
               : "قیمت تعیین نشده"}
           </p>
-          <p className="mt-1 text-[10px] text-muted-foreground">
+          <p className="mt-1 text-caption text-muted-foreground">
             {values.purchasingMode === "QUOTE"
               ? "خرید استعلامی"
               : "خرید با قیمت ثابت"}
@@ -442,7 +442,7 @@ export function ProductForm({ categories, initial }: ProductFormProps) {
           <Link href="/admin/products">بازگشت به فهرست محصولات</Link>
         </Button>
 
-        <p className="rounded-xl bg-surface-muted px-3 py-2 text-[10px] leading-5 text-muted-foreground">
+        <p className="rounded-xl bg-surface-muted px-3 py-2 text-caption leading-5 text-muted-foreground">
           مدیریت گالری تصاویر واقعی در این نسخه پیاده‌سازی نشده است؛ محصولات با
           تصویر شماتیک محلی نمایش داده می‌شوند.
         </p>
@@ -482,10 +482,10 @@ function Field({
       </Label>
       {children}
       {hint ? (
-        <p className="text-[10px] leading-5 text-muted-foreground">{hint}</p>
+        <p className="text-caption leading-5 text-muted-foreground">{hint}</p>
       ) : null}
       {error ? (
-        <p className="text-[10px] font-medium text-danger" role="alert">
+        <p className="text-caption font-medium text-danger" role="alert">
           {error}
         </p>
       ) : null}

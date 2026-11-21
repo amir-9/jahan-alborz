@@ -33,7 +33,7 @@ export default async function AdminFaqPage() {
         <h1 className="text-lg font-extrabold text-primary sm:text-xl">
           سوالات متداول
         </h1>
-        <p className="mt-1.5 text-[11.5px] leading-6 text-muted-foreground">
+        <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
           سوالات فعال در صفحه عمومی سوالات متداول و داده ساختاریافته FAQ نمایش
           داده می‌شوند. پاسخ‌ها باید دقیق و بدون وعده تضمین باشند.
         </p>
@@ -42,7 +42,7 @@ export default async function AdminFaqPage() {
       <FaqForm />
 
       {!faqs ? (
-        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11.5px] leading-6 text-amber-800">
+        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           <CircleExclamationPoint
             className="mt-0.5 h-4 w-4 shrink-0"
             aria-hidden="true"
@@ -54,10 +54,10 @@ export default async function AdminFaqPage() {
           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 text-primary">
             <MessageCircleQuestion className="h-6 w-6" aria-hidden="true" />
           </span>
-          <p className="mt-4 text-[12.5px] font-bold text-primary">
+          <p className="mt-4 text-caption font-bold text-primary">
             هنوز سوالی ثبت نشده است
           </p>
-          <p className="mt-1.5 text-[11px] text-muted-foreground">
+          <p className="mt-1.5 text-caption text-muted-foreground">
             با فرم بالا نخستین سوال متداول را ایجاد کنید.
           </p>
         </div>
@@ -73,7 +73,7 @@ export default async function AdminFaqPage() {
                   <div className="flex flex-wrap items-center gap-1.5">
                     <Link
                       href={`/admin/faq/${faq.id}`}
-                      className="text-[12px] font-bold text-primary hover:underline"
+                      className="text-caption font-bold text-primary hover:underline"
                     >
                       {faq.question}
                     </Link>
@@ -85,7 +85,7 @@ export default async function AdminFaqPage() {
                       <Badge variant="outline">{faq.category}</Badge>
                     ) : null}
                   </div>
-                  <p className="mt-1.5 text-[11px] leading-6 text-muted-foreground">
+                  <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
                     {faq.answer}
                   </p>
                 </div>
@@ -95,7 +95,7 @@ export default async function AdminFaqPage() {
             </article>
           ))}
 
-          <p className="text-[10.5px] text-muted-foreground">
+          <p className="text-caption text-muted-foreground">
             مجموع {formatNumber(faqs.length)} سوال ثبت شده است.
           </p>
         </div>

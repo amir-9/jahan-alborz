@@ -95,7 +95,7 @@ export function AddressCardActions({
       </Button>
 
       {error ? (
-        <p className="text-[10.5px] text-danger" role="alert">
+        <p className="text-caption text-danger" role="alert">
           {error}
         </p>
       ) : null}

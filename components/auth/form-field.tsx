@@ -33,10 +33,10 @@ export function FormField({
       </Label>
       {children}
       {hint ? (
-        <p className="text-[10.5px] leading-5 text-muted-foreground">{hint}</p>
+        <p className="text-caption leading-5 text-muted-foreground">{hint}</p>
       ) : null}
       {error ? (
-        <p className="text-[10.5px] font-medium text-danger" role="alert">
+        <p className="text-caption font-medium text-danger" role="alert">
           {error}
         </p>
       ) : null}

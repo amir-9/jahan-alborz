@@ -88,10 +88,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <h1 className="mt-3 text-2xl font-extrabold text-primary sm:text-3xl">
               {category.name}
             </h1>
-            <p className="mt-3 max-w-xl text-[13px] leading-8 text-muted-foreground">
+            <p className="mt-3 max-w-xl text-caption leading-8 text-muted-foreground">
               {category.description}
             </p>
-            <p className="mt-2 text-[11px] text-muted-foreground">
+            <p className="mt-2 text-caption text-muted-foreground">
               برای اطمینان از سازگاری مدل و ظرفیت، پیش از سفارش با ما هماهنگ
               کنید.
             </p>
@@ -120,7 +120,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               <Link
                 key={item.slug}
                 href={`/categories/${item.slug}`}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3.5 py-2 text-[11px] font-semibold text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3.5 py-2 text-caption font-semibold text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
               >
                 {item.name}
                 <ArrowLeft className="h-3 w-3" aria-hidden="true" />

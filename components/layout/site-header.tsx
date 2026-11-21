@@ -82,13 +82,13 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
     <header className="sticky top-0 z-40 w-full">
       {/* Utility bar */}
       <div className="hidden bg-primary-900 text-primary-foreground lg:block">
-        <div className="page-container flex h-9 items-center justify-between text-[11px]">
+        <div className="page-container flex h-9 items-center justify-between text-caption">
           <div className="flex items-center gap-6">
             <span className="inline-flex items-center gap-1.5">
               <MapPin className="h-3.5 w-3.5 text-secondary" aria-hidden="true" />
               {siteConfig.address.fullAddress}
             </span>
-            <span className="inline-flex items-center gap-1.5 text-primary-foreground/80">
+            <span className="inline-flex items-center gap-1.5 text-on-primary-muted">
               <Clock className="h-3.5 w-3.5 text-secondary" aria-hidden="true" />
               {siteConfig.business.workHours.days}،{" "}
               {siteConfig.business.workHours.hours}
@@ -99,7 +99,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
               <>
                 <Link
                   href="/account"
-                  className="max-w-40 truncate font-semibold text-primary-foreground/85 transition-colors hover:text-secondary"
+                  className="max-w-40 truncate font-semibold text-on-primary-muted transition-colors hover:text-secondary"
                 >
                   {viewer.name?.trim() || "حساب کاربری"}
                 </Link>
@@ -114,7 +114,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
                 <span className="h-3 w-px bg-primary-foreground/20" aria-hidden="true" />
               </>
             ) : null}
-            <span className="text-primary-foreground/80">
+            <span className="text-on-primary-muted">
               ارسال محصولات به سراسر ایران
             </span>
             <span className="h-3 w-px bg-primary-foreground/20" aria-hidden="true" />
@@ -183,7 +183,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
 
                   <Separator className="my-5" />
 
-                  <p className="px-3 text-[11px] font-bold text-muted-foreground">
+                  <p className="px-3 text-caption font-bold text-muted-foreground">
                     دسته‌بندی محصولات
                   </p>
                   <ul className="mt-2 space-y-1">
@@ -192,7 +192,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
                         <Link
                           href={`/categories/${category.slug}`}
                           onClick={() => setIsMobileOpen(false)}
-                          className="flex items-center justify-between rounded-xl px-3 py-2 text-[13px] text-muted-foreground transition-colors hover:bg-muted hover:text-primary"
+                          className="flex items-center justify-between rounded-xl px-3 py-2 text-caption text-muted-foreground transition-colors hover:bg-muted hover:text-primary"
                         >
                           {category.name}
                           <ChevronDown
@@ -231,7 +231,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
                       <Link
                         href={item.href}
                         className={cn(
-                          "inline-flex items-center gap-1 rounded-lg px-3 py-2 text-[13px] font-semibold transition-colors",
+                          "inline-flex items-center gap-1 rounded-lg px-3 py-2 text-caption font-semibold transition-colors",
                           active
                             ? "text-primary"
                             : "text-foreground/80 hover:text-primary",
@@ -260,17 +260,17 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
                               href={`/categories/${category.slug}`}
                               className="flex flex-col gap-0.5 rounded-xl px-3 py-2.5 transition-colors hover:bg-primary-50 focus-visible:bg-primary-50 focus-visible:outline-none"
                             >
-                              <span className="text-[13px] font-bold text-foreground">
+                              <span className="text-caption font-bold text-foreground">
                                 {category.name}
                               </span>
-                              <span className="line-clamp-1 text-[11px] text-muted-foreground">
+                              <span className="line-clamp-1 text-caption text-muted-foreground">
                                 {category.description}
                               </span>
                             </Link>
                           ))}
                           <Link
                             href="/shop"
-                            className="mt-1 block rounded-xl bg-muted px-3 py-2 text-center text-[12px] font-bold text-primary transition-colors hover:bg-primary-100"
+                            className="mt-1 block rounded-xl bg-muted px-3 py-2 text-center text-caption font-bold text-primary transition-colors hover:bg-primary-100"
                           >
                             مشاهده همه محصولات
                           </Link>
@@ -293,7 +293,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
                     <Link
                       href={item.href}
                       className={cn(
-                        "inline-flex items-center rounded-lg px-3 py-2 text-[13px] font-semibold transition-colors",
+                        "inline-flex items-center rounded-lg px-3 py-2 text-caption font-semibold transition-colors",
                         active
                           ? "text-primary"
                           : "text-foreground/80 hover:text-primary",
@@ -332,7 +332,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
             >
               <User className="h-5 w-5" aria-hidden="true" />
               {viewer ? (
-                <span className="hidden max-w-24 truncate text-[11px] font-semibold lg:inline">
+                <span className="hidden max-w-24 truncate text-caption font-semibold lg:inline">
                   {viewer.name?.trim() || "حساب من"}
                 </span>
               ) : null}
@@ -350,7 +350,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
             >
               <ShoppingBag className="h-5 w-5" aria-hidden="true" />
               {hasHydrated && cartCount > 0 ? (
-                <span className="absolute -end-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-secondary px-1 text-[10px] font-bold text-secondary-foreground">
+                <span className="absolute -end-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-secondary px-1 text-caption font-bold text-secondary-foreground">
                   {formatNumber(cartCount)}
                 </span>
               ) : null}

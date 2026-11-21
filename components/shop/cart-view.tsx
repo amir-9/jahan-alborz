@@ -50,7 +50,7 @@ export function CartView() {
         </span>
         <div>
           <h2 className="text-lg font-bold text-primary">سبد خرید خالی است</h2>
-          <p className="mx-auto mt-2 max-w-sm text-[12px] leading-6 text-muted-foreground">
+          <p className="mx-auto mt-2 max-w-sm text-caption leading-6 text-muted-foreground">
             محصولات فروشگاه را بررسی کنید و موارد مورد نیاز خود را به سبد
             اضافه کنید. برای انتخاب، می‌توانید از مشاوره ما هم استفاده کنید.
           </p>
@@ -84,13 +84,13 @@ export function CartView() {
     <div className="grid gap-6 lg:grid-cols-[1fr_20rem] lg:items-start">
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <p className="text-[12px] text-muted-foreground">
+          <p className="text-caption text-muted-foreground">
             {formatNumber(count)} کالا در سبد
           </p>
           <button
             type="button"
             onClick={clearCart}
-            className="text-[11px] font-semibold text-danger transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="text-caption font-semibold text-danger transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             خالی کردن سبد
           </button>
@@ -110,10 +110,10 @@ export function CartView() {
               </Link>
 
               <div className="min-w-0 flex-1">
-                <p className="text-[10.5px] text-muted-foreground">
+                <p className="text-caption text-muted-foreground">
                   {item.brand}
                 </p>
-                <h2 className="mt-0.5 text-[13px] font-bold text-foreground">
+                <h2 className="mt-0.5 text-caption font-bold text-foreground">
                   <Link
                     href={`/products/${item.slug}`}
                     className="transition-colors hover:text-primary"
@@ -121,7 +121,7 @@ export function CartView() {
                     {item.name}
                   </Link>
                 </h2>
-                <p className="mt-1 text-[11px] text-muted-foreground">
+                <p className="mt-1 text-caption text-muted-foreground">
                   قیمت واحد: {formatPrice(item.price)}
                 </p>
 
@@ -133,7 +133,7 @@ export function CartView() {
                     label={`تعداد ${item.name}`}
                   />
                   <div className="flex items-center gap-4">
-                    <p className="text-[13px] font-extrabold text-primary">
+                    <p className="text-caption font-extrabold text-primary">
                       {formatPrice(item.price * item.quantity)}
                     </p>
                     <button
@@ -154,12 +154,12 @@ export function CartView() {
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border bg-surface p-4">
           <Link
             href="/shop"
-            className="inline-flex items-center gap-1.5 text-[11.5px] font-bold text-primary transition-colors hover:text-secondary-600"
+            className="inline-flex items-center gap-1.5 text-caption font-bold text-primary transition-colors hover:text-secondary-700"
           >
             <ArrowLeft className="h-3.5 w-3.5 rotate-180" aria-hidden="true" />
             ادامه خرید
           </Link>
-          <p className="text-[10.5px] text-muted-foreground">
+          <p className="text-caption text-muted-foreground">
             قیمت نهایی و موجودی هنگام ثبت سفارش توسط فروشگاه بررسی می‌شود.
           </p>
         </div>
@@ -169,7 +169,7 @@ export function CartView() {
         <div className="rounded-2xl border border-border bg-surface p-5 shadow-soft">
           <h2 className="text-sm font-bold text-primary">خلاصه سبد</h2>
 
-          <dl className="mt-4 space-y-2.5 text-[12px]">
+          <dl className="mt-4 space-y-2.5 text-caption">
             <div className="flex items-center justify-between">
               <dt className="text-muted-foreground">تعداد کالا</dt>
               <dd className="font-semibold text-foreground">
@@ -184,7 +184,7 @@ export function CartView() {
             </div>
             <div className="flex items-center justify-between">
               <dt className="text-muted-foreground">هزینه ارسال</dt>
-              <dd className="text-[11px] text-muted-foreground">
+              <dd className="text-caption text-muted-foreground">
                 پس از هماهنگی
               </dd>
             </div>
@@ -193,7 +193,7 @@ export function CartView() {
           <Separator className="my-4" />
 
           <div className="flex items-baseline justify-between">
-            <span className="text-[12px] font-semibold text-foreground">
+            <span className="text-caption font-semibold text-foreground">
               مبلغ قابل پرداخت
             </span>
             <span className="text-base font-extrabold text-primary">
@@ -201,7 +201,7 @@ export function CartView() {
             </span>
           </div>
 
-          <p className="mt-4 rounded-xl bg-surface-muted px-3.5 py-3 text-[10.5px] leading-5 text-muted-foreground">
+          <p className="mt-4 rounded-xl bg-surface-muted px-3.5 py-3 text-caption leading-5 text-muted-foreground">
             در مرحله بعد اطلاعات تحویل را وارد می‌کنید. برای خرید مهمان، تأیید
             شماره موبایل با کد یک‌بارمصرف لازم است.
           </p>
@@ -233,7 +233,7 @@ export function CartView() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border bg-surface-muted p-4 text-[10.5px] leading-5 text-muted-foreground">
+        <div className="rounded-2xl border border-border bg-surface-muted p-4 text-caption leading-5 text-muted-foreground">
           ارسال محصولات به سراسر ایران انجام می‌شود. روش و هزینه ارسال بر اساس
           مقصد، ابعاد و وزن محموله پیش از تأیید سفارش هماهنگ می‌شود.
         </div>

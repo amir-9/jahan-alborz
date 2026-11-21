@@ -90,7 +90,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_19rem] lg:items-start">
         <article className="rounded-3xl border border-border bg-surface p-6 shadow-soft sm:p-9">
-          <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-2 text-caption text-muted-foreground">
             <Badge variant="secondary">{post.category}</Badge>
             <span className="inline-flex items-center gap-1">
               <Clock className="h-3.5 w-3.5" aria-hidden="true" />
@@ -103,7 +103,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.title}
           </h1>
 
-          <p className="mt-4 rounded-xl border-s-2 border-secondary bg-secondary-50/60 px-4 py-3 text-[12.5px] leading-7 text-muted-foreground">
+          <p className="mt-4 rounded-xl border-s-2 border-secondary bg-secondary-50/60 px-4 py-3 text-caption leading-7 text-muted-foreground">
             {post.excerpt}
           </p>
 
@@ -117,7 +117,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   {section.paragraphs.map((paragraph) => (
                     <p
                       key={paragraph.slice(0, 40)}
-                      className="text-[13px] leading-8 text-muted-foreground"
+                      className="text-caption leading-8 text-muted-foreground"
                     >
                       {paragraph}
                     </p>
@@ -129,7 +129,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           <Separator className="my-8" />
 
-          <div className="rounded-xl border border-dashed border-border bg-surface-muted px-4 py-3 text-[11px] leading-6 text-muted-foreground">
+          <div className="rounded-xl border border-dashed border-border bg-surface-muted px-4 py-3 text-caption leading-6 text-muted-foreground">
             این مطلب راهنمای عمومی است. برای تشخیص دقیق عیب دستگاه یا انتخاب
             ظرفیت، از مشاوره فنی استفاده کنید و به دفترچه راهنمای محصول مراجعه
             کنید.
@@ -158,10 +158,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     href={`/blog/${item.slug}`}
                     className="group block rounded-xl border border-border p-3 transition-colors hover:border-primary/25 hover:bg-primary-50/40"
                   >
-                    <p className="text-[12px] font-bold leading-6 text-foreground transition-colors group-hover:text-primary">
+                    <p className="text-caption font-bold leading-6 text-foreground transition-colors group-hover:text-primary">
                       {item.title}
                     </p>
-                    <p className="mt-1 text-[10.5px] text-muted-foreground">
+                    <p className="mt-1 text-caption text-muted-foreground">
                       {formatNumber(item.readTime)} دقیقه مطالعه
                     </p>
                   </Link>
@@ -170,7 +170,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </ul>
             <Link
               href="/blog"
-              className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-bold text-primary transition-colors hover:text-secondary-600"
+              className="mt-4 inline-flex items-center gap-1.5 text-caption font-bold text-primary transition-colors hover:text-secondary-700"
             >
               همه مقالات
               <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
@@ -180,7 +180,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="rounded-2xl border border-border bg-primary-900 p-5 text-primary-foreground shadow-soft">
             <ShieldCheck className="h-6 w-6 text-secondary" aria-hidden="true" />
             <h2 className="mt-3 text-sm font-bold">مشاوره پیش از اقدام</h2>
-            <p className="mt-2 text-[11px] leading-6 text-primary-foreground/70">
+            <p className="mt-2 text-caption leading-6 text-on-primary-muted">
               برای اطمینان از تشخیص و انتخاب قطعه، پیش از خرید یا تعمیر با
               کارشناس ما هماهنگ کنید.
             </p>

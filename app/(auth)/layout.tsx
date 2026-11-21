@@ -27,7 +27,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
           <Logo />
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-[11.5px] font-semibold text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-caption font-semibold text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
             بازگشت به فروشگاه
@@ -40,7 +40,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       </main>
 
       <footer className="relative border-t border-border/70 bg-surface/60">
-        <div className="page-container flex flex-col items-center justify-between gap-3 py-5 text-center text-[10.5px] text-muted-foreground sm:flex-row sm:text-start">
+        <div className="page-container flex flex-col items-center justify-between gap-3 py-5 text-center text-caption text-muted-foreground sm:flex-row sm:text-start">
           <p className="inline-flex items-center gap-1.5">
             <ShieldCheck className="h-3.5 w-3.5 text-success" aria-hidden="true" />
             اطلاعات ورود شما به‌صورت امن نگهداری می‌شود.

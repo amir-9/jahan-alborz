@@ -76,7 +76,7 @@ export function UserRowActions({
           className="flex flex-1 flex-wrap items-end gap-1.5"
         >
           <label className="flex min-w-[9rem] flex-1 flex-col gap-1">
-            <span className="text-[9.5px] font-semibold text-muted-foreground">
+            <span className="text-caption font-semibold text-muted-foreground">
               نقش کاربر
             </span>
             <Select
@@ -126,19 +126,19 @@ export function UserRowActions({
       </div>
 
       {isSelf ? (
-        <p className="text-[9.5px] leading-4 text-muted-foreground">
+        <p className="text-caption leading-4 text-muted-foreground">
           این حساب خود شماست؛ تغییر نقش یا غیرفعال‌سازی آن برای جلوگیری از قفل‌شدن
           دسترسی مسدود است.
         </p>
       ) : (
-        <p className="text-[9.5px] leading-4 text-muted-foreground">
+        <p className="text-caption leading-4 text-muted-foreground">
           {roleDescription(selectedRole)}
         </p>
       )}
 
       {result ? (
         <p
-          className={`flex items-start gap-1.5 rounded-lg px-2 py-1.5 text-[9.5px] leading-4 ${
+          className={`flex items-start gap-1.5 rounded-lg px-2 py-1.5 text-caption leading-4 ${
             result.ok ? "text-teal-700" : "text-danger"
           }`}
           role={result.ok ? "status" : "alert"}
@@ -202,7 +202,7 @@ export function CreateStaffForm() {
         <UserPlus className="h-4 w-4 text-secondary" aria-hidden="true" />
         ایجاد حساب کارمند
       </h2>
-      <p className="mt-1 text-[10.5px] leading-5 text-muted-foreground">
+      <p className="mt-1 text-caption leading-5 text-muted-foreground">
         کارکنان با ایمیل و رمز عبور وارد می‌شوند. رمز عبور را پس از ایجاد، از
         طریق کانال امن به کارمند اطلاع دهید؛ امکان ارسال خودکار ایمیل در این نسخه
         فعال نیست.
@@ -276,7 +276,7 @@ export function CreateStaffForm() {
             maxLength={72}
             required
           />
-          <p className="text-[10px] leading-5 text-muted-foreground">
+          <p className="text-caption leading-5 text-muted-foreground">
             حداقل ۱۰ کاراکتر، شامل حرف انگلیسی و رقم. رمز به‌صورت هش ذخیره می‌شود.
           </p>
         </div>
@@ -284,7 +284,7 @@ export function CreateStaffForm() {
 
       {result ? (
         <p
-          className={`mt-3 flex items-start gap-2 rounded-xl border px-3 py-2 text-[10.5px] leading-5 ${
+          className={`mt-3 flex items-start gap-2 rounded-xl border px-3 py-2 text-caption leading-5 ${
             result.ok
               ? "border-teal-200 bg-teal-50 text-teal-800"
               : "border-red-200 bg-red-50 text-danger"

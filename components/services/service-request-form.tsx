@@ -62,10 +62,10 @@ function Field({
       </Label>
       {children}
       {hint ? (
-        <p className="text-[10.5px] leading-5 text-muted-foreground">{hint}</p>
+        <p className="text-caption leading-5 text-muted-foreground">{hint}</p>
       ) : null}
       {error ? (
-        <p className="text-[10.5px] font-medium text-danger" role="alert">
+        <p className="text-caption font-medium text-danger" role="alert">
           {error}
         </p>
       ) : null}
@@ -114,10 +114,10 @@ export function ServiceRequestForm({ services }: ServiceRequestFormProps) {
         <h2 className="mt-4 text-lg font-extrabold text-primary">
           درخواست شما ثبت شد
         </h2>
-        <p className="mx-auto mt-2 max-w-md text-[12.5px] leading-7 text-muted-foreground">
+        <p className="mx-auto mt-2 max-w-md text-caption leading-7 text-muted-foreground">
           {result.message}
         </p>
-        <p className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-primary-50 px-3 py-1.5 text-[11px] font-semibold text-primary">
+        <p className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-primary-50 px-3 py-1.5 text-caption font-semibold text-primary">
           کد پیگیری: <span dir="ltr">{result.requestId.slice(0, 8)}</span>
         </p>
         <div className="mt-6 flex flex-col justify-center gap-2 sm:flex-row">
@@ -142,7 +142,7 @@ export function ServiceRequestForm({ services }: ServiceRequestFormProps) {
     >
       {result && !result.ok ? (
         <div
-          className="mb-5 flex items-start gap-2.5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[11.5px] leading-6 text-danger"
+          className="mb-5 flex items-start gap-2.5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-caption leading-6 text-danger"
           role="alert"
         >
           <CircleExclamationPoint
@@ -295,7 +295,7 @@ export function ServiceRequestForm({ services }: ServiceRequestFormProps) {
         </Field>
       </div>
 
-      <div className="mt-5 rounded-xl bg-surface-muted px-4 py-3 text-[10.5px] leading-5 text-muted-foreground">
+      <div className="mt-5 rounded-xl bg-surface-muted px-4 py-3 text-caption leading-5 text-muted-foreground">
         با ثبت این فرم، درخواست شما برای هماهنگی در سامانه ثبت می‌شود. این فرم
         تأیید قطعی زمان مراجعه نیست و زمان نهایی تلفنی اعلام می‌شود.
       </div>

@@ -100,7 +100,7 @@ export function RegisterForm({ callbackUrl }: RegisterFormProps) {
         <h1 className="mt-4 text-lg font-extrabold text-primary">
           حساب شما ساخته شد
         </h1>
-        <p className="mt-2 text-[12px] leading-7 text-muted-foreground">
+        <p className="mt-2 text-caption leading-7 text-muted-foreground">
           در حال انتقال به حساب کاربری هستید. اگر انتقال انجام نشد، از صفحه ورود
           وارد شوید.
         </p>
@@ -122,7 +122,7 @@ export function RegisterForm({ callbackUrl }: RegisterFormProps) {
         <h1 className="mt-4 text-xl font-extrabold text-primary">
           ساخت حساب کاربری
         </h1>
-        <p className="mt-2 text-[12px] leading-6 text-muted-foreground">
+        <p className="mt-2 text-caption leading-6 text-muted-foreground">
           با شماره موبایل ثبت‌نام کنید تا سفارش‌ها و درخواست‌های خدمات خود را
           پیگیری کنید.
         </p>
@@ -131,7 +131,7 @@ export function RegisterForm({ callbackUrl }: RegisterFormProps) {
       <form onSubmit={handleSubmit} noValidate className="mt-6 flex flex-col gap-4">
         {error ? (
           <div
-            className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-[11px] leading-6 text-danger"
+            className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-caption leading-6 text-danger"
             role="alert"
           >
             <CircleExclamationPoint
@@ -229,7 +229,7 @@ export function RegisterForm({ callbackUrl }: RegisterFormProps) {
         </Button>
       </form>
 
-      <p className="mt-5 text-center text-[11.5px] text-muted-foreground">
+      <p className="mt-5 text-center text-caption text-muted-foreground">
         قبلاً ثبت‌نام کرده‌اید؟{" "}
         <Link
           href={`/auth/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}

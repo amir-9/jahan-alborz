@@ -35,11 +35,11 @@ export function StarRating({
           />
         ))}
       </span>
-      <span className="text-[11px] font-semibold text-foreground">
+      <span className="text-caption font-semibold text-foreground">
         {formatNumber(value)}
       </span>
       {typeof reviewCount === "number" ? (
-        <span className="text-[11px] text-muted-foreground">
+        <span className="text-caption text-muted-foreground">
           ({formatNumber(reviewCount)})
         </span>
       ) : null}

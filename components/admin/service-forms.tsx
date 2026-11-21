@@ -61,7 +61,7 @@ export function ServiceStatusForm({
       className="rounded-2xl border border-border bg-surface p-5 shadow-soft"
     >
       <h2 className="text-sm font-bold text-primary">وضعیت درخواست</h2>
-      <p className="mt-1 text-[10.5px] leading-5 text-muted-foreground">
+      <p className="mt-1 text-caption leading-5 text-muted-foreground">
         وضعیت جدید و تکنسین مسئول را ثبت کنید. هر تغییر در یادداشت‌های داخلی
         درخواست ثبت می‌شود.
       </p>
@@ -98,7 +98,7 @@ export function ServiceStatusForm({
 
       {result ? (
         <p
-          className={`mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-[10.5px] leading-5 ${
+          className={`mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-caption leading-5 ${
             result.ok
               ? "border border-teal-200 bg-teal-50 text-teal-800"
               : "border border-red-200 bg-red-50 text-danger"
@@ -161,7 +161,7 @@ export function ServiceNoteForm({ requestId }: { requestId: string }) {
       className="rounded-2xl border border-border bg-surface p-5 shadow-soft"
     >
       <h2 className="text-sm font-bold text-primary">یادداشت داخلی</h2>
-      <p className="mt-1 text-[10.5px] leading-5 text-muted-foreground">
+      <p className="mt-1 text-caption leading-5 text-muted-foreground">
         این یادداشت فقط برای کارکنان است و به مشتری نمایش داده نمی‌شود.
       </p>
 
@@ -180,7 +180,7 @@ export function ServiceNoteForm({ requestId }: { requestId: string }) {
 
       {result ? (
         <p
-          className={`mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-[10.5px] leading-5 ${
+          className={`mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-caption leading-5 ${
             result.ok
               ? "border border-teal-200 bg-teal-50 text-teal-800"
               : "border border-red-200 bg-red-50 text-danger"

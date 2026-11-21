@@ -56,14 +56,14 @@ export function ProfileForm({
       className="rounded-2xl border border-border bg-surface p-5 shadow-soft sm:p-6"
     >
       <h2 className="text-sm font-bold text-primary">اطلاعات شخصی</h2>
-      <p className="mt-1 text-[11px] leading-6 text-muted-foreground">
+      <p className="mt-1 text-caption leading-6 text-muted-foreground">
         نام شما در سفارش‌ها و پیگیری خدمات استفاده می‌شود. شماره موبایل حساب
         قابل ویرایش نیست.
       </p>
 
       {error ? (
         <div
-          className="mt-4 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-[11px] leading-6 text-danger"
+          className="mt-4 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-caption leading-6 text-danger"
           role="alert"
         >
           <CircleExclamationPoint
@@ -76,7 +76,7 @@ export function ProfileForm({
 
       {success ? (
         <div
-          className="mt-4 flex items-start gap-2 rounded-xl border border-teal-200 bg-teal-50 px-3.5 py-2.5 text-[11px] leading-6 text-teal-800"
+          className="mt-4 flex items-start gap-2 rounded-xl border border-teal-200 bg-teal-50 px-3.5 py-2.5 text-caption leading-6 text-teal-800"
           role="status"
         >
           <CircleCheck className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />

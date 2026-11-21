@@ -13,6 +13,7 @@
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-on-primary-muted: var(--on-primary-muted);
   --color-primary-50: var(--primary-50);
   --color-primary-100: var(--primary-100);
   --color-primary-200: var(--primary-200);
@@ -26,6 +27,7 @@
   --color-secondary-50: var(--secondary-50);
   --color-secondary-100: var(--secondary-100);
   --color-secondary-600: var(--secondary-600);
+  --color-secondary-700: var(--secondary-700);
 
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
@@ -40,6 +42,11 @@
 
   /* Typography */
   --font-sans: var(--font-vazirmatn), "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+  --text-caption: var(--font-size-caption);
+  --text-body-sm: var(--font-size-body-sm);
+  --text-title-sm: var(--font-size-title-sm);
+  --text-title: var(--font-size-title);
+  --text-display: var(--font-size-display);
 
   /* Radii */
   --radius-xs: 0.375rem;
@@ -60,6 +67,8 @@
   /* Brand palette */
   --primary: #142d4e;
   --primary-foreground: #ffffff;
+  /* Muted text on navy surfaces; keeps WCAG AA contrast without opacity. */
+  --on-primary-muted: #dbe4ef;
   --primary-50: #f1f5fa;
   --primary-100: #dfe8f3;
   --primary-200: #c2d3e6;
@@ -73,6 +82,8 @@
   --secondary-50: #fff6ec;
   --secondary-100: #fde7d1;
   --secondary-600: #d9781a;
+  /* Darker orange for small text on light surfaces (AA contrast). */
+  --secondary-700: #a4510b;
 
   /* Neutrals */
   --background: #f5f7fa;
@@ -89,6 +100,13 @@
   --success-foreground: #ffffff;
   --danger: #b91c1c;
   --danger-foreground: #ffffff;
+
+  /* Semantic type scale. Persian needs a slightly larger minimum size. */
+  --font-size-caption: 0.8125rem;
+  --font-size-body-sm: 0.875rem;
+  --font-size-title-sm: 1.125rem;
+  --font-size-title: 1.375rem;
+  --font-size-display: clamp(2.25rem, 5vw, 4rem);
 }
 
 /* ------------------------------------------------------------------ */

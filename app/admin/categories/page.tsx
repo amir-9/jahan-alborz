@@ -43,7 +43,7 @@ export default async function AdminCategoriesPage() {
         <h1 className="text-lg font-extrabold text-primary sm:text-xl">
           دسته‌بندی محصولات
         </h1>
-        <p className="mt-1.5 text-[11.5px] leading-6 text-muted-foreground">
+        <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
           دسته‌بندی‌های فعال در فهرست دسته‌ها و منوی فروشگاه نمایش داده می‌شوند.
           غیرفعال‌سازی دسته، محصولات آن را پنهان نمی‌کند اما دسته را از فهرست
           عمومی برمی‌دارد.
@@ -53,7 +53,7 @@ export default async function AdminCategoriesPage() {
       <CategoryForm visualOptions={visualOptions} />
 
       {!categories ? (
-        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11.5px] leading-6 text-amber-800">
+        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           <CircleExclamationPoint
             className="mt-0.5 h-4 w-4 shrink-0"
             aria-hidden="true"
@@ -66,16 +66,16 @@ export default async function AdminCategoriesPage() {
           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 text-primary">
             <Tags className="h-6 w-6" aria-hidden="true" />
           </span>
-          <p className="mt-4 text-[12.5px] font-bold text-primary">
+          <p className="mt-4 text-caption font-bold text-primary">
             هنوز دسته‌بندی‌ای ثبت نشده است
           </p>
-          <p className="mt-1.5 text-[11px] text-muted-foreground">
+          <p className="mt-1.5 text-caption text-muted-foreground">
             با فرم بالا نخستین دسته‌بندی را ایجاد کنید.
           </p>
         </div>
       ) : (
         <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
-          <div className="hidden grid-cols-[1.4fr_1fr_0.7fr_auto] gap-3 border-b border-border bg-surface-muted px-4 py-2.5 text-[10px] font-bold text-muted-foreground md:grid">
+          <div className="hidden grid-cols-[1.4fr_1fr_0.7fr_auto] gap-3 border-b border-border bg-surface-muted px-4 py-2.5 text-caption font-bold text-muted-foreground md:grid">
             <span>نام / نامک</span>
             <span>توضیح</span>
             <span>تعداد محصول</span>
@@ -90,7 +90,7 @@ export default async function AdminCategoriesPage() {
               >
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <p className="text-[11.5px] font-bold text-foreground">
+                    <p className="text-caption font-bold text-foreground">
                       {category.name}
                     </p>
                     <Badge variant={category.isActive ? "success" : "outline"}>
@@ -99,17 +99,17 @@ export default async function AdminCategoriesPage() {
                   </div>
                   <p
                     dir="ltr"
-                    className="mt-0.5 text-start text-[10px] text-muted-foreground"
+                    className="mt-0.5 text-start text-caption text-muted-foreground"
                   >
                     {category.slug}
                   </p>
                 </div>
 
-                <p className="text-[10.5px] leading-5 text-muted-foreground">
+                <p className="text-caption leading-5 text-muted-foreground">
                   {category.description?.trim() || "—"}
                 </p>
 
-                <p className="text-[10.5px] text-muted-foreground">
+                <p className="text-caption text-muted-foreground">
                   {formatNumber(category._count.products)} محصول
                 </p>
 
@@ -123,7 +123,7 @@ export default async function AdminCategoriesPage() {
         </div>
       )}
 
-      <p className="text-[10px] leading-5 text-muted-foreground">
+      <p className="text-caption leading-5 text-muted-foreground">
         حذف دسته‌بندی در این نسخه پیاده‌سازی نشده است تا محصولات مرتبط بدون دسته
         نمانند؛ به‌جای حذف، دسته را غیرفعال کنید.
       </p>

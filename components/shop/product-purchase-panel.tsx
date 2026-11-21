@@ -17,7 +17,7 @@ export function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
     <div className="flex flex-col gap-3">
       {product.purchasingMode === "FIXED" ? (
         <div className="flex items-center justify-between gap-3">
-          <span className="text-[12px] font-medium text-muted-foreground">
+          <span className="text-caption font-medium text-muted-foreground">
             تعداد
           </span>
           <QuantityStepper
@@ -37,7 +37,7 @@ export function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
         withIcon
       />
 
-      <p className="text-center text-[10.5px] leading-5 text-muted-foreground">
+      <p className="text-center text-caption leading-5 text-muted-foreground">
         {product.purchasingMode === "FIXED"
           ? "قیمت و موجودی نهایی پیش از تأیید سفارش توسط فروشگاه بررسی می‌شود."
           : "برای این محصول، قیمت بر اساس مدل و ظرفیت اعلام می‌شود."}

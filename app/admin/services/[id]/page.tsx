@@ -59,7 +59,7 @@ export default async function AdminServiceDetailPage({
 
   if (failed || !request) {
     return (
-      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-[11.5px] leading-6 text-amber-800">
+      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-caption leading-6 text-amber-800">
         <p className="flex items-center gap-2 font-bold">
           <CircleExclamationPoint className="h-4 w-4" aria-hidden="true" />
           دریافت جزئیات درخواست در حال حاضر ممکن نیست.
@@ -77,7 +77,7 @@ export default async function AdminServiceDetailPage({
         <div>
           <Link
             href="/admin/services"
-            className="inline-flex items-center gap-1 text-[10.5px] font-semibold text-muted-foreground hover:text-primary"
+            className="inline-flex items-center gap-1 text-caption font-semibold text-muted-foreground hover:text-primary"
           >
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             همه درخواست‌ها
@@ -85,7 +85,7 @@ export default async function AdminServiceDetailPage({
           <h1 className="mt-1 text-lg font-extrabold text-primary sm:text-xl">
             {request.serviceType}
           </h1>
-          <p className="mt-1 text-[10.5px] text-muted-foreground">
+          <p className="mt-1 text-caption text-muted-foreground">
             ثبت‌شده در {formatDate(request.createdAt)} · کد پیگیری{" "}
             <span dir="ltr">{request.id.slice(0, 8)}</span>
           </p>
@@ -103,7 +103,7 @@ export default async function AdminServiceDetailPage({
               مشخصات مشتری
             </h2>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-border px-3.5 py-3 text-[11px] leading-6">
+              <div className="rounded-xl border border-border px-3.5 py-3 text-caption leading-6">
                 <p className="font-bold text-foreground">
                   {request.customerName}
                 </p>
@@ -115,23 +115,23 @@ export default async function AdminServiceDetailPage({
                   <Phone className="h-3.5 w-3.5" aria-hidden="true" />
                   {request.customerPhone}
                 </a>
-                <p className="mt-1 text-[10px] text-muted-foreground">
+                <p className="mt-1 text-caption text-muted-foreground">
                   {request.customer
                     ? `حساب کاربری: ${request.customer.name ?? "بدون نام"}`
                     : "درخواست بدون حساب کاربری"}
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border px-3.5 py-3 text-[11px] leading-6">
+              <div className="rounded-xl border border-border px-3.5 py-3 text-caption leading-6">
                 <p className="flex items-center gap-1.5 font-bold text-foreground">
                   <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
                   {request.city ?? "شهر ثبت نشده"}
                 </p>
-                <p className="mt-1 text-[10.5px] leading-6 text-muted-foreground">
+                <p className="mt-1 text-caption leading-6 text-muted-foreground">
                   {request.address ?? "آدرسی ثبت نشده است."}
                 </p>
                 {request.brand ? (
-                  <p className="mt-1 text-[10px] text-muted-foreground">
+                  <p className="mt-1 text-caption text-muted-foreground">
                     برند تجهیز: {request.brand}
                   </p>
                 ) : null}
@@ -144,18 +144,18 @@ export default async function AdminServiceDetailPage({
               <Wrench className="h-4 w-4 text-secondary" aria-hidden="true" />
               شرح درخواست
             </h2>
-            <p className="mt-3 whitespace-pre-line rounded-xl bg-surface-muted px-3.5 py-3 text-[11px] leading-7 text-muted-foreground">
+            <p className="mt-3 whitespace-pre-line rounded-xl bg-surface-muted px-3.5 py-3 text-caption leading-7 text-muted-foreground">
               {request.problemDescription?.trim() ||
                 "مشتری توضیح تکمیلی ثبت نکرده است."}
             </p>
             {request.preferredVisitDate ? (
-              <p className="mt-2 text-[10.5px] text-muted-foreground">
+              <p className="mt-2 text-caption text-muted-foreground">
                 زمان پیشنهادی مراجعه:{" "}
                 {formatDate(request.preferredVisitDate)}
               </p>
             ) : null}
             {request.notes ? (
-              <p className="mt-2 text-[10.5px] leading-6 text-muted-foreground">
+              <p className="mt-2 text-caption leading-6 text-muted-foreground">
                 یادداشت ثبت‌شده هنگام درخواست: {request.notes}
               </p>
             ) : null}
@@ -166,7 +166,7 @@ export default async function AdminServiceDetailPage({
               یادداشت‌های داخلی
             </h2>
             {request.serviceNotes.length === 0 ? (
-              <p className="mt-3 rounded-xl border border-dashed border-border px-3.5 py-5 text-center text-[10.5px] text-muted-foreground">
+              <p className="mt-3 rounded-xl border border-dashed border-border px-3.5 py-5 text-center text-caption text-muted-foreground">
                 هنوز یادداشتی ثبت نشده است.
               </p>
             ) : (
@@ -176,10 +176,10 @@ export default async function AdminServiceDetailPage({
                     key={note.id}
                     className="rounded-xl border border-border px-3.5 py-2.5"
                   >
-                    <p className="text-[10.5px] leading-6 text-foreground">
+                    <p className="text-caption leading-6 text-foreground">
                       {note.note}
                     </p>
-                    <p className="mt-1 text-[9.5px] text-muted-foreground">
+                    <p className="mt-1 text-caption text-muted-foreground">
                       {note.author ?? "سیستم"} · {formatDate(note.createdAt)}
                     </p>
                   </li>

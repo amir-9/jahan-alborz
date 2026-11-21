@@ -64,12 +64,12 @@ export default function AboutPage() {
           <h1 className="mt-4 text-2xl font-extrabold leading-[1.5] text-primary sm:text-3xl">
             تجهیزات گرمایشی، با نگاهی فنی و همراهی واقعی
           </h1>
-          <p className="mt-4 text-[13px] leading-8 text-muted-foreground">
+          <p className="mt-4 text-caption leading-8 text-muted-foreground">
             جهان البرز یک فروشگاه تخصصی تجهیزات گرمایشی در قزوین است؛ با تمرکز
             بر فروش پکیج، رادیاتور، قطعات یدکی و لوازم نصب، همراه با خدمات
             تعمیر، سرویس دوره‌ای و نصب.
           </p>
-          <p className="mt-3 text-[13px] leading-8 text-muted-foreground">
+          <p className="mt-3 text-caption leading-8 text-muted-foreground">
             هدف ما ساده است: انتخاب درست، توضیح شفاف و پیگیری پس از فروش. خرید
             تجهیزات گرمایشی فقط یک تراکنش نیست؛ نحوه نصب و نگهداری در عملکرد
             بلندمدت سیستم اثر مستقیم دارد.
@@ -101,7 +101,7 @@ export default function AboutPage() {
               <ProductVisual variant="installation" />
             </div>
           </div>
-          <div className="relative mt-4 flex items-center gap-2 rounded-xl border border-border bg-surface/90 px-3.5 py-2.5 text-[11px] text-muted-foreground backdrop-blur">
+          <div className="relative mt-4 flex items-center gap-2 rounded-xl border border-border bg-surface/90 px-3.5 py-2.5 text-caption text-muted-foreground backdrop-blur">
             <MapPin className="h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
             {siteConfig.address.fullAddress}
           </div>
@@ -123,10 +123,10 @@ export default function AboutPage() {
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-50 text-primary">
                 <value.icon className="h-5 w-5" aria-hidden="true" />
               </span>
-              <h3 className="mt-4 text-[13px] font-bold text-primary">
+              <h3 className="mt-4 text-caption font-bold text-primary">
                 {value.title}
               </h3>
-              <p className="mt-2 text-[11.5px] leading-6 text-muted-foreground">
+              <p className="mt-2 text-caption leading-6 text-muted-foreground">
                 {value.description}
               </p>
             </div>
@@ -140,7 +140,7 @@ export default function AboutPage() {
             <h2 className="text-xl font-extrabold leading-[1.6] sm:text-2xl">
               محدوده فعالیت
             </h2>
-            <p className="mt-3 max-w-md text-[12.5px] leading-7 text-primary-foreground/70">
+            <p className="mt-3 max-w-md text-caption leading-7 text-on-primary-muted">
               فروش محصولات به سراسر ایران انجام می‌شود. خدمات تعمیر، سرویس و
               نصب به‌صورت میدانی در شهر {siteConfig.business.serviceCoverageCity}{" "}
               ارائه می‌شود. برای شهرهای دیگر، امکان هماهنگی تأمین قطعات و
@@ -155,7 +155,7 @@ export default function AboutPage() {
               ].map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-2.5 text-[12px] text-primary-foreground/80"
+                  className="flex items-start gap-2.5 text-caption text-on-primary-muted"
                 >
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-secondary/20 text-secondary">
                     <Check className="h-3 w-3" aria-hidden="true" />
@@ -169,15 +169,15 @@ export default function AboutPage() {
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
               <Truck className="h-6 w-6 text-secondary" aria-hidden="true" />
-              <p className="mt-3 text-[12.5px] font-bold">ارسال کشوری</p>
-              <p className="mt-1.5 text-[11px] leading-6 text-primary-foreground/65">
+              <p className="mt-3 text-caption font-bold">ارسال کشوری</p>
+              <p className="mt-1.5 text-caption leading-6 text-on-primary-muted">
                 روش و هزینه ارسال بر اساس مقصد و ابعاد محموله هماهنگ می‌شود.
               </p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
               <Wrench className="h-6 w-6 text-secondary" aria-hidden="true" />
-              <p className="mt-3 text-[12.5px] font-bold">خدمات میدانی</p>
-              <p className="mt-1.5 text-[11px] leading-6 text-primary-foreground/65">
+              <p className="mt-3 text-caption font-bold">خدمات میدانی</p>
+              <p className="mt-1.5 text-caption leading-6 text-on-primary-muted">
                 بازدید، نصب و سرویس با زمان‌بندی هماهنگ‌شده در قزوین.
               </p>
             </div>
@@ -190,7 +190,7 @@ export default function AboutPage() {
           <h2 className="text-sm font-bold text-primary">
             برای هماهنگی یا سوال فنی تماس بگیرید
           </h2>
-          <p className="mt-1.5 text-[11.5px] leading-6 text-muted-foreground">
+          <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
             پیش از مراجعه حضوری، تماس بگیرید تا زمان دقیق و موجودی هماهنگ شود.
           </p>
         </div>

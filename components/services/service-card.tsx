@@ -45,7 +45,7 @@ export function ServiceCard({
       </span>
 
       <h3 className="mt-5 text-base font-bold text-primary">{service.name}</h3>
-      <p className="mt-2 text-[13px] leading-7 text-muted-foreground">
+      <p className="mt-2 text-caption leading-7 text-muted-foreground">
         {service.description}
       </p>
 
@@ -54,7 +54,7 @@ export function ServiceCard({
           {service.features.map((feature) => (
             <li
               key={feature}
-              className="flex items-start gap-2 text-[12px] text-muted-foreground"
+              className="flex items-start gap-2 text-caption text-muted-foreground"
             >
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary" aria-hidden="true" />
               {feature}
@@ -66,7 +66,7 @@ export function ServiceCard({
       <div className="mt-auto pt-5">
         <Link
           href="/services/request"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-primary transition-colors hover:text-secondary-600 focus-visible:outline-none focus-visible:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-primary transition-colors hover:text-secondary-700 focus-visible:outline-none focus-visible:underline"
         >
           ثبت درخواست
           <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />

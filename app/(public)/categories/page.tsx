@@ -50,7 +50,7 @@ export default async function CategoriesPage() {
       </div>
 
       {categories.length === 0 ? (
-        <p className="mt-8 rounded-2xl border border-dashed border-border bg-surface px-5 py-8 text-center text-[12px] leading-7 text-muted-foreground">
+        <p className="mt-8 rounded-2xl border border-dashed border-border bg-surface px-5 py-8 text-center text-caption leading-7 text-muted-foreground">
           هنوز دسته‌بندی فعالی در فروشگاه ثبت نشده است. برای استعلام موجودی با
           فروشگاه تماس بگیرید.
         </p>

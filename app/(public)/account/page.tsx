@@ -62,7 +62,7 @@ export default async function AccountPage() {
   return (
     <div className="flex flex-col gap-5">
       {failed ? (
-        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11.5px] leading-6 text-amber-800">
+        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           <CircleExclamationPoint
             className="mt-0.5 h-4 w-4 shrink-0"
             aria-hidden="true"
@@ -82,7 +82,7 @@ export default async function AccountPage() {
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-50 text-primary">
               <card.icon className="h-4.5 w-4.5" aria-hidden="true" />
             </span>
-            <p className="mt-3 text-[11px] text-muted-foreground">{card.label}</p>
+            <p className="mt-3 text-caption text-muted-foreground">{card.label}</p>
             <p className="mt-1 text-xl font-extrabold text-primary">{card.value}</p>
           </Link>
         ))}
@@ -101,10 +101,10 @@ export default async function AccountPage() {
 
         {!summary?.latestOrder ? (
           <div className="mt-4 rounded-xl border border-dashed border-border bg-surface-muted px-4 py-8 text-center">
-            <p className="text-[12px] font-semibold text-primary">
+            <p className="text-caption font-semibold text-primary">
               هنوز سفارشی ثبت نکرده‌اید.
             </p>
-            <p className="mt-1.5 text-[11px] leading-6 text-muted-foreground">
+            <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
               محصولات فروشگاه را مرور کنید یا برای انتخاب تجهیزات مناسب از مشاوره
               پیش از خرید استفاده کنید.
             </p>
@@ -118,16 +118,16 @@ export default async function AccountPage() {
             className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border px-4 py-3 transition-colors hover:border-primary/25 hover:bg-primary-50/30"
           >
             <div>
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-caption text-muted-foreground">
                 شماره سفارش{" "}
                 <span dir="ltr" className="font-semibold text-foreground">
                   {summary.latestOrder.orderNumber}
                 </span>
               </p>
-              <p className="mt-1 text-[12px] font-semibold text-primary">
+              <p className="mt-1 text-caption font-semibold text-primary">
                 {formatPrice(Number(summary.latestOrder.total))}
               </p>
-              <p className="mt-0.5 text-[10.5px] text-muted-foreground">
+              <p className="mt-0.5 text-caption text-muted-foreground">
                 {formatDate(summary.latestOrder.createdAt)} ·{" "}
                 {formatNumber(summary.latestOrder.items.length)} قلم
               </p>
@@ -144,25 +144,25 @@ export default async function AccountPage() {
         <div className="mt-3 grid gap-2 sm:grid-cols-2">
           <Link
             href="/account/profile"
-            className="rounded-xl border border-border px-4 py-3 text-[11.5px] font-semibold text-muted-foreground transition-colors hover:border-primary/25 hover:text-primary"
+            className="rounded-xl border border-border px-4 py-3 text-caption font-semibold text-muted-foreground transition-colors hover:border-primary/25 hover:text-primary"
           >
             تکمیل اطلاعات حساب
           </Link>
           <Link
             href="/account/addresses"
-            className="rounded-xl border border-border px-4 py-3 text-[11.5px] font-semibold text-muted-foreground transition-colors hover:border-primary/25 hover:text-primary"
+            className="rounded-xl border border-border px-4 py-3 text-caption font-semibold text-muted-foreground transition-colors hover:border-primary/25 hover:text-primary"
           >
             مدیریت آدرس‌های تحویل
           </Link>
           <Link
             href="/services/request"
-            className="rounded-xl border border-border px-4 py-3 text-[11.5px] font-semibold text-muted-foreground transition-colors hover:border-primary/25 hover:text-primary"
+            className="rounded-xl border border-border px-4 py-3 text-caption font-semibold text-muted-foreground transition-colors hover:border-primary/25 hover:text-primary"
           >
             ثبت درخواست تعمیر یا سرویس
           </Link>
           <Link
             href="/faq"
-            className="rounded-xl border border-border px-4 py-3 text-[11.5px] font-semibold text-muted-foreground transition-colors hover:border-primary/25 hover:text-primary"
+            className="rounded-xl border border-border px-4 py-3 text-caption font-semibold text-muted-foreground transition-colors hover:border-primary/25 hover:text-primary"
           >
             سوالات متداول ارسال و پرداخت
           </Link>

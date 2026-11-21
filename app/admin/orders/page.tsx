@@ -58,7 +58,7 @@ export default async function AdminOrdersPage({
         <h1 className="text-lg font-extrabold text-primary sm:text-xl">
           مدیریت سفارش‌ها
         </h1>
-        <p className="mt-1.5 text-[11.5px] leading-6 text-muted-foreground">
+        <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
           سفارش‌ها را بررسی کنید و وضعیت، پرداخت و اطلاعات ارسال را به‌روزرسانی
           کنید.
         </p>
@@ -79,7 +79,7 @@ export default async function AdminOrdersPage({
       </AdminFilterBar>
 
       {!result ? (
-        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11.5px] leading-6 text-amber-800">
+        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           <CircleExclamationPoint
             className="mt-0.5 h-4 w-4 shrink-0"
             aria-hidden="true"
@@ -91,17 +91,17 @@ export default async function AdminOrdersPage({
           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 text-primary">
             <Inbox className="h-6 w-6" aria-hidden="true" />
           </span>
-          <p className="mt-4 text-[12.5px] font-bold text-primary">
+          <p className="mt-4 text-caption font-bold text-primary">
             سفارشی با این فیلترها یافت نشد
           </p>
-          <p className="mt-1.5 text-[11px] text-muted-foreground">
+          <p className="mt-1.5 text-caption text-muted-foreground">
             فیلترها را تغییر دهید یا عبارت جستجو را حذف کنید.
           </p>
         </div>
       ) : (
         <>
           <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
-            <div className="hidden grid-cols-[1.4fr_1.3fr_1fr_0.9fr_0.9fr_auto] gap-3 border-b border-border bg-surface-muted px-4 py-2.5 text-[10px] font-bold text-muted-foreground lg:grid">
+            <div className="hidden grid-cols-[1.4fr_1.3fr_1fr_0.9fr_0.9fr_auto] gap-3 border-b border-border bg-surface-muted px-4 py-2.5 text-caption font-bold text-muted-foreground lg:grid">
               <span>شماره سفارش / مشتری</span>
               <span>تاریخ</span>
               <span>مبلغ</span>
@@ -117,29 +117,29 @@ export default async function AdminOrdersPage({
                   className="grid gap-2 px-4 py-3.5 transition-colors hover:bg-primary-50/20 lg:grid-cols-[1.4fr_1.3fr_1fr_0.9fr_0.9fr_auto] lg:items-center lg:gap-3"
                 >
                   <div className="min-w-0">
-                    <p className="text-[11.5px] font-bold text-foreground">
+                    <p className="text-caption font-bold text-foreground">
                       {order.customerName}
                     </p>
                     <p
                       dir="ltr"
-                      className="mt-0.5 text-start text-[10px] text-muted-foreground"
+                      className="mt-0.5 text-start text-caption text-muted-foreground"
                     >
                       {order.orderNumber}
                     </p>
-                    <p className="mt-0.5 text-[10px] text-muted-foreground lg:hidden">
+                    <p className="mt-0.5 text-caption text-muted-foreground lg:hidden">
                       {formatDate(order.createdAt)} ·{" "}
                       {formatNumber(order.items.length)} قلم
                     </p>
                   </div>
 
-                  <div className="hidden text-[10.5px] text-muted-foreground lg:block">
+                  <div className="hidden text-caption text-muted-foreground lg:block">
                     {formatDate(order.createdAt)}
-                    <span className="mt-0.5 block text-[9.5px]">
+                    <span className="mt-0.5 block text-caption">
                       {formatNumber(order.items.length)} قلم کالا
                     </span>
                   </div>
 
-                  <p className="text-[11px] font-semibold text-primary">
+                  <p className="text-caption font-semibold text-primary">
                     {formatPrice(Number(order.total))}
                   </p>
 

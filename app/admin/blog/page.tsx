@@ -35,7 +35,7 @@ export default async function AdminBlogPage() {
           <h1 className="text-lg font-extrabold text-primary sm:text-xl">
             مدیریت وبلاگ
           </h1>
-          <p className="mt-1.5 text-[11.5px] leading-6 text-muted-foreground">
+          <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
             مطالب منتشرشده در وبلاگ عمومی نمایش داده می‌شوند. هر مطلب از بخش‌های
             عنوان‌دار و پاراگراف تشکیل می‌شود.
           </p>
@@ -49,7 +49,7 @@ export default async function AdminBlogPage() {
       </div>
 
       {!posts ? (
-        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11.5px] leading-6 text-amber-800">
+        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           <CircleExclamationPoint
             className="mt-0.5 h-4 w-4 shrink-0"
             aria-hidden="true"
@@ -61,10 +61,10 @@ export default async function AdminBlogPage() {
           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 text-primary">
             <Newspaper className="h-6 w-6" aria-hidden="true" />
           </span>
-          <p className="mt-4 text-[12.5px] font-bold text-primary">
+          <p className="mt-4 text-caption font-bold text-primary">
             هنوز مطلبی ثبت نشده است
           </p>
-          <p className="mt-1.5 text-[11px] text-muted-foreground">
+          <p className="mt-1.5 text-caption text-muted-foreground">
             نخستین مطلب وبلاگ را ایجاد کنید.
           </p>
         </div>
@@ -80,7 +80,7 @@ export default async function AdminBlogPage() {
                   <div className="flex flex-wrap items-center gap-1.5">
                     <Link
                       href={`/admin/blog/${post.id}`}
-                      className="text-[12px] font-bold text-primary hover:underline"
+                      className="text-caption font-bold text-primary hover:underline"
                     >
                       {post.title}
                     </Link>
@@ -92,7 +92,7 @@ export default async function AdminBlogPage() {
                     ) : null}
                   </div>
 
-                  <p className="mt-1 text-[10px] text-muted-foreground">
+                  <p className="mt-1 text-caption text-muted-foreground">
                     <span dir="ltr">{post.slug}</span>
                     {` · ${formatNumber(post.readTime)} دقیقه مطالعه`}
                     {post.publishedAt
@@ -101,7 +101,7 @@ export default async function AdminBlogPage() {
                     {` · آخرین ویرایش: ${formatDate(post.updatedAt)}`}
                   </p>
 
-                  <p className="mt-1.5 line-clamp-2 text-[10.5px] leading-5 text-muted-foreground">
+                  <p className="mt-1.5 line-clamp-2 text-caption leading-5 text-muted-foreground">
                     {post.excerpt}
                   </p>
                 </div>
@@ -114,7 +114,7 @@ export default async function AdminBlogPage() {
             </article>
           ))}
 
-          <p className="text-[10.5px] text-muted-foreground">
+          <p className="text-caption text-muted-foreground">
             مجموع {formatNumber(posts.length)} مطلب ثبت شده است.
           </p>
         </div>

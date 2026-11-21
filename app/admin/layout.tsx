@@ -92,7 +92,7 @@ export default async function AdminLayout({
           <div className="flex items-center gap-3">
             <Logo withCaption={false} />
             <span className="hidden h-6 w-px bg-border sm:block" aria-hidden="true" />
-            <span className="hidden items-center gap-1.5 text-[11.5px] font-bold text-primary sm:inline-flex">
+            <span className="hidden items-center gap-1.5 text-caption font-bold text-primary sm:inline-flex">
               <ShieldCheck className="h-4 w-4 text-secondary" aria-hidden="true" />
               پنل مدیریت
             </span>
@@ -101,23 +101,23 @@ export default async function AdminLayout({
           <div className="flex items-center gap-2">
             <Link
               href="/"
-              className="hidden items-center gap-1 rounded-lg px-2 py-1.5 text-[11px] font-semibold text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:inline-flex"
+              className="hidden items-center gap-1 rounded-lg px-2 py-1.5 text-caption font-semibold text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:inline-flex"
             >
               مشاهده سایت
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
             <div className="flex items-center gap-2 rounded-xl border border-border bg-surface px-2.5 py-1.5">
               <span
-                className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-[11px] font-extrabold text-primary-foreground"
+                className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-caption font-extrabold text-primary-foreground"
                 aria-hidden="true"
               >
                 {initial}
               </span>
               <div className="hidden text-start sm:block">
-                <p className="text-[10.5px] font-bold leading-4 text-foreground">
+                <p className="text-caption font-bold leading-4 text-foreground">
                   {user.name?.trim() || "کاربر مدیریت"}
                 </p>
-                <p className="text-[9.5px] leading-4 text-muted-foreground">
+                <p className="text-caption leading-4 text-muted-foreground">
                   {user.role ? roleLabels[user.role] : "مدیر"}
                 </p>
               </div>
@@ -132,11 +132,11 @@ export default async function AdminLayout({
           <AdminNav items={visibleItems} />
 
           <div className="mt-3 hidden rounded-2xl border border-border bg-surface p-4 shadow-soft lg:block">
-            <p className="text-[10.5px] font-bold text-primary">دسترسی شما</p>
+            <p className="text-caption font-bold text-primary">دسترسی شما</p>
             <Badge variant="default" className="mt-2">
               {user.role ? roleLabels[user.role] : "مدیر"}
             </Badge>
-            <p className="mt-2 text-[10px] leading-5 text-muted-foreground">
+            <p className="mt-2 text-caption leading-5 text-muted-foreground">
               بخش‌های غیرمجاز برای نقش شما در منو نمایش داده نمی‌شوند و در سرور
               نیز مسدود هستند.
             </p>

@@ -241,7 +241,7 @@ export function CheckoutForm({
         <h2 className="mt-4 text-lg font-extrabold text-primary">
           سبد خرید شما خالی است
         </h2>
-        <p className="mx-auto mt-2 max-w-md text-[12px] leading-7 text-muted-foreground">
+        <p className="mx-auto mt-2 max-w-md text-caption leading-7 text-muted-foreground">
           برای ثبت سفارش، ابتدا محصول مورد نظر را از فروشگاه انتخاب کنید.
         </p>
         <Button asChild className="mt-5">
@@ -260,7 +260,7 @@ export function CheckoutForm({
       <div className="flex flex-col gap-4">
         {error ? (
           <div
-            className="flex items-start gap-2.5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-[11.5px] leading-6 text-danger"
+            className="flex items-start gap-2.5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-caption leading-6 text-danger"
             role="alert"
           >
             <CircleExclamationPoint
@@ -273,7 +273,7 @@ export function CheckoutForm({
 
         <section className="rounded-2xl border border-border bg-surface p-5 shadow-soft">
           <h2 className="text-sm font-bold text-primary">اطلاعات تحویل</h2>
-          <p className="mt-1 text-[11px] leading-6 text-muted-foreground">
+          <p className="mt-1 text-caption leading-6 text-muted-foreground">
             نام و شماره تماس را دقیق وارد کنید؛ هماهنگی نهایی سفارش با همین شماره
             انجام می‌شود.
           </p>
@@ -405,13 +405,13 @@ export function CheckoutForm({
               />
               تأیید شماره موبایل
             </h2>
-            <p className="mt-1 text-[11px] leading-6 text-muted-foreground">
+            <p className="mt-1 text-caption leading-6 text-muted-foreground">
               برای ثبت سفارش مهمان، شماره موبایل باید با کد یک‌بارمصرف تأیید شود.
               کد ارسال‌شده تا ۵ دقیقه معتبر است.
             </p>
 
             {otpNotice ? (
-              <p className="mt-3 flex items-start gap-2 rounded-xl border border-teal-200 bg-teal-50 px-3.5 py-2.5 text-[11px] leading-6 text-teal-800">
+              <p className="mt-3 flex items-start gap-2 rounded-xl border border-teal-200 bg-teal-50 px-3.5 py-2.5 text-caption leading-6 text-teal-800">
                 <CircleCheck
                   className="mt-0.5 h-4 w-4 shrink-0"
                   aria-hidden="true"
@@ -422,7 +422,7 @@ export function CheckoutForm({
 
             {otpError ? (
               <p
-                className="mt-3 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-[11px] leading-6 text-danger"
+                className="mt-3 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-caption leading-6 text-danger"
                 role="alert"
               >
                 <CircleExclamationPoint
@@ -434,7 +434,7 @@ export function CheckoutForm({
             ) : null}
 
             {verifiedPhone === normalizedPhone ? (
-              <p className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-teal-50 px-3 py-1.5 text-[11px] font-semibold text-success">
+              <p className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-teal-50 px-3 py-1.5 text-caption font-semibold text-success">
                 <CircleCheck className="h-4 w-4" aria-hidden="true" />
                 شماره تأیید شده است
               </p>
@@ -498,7 +498,7 @@ export function CheckoutForm({
             {shippingMethodOptions.map((option) => (
               <label
                 key={option.value}
-                className={`flex cursor-pointer flex-col gap-1 rounded-xl border px-3.5 py-3 text-[11.5px] transition-colors ${
+                className={`flex cursor-pointer flex-col gap-1 rounded-xl border px-3.5 py-3 text-caption transition-colors ${
                   values.shippingMethod === option.value
                     ? "border-primary bg-primary-50/60 text-primary"
                     : "border-border text-muted-foreground hover:border-primary/30"
@@ -515,13 +515,13 @@ export function CheckoutForm({
                   />
                   {option.label}
                 </span>
-                <span className="ps-5 text-[10px] leading-5">
+                <span className="ps-5 text-caption leading-5">
                   {initialShippingNotes[option.value]}
                 </span>
               </label>
             ))}
           </div>
-          <p className="mt-3 rounded-xl bg-surface-muted px-3 py-2 text-[10.5px] leading-5 text-muted-foreground">
+          <p className="mt-3 rounded-xl bg-surface-muted px-3 py-2 text-caption leading-5 text-muted-foreground">
             هزینه ارسال به‌صورت دستی توسط فروشگاه تعیین و پیش از ارسال با شما
             هماهنگ می‌شود. در این مرحله مبلغی بابت ارسال محاسبه نشده است.
           </p>
@@ -531,7 +531,7 @@ export function CheckoutForm({
           <h2 className="text-sm font-bold text-primary">روش پرداخت</h2>
           <div className="mt-3 grid gap-2 sm:grid-cols-2">
             <label
-              className={`flex cursor-pointer flex-col gap-1 rounded-xl border px-3.5 py-3 text-[11.5px] transition-colors ${
+              className={`flex cursor-pointer flex-col gap-1 rounded-xl border px-3.5 py-3 text-caption transition-colors ${
                 values.paymentMethod === "ONLINE"
                   ? "border-primary bg-primary-50/60 text-primary"
                   : "border-border text-muted-foreground hover:border-primary/30"
@@ -548,14 +548,14 @@ export function CheckoutForm({
                 />
                 پرداخت آنلاین
               </span>
-              <span className="ps-5 text-[10px] leading-5">
+              <span className="ps-5 text-caption leading-5">
                 درگاه پرداخت در این نسخه فعال نیست؛ سفارش ثبت و برای پرداخت
                 هماهنگ می‌شود.
               </span>
             </label>
 
             <label
-              className={`flex cursor-pointer flex-col gap-1 rounded-xl border px-3.5 py-3 text-[11.5px] transition-colors ${
+              className={`flex cursor-pointer flex-col gap-1 rounded-xl border px-3.5 py-3 text-caption transition-colors ${
                 values.paymentMethod === "COD"
                   ? "border-primary bg-primary-50/60 text-primary"
                   : "border-border text-muted-foreground hover:border-primary/30"
@@ -572,7 +572,7 @@ export function CheckoutForm({
                 />
                 پرداخت در محل
               </span>
-              <span className="ps-5 text-[10px] leading-5">
+              <span className="ps-5 text-caption leading-5">
                 مبلغ سفارش هنگام تحویل دریافت می‌شود. هماهنگی با فروشگاه انجام
                 می‌گیرد.
               </span>
@@ -590,7 +590,7 @@ export function CheckoutForm({
               onChange={(event) => update("notes", event.target.value)}
             />
             {fieldErrors.notes?.[0] ? (
-              <p className="text-[10.5px] font-medium text-danger" role="alert">
+              <p className="text-caption font-medium text-danger" role="alert">
                 {fieldErrors.notes[0]}
               </p>
             ) : null}
@@ -613,14 +613,14 @@ export function CheckoutForm({
                   />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-[11px] font-semibold text-primary">
+                  <p className="truncate text-caption font-semibold text-primary">
                     {item.name}
                   </p>
-                  <p className="text-[10px] text-muted-foreground">
+                  <p className="text-caption text-muted-foreground">
                     {formatNumber(item.quantity)} عدد
                   </p>
                 </div>
-                <p className="text-[10.5px] font-semibold text-foreground">
+                <p className="text-caption font-semibold text-foreground">
                   {formatPrice(item.price * item.quantity)}
                 </p>
               </div>
@@ -629,7 +629,7 @@ export function CheckoutForm({
 
           <Separator className="my-4" />
 
-          <dl className="flex flex-col gap-2 text-[11.5px]">
+          <dl className="flex flex-col gap-2 text-caption">
             <div className="flex items-center justify-between">
               <dt className="text-muted-foreground">جمع کالاها</dt>
               <dd className="font-semibold text-foreground">
@@ -638,7 +638,7 @@ export function CheckoutForm({
             </div>
             <div className="flex items-center justify-between">
               <dt className="text-muted-foreground">هزینه ارسال</dt>
-              <dd className="text-[10.5px] text-muted-foreground">
+              <dd className="text-caption text-muted-foreground">
                 پس از تأیید فروشگاه
               </dd>
             </div>
@@ -664,7 +664,7 @@ export function CheckoutForm({
             {pending ? "در حال ثبت سفارش" : "ثبت سفارش"}
           </Button>
 
-          <p className="mt-3 text-[10px] leading-5 text-muted-foreground">
+          <p className="mt-3 text-caption leading-5 text-muted-foreground">
             مبلغ نهایی بر اساس قیمت‌های ثبت‌شده فروشگاه و پس از بررسی موجودی
             محاسبه می‌شود. سفارش تا تأیید پرداخت، پرداخت‌شده محسوب نمی‌شود.
           </p>
@@ -703,7 +703,7 @@ function CheckoutField({
       </Label>
       {children}
       {error ? (
-        <p className="text-[10.5px] font-medium text-danger" role="alert">
+        <p className="text-caption font-medium text-danger" role="alert">
           {error}
         </p>
       ) : null}

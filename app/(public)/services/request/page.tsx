@@ -42,7 +42,7 @@ export default function ServiceRequestPage() {
         <h1 className="text-2xl font-extrabold text-primary sm:text-3xl">
           درخواست خدمات گرمایشی
         </h1>
-        <p className="mt-3 text-[13px] leading-8 text-muted-foreground">
+        <p className="mt-3 text-caption leading-8 text-muted-foreground">
           فرم زیر را تکمیل کنید تا برای بررسی شرایط و هماهنگی زمان بازدید با
           شما تماس بگیریم. خدمات میدانی در شهر {siteConfig.business.serviceCoverageCity}{" "}
           ارائه می‌شود.
@@ -60,10 +60,10 @@ export default function ServiceRequestPage() {
             <ol className="mt-4 space-y-3">
               {nextSteps.map((step, index) => (
                 <li key={step} className="flex items-start gap-2.5">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-caption font-bold text-primary-foreground">
                     {new Intl.NumberFormat("fa-IR").format(index + 1)}
                   </span>
-                  <p className="text-[11.5px] leading-6 text-muted-foreground">
+                  <p className="text-caption leading-6 text-muted-foreground">
                     {step}
                   </p>
                 </li>
@@ -73,7 +73,7 @@ export default function ServiceRequestPage() {
 
           <div className="rounded-2xl border border-border bg-surface p-5 shadow-soft">
             <h2 className="text-sm font-bold text-primary">تماس مستقیم</h2>
-            <div className="mt-3 space-y-3 text-[11.5px] text-muted-foreground">
+            <div className="mt-3 space-y-3 text-caption text-muted-foreground">
               <a
                 href={toTelHref(siteConfig.contact.phone)}
                 className="flex items-center gap-2.5 transition-colors hover:text-primary"
@@ -99,16 +99,16 @@ export default function ServiceRequestPage() {
           </div>
 
           <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
-            <h2 className="flex items-center gap-2 text-[12px] font-bold text-amber-900">
+            <h2 className="flex items-center gap-2 text-caption font-bold text-amber-900">
               <CircleExclamationPoint className="h-4 w-4 shrink-0" aria-hidden="true" />
               هشدار ایمنی
             </h2>
-            <p className="mt-2 text-[11px] leading-6 text-amber-900/80">
+            <p className="mt-2 text-caption leading-6 text-amber-900/80">
               در صورت بوی گاز، شیر اصلی گاز را ببندید، از روشن یا خاموش کردن
               کلیدهای برق خودداری کنید، پنجره‌ها را باز کنید و محل را ترک کنید.
               سپس از خارج ساختمان با امداد گاز یا آتش‌نشانی تماس بگیرید.
             </p>
-            <p className="mt-2 flex items-center gap-1.5 text-[10.5px] font-semibold text-amber-900/80">
+            <p className="mt-2 flex items-center gap-1.5 text-caption font-semibold text-amber-900/80">
               <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
               این فرم جایگزین تماس اضطراری نیست.
             </p>

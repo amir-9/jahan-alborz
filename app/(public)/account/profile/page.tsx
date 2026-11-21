@@ -39,7 +39,7 @@ export default async function AccountProfilePage() {
     <div className="flex flex-col gap-4">
       <div>
         <h2 className="text-base font-extrabold text-primary">اطلاعات حساب</h2>
-        <p className="mt-1 text-[11.5px] leading-6 text-muted-foreground">
+        <p className="mt-1 text-caption leading-6 text-muted-foreground">
           اطلاعات تماس خود را به‌روز نگه دارید تا هماهنگی سفارش و خدمات سریع‌تر
           انجام شود.
         </p>
@@ -52,7 +52,7 @@ export default async function AccountProfilePage() {
           <ShieldCheck className="h-4 w-4 text-secondary" aria-hidden="true" />
           امنیت حساب
         </h3>
-        <p className="mt-2 text-[11px] leading-6 text-muted-foreground">
+        <p className="mt-2 text-caption leading-6 text-muted-foreground">
           ورود به حساب با کد یک‌بارمصرف انجام می‌شود. اگر رمز عبور خود را فراموش
           کردید، از صفحه ورود گزینه «ورود با کد تأیید» را انتخاب کنید.
         </p>

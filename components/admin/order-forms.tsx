@@ -61,13 +61,13 @@ export function OrderStatusForm({
       className="rounded-2xl border border-border bg-surface p-5 shadow-soft"
     >
       <h2 className="text-sm font-bold text-primary">وضعیت سفارش</h2>
-      <p className="mt-1 text-[10.5px] leading-5 text-muted-foreground">
+      <p className="mt-1 text-caption leading-5 text-muted-foreground">
         تغییر وضعیت در تاریخچه سفارش ثبت می‌شود. لغو سفارش، موجودی کالاها را
         برمی‌گرداند و لغو قابل بازگشت نیست.
       </p>
 
       {isCancelled ? (
-        <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-[10.5px] leading-5 text-danger">
+        <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-caption leading-5 text-danger">
           این سفارش لغو شده است و وضعیت آن قابل تغییر نیست.
         </p>
       ) : null}
@@ -105,7 +105,7 @@ export function OrderStatusForm({
 
       {result ? (
         <p
-          className={`mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-[10.5px] leading-5 ${
+          className={`mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-caption leading-5 ${
             result.ok
               ? "border border-teal-200 bg-teal-50 text-teal-800"
               : "border border-red-200 bg-red-50 text-danger"
@@ -185,7 +185,7 @@ export function OrderPaymentForm({
       className="rounded-2xl border border-border bg-surface p-5 shadow-soft"
     >
       <h2 className="text-sm font-bold text-primary">وضعیت پرداخت</h2>
-      <p className="mt-1 text-[10.5px] leading-5 text-muted-foreground">
+      <p className="mt-1 text-caption leading-5 text-muted-foreground">
         فقط زمانی «پرداخت شده» را انتخاب کنید که واریز واقعاً تأیید شده باشد.
         تأیید دستی بدون بررسی، سابقه مالی نادرست ایجاد می‌کند.
       </p>
@@ -208,7 +208,7 @@ export function OrderPaymentForm({
 
       {result ? (
         <p
-          className={`mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-[10.5px] leading-5 ${
+          className={`mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-caption leading-5 ${
             result.ok
               ? "border border-teal-200 bg-teal-50 text-teal-800"
               : "border border-red-200 bg-red-50 text-danger"
@@ -305,7 +305,7 @@ export function OrderShippingForm({
       className="rounded-2xl border border-border bg-surface p-5 shadow-soft"
     >
       <h2 className="text-sm font-bold text-primary">ارسال و هزینه</h2>
-      <p className="mt-1 text-[10.5px] leading-5 text-muted-foreground">
+      <p className="mt-1 text-caption leading-5 text-muted-foreground">
         هزینه ارسال دستی تعیین می‌شود و مبلغ نهایی سفارش را به‌روز می‌کند. پس از
         تأیید پرداخت، هزینه ارسال قفل می‌شود.
       </p>
@@ -365,7 +365,7 @@ export function OrderShippingForm({
 
       {result ? (
         <p
-          className={`mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-[10.5px] leading-5 ${
+          className={`mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-caption leading-5 ${
             result.ok
               ? "border border-teal-200 bg-teal-50 text-teal-800"
               : "border border-red-200 bg-red-50 text-danger"

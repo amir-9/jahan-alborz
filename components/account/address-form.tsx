@@ -76,7 +76,7 @@ export function AddressForm() {
     return (
       <div>
         {success ? (
-          <p className="mb-3 flex items-center gap-1.5 rounded-xl border border-teal-200 bg-teal-50 px-3.5 py-2.5 text-[11px] text-teal-800">
+          <p className="mb-3 flex items-center gap-1.5 rounded-xl border border-teal-200 bg-teal-50 px-3.5 py-2.5 text-caption text-teal-800">
             <CircleCheck className="h-4 w-4" aria-hidden="true" />
             {success}
           </p>
@@ -99,7 +99,7 @@ export function AddressForm() {
 
       {error ? (
         <div
-          className="mt-3 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-[11px] leading-6 text-danger"
+          className="mt-3 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-caption leading-6 text-danger"
           role="alert"
         >
           <CircleExclamationPoint
@@ -215,7 +215,7 @@ export function AddressForm() {
         </Field>
       </div>
 
-      <label className="mt-4 flex items-center gap-2 text-[11.5px] text-muted-foreground">
+      <label className="mt-4 flex items-center gap-2 text-caption text-muted-foreground">
         <input
           type="checkbox"
           checked={isDefault}
@@ -274,7 +274,7 @@ function Field({
       </Label>
       {children}
       {error ? (
-        <p className="text-[10.5px] font-medium text-danger" role="alert">
+        <p className="text-caption font-medium text-danger" role="alert">
           {error}
         </p>
       ) : null}

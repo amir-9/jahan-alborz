@@ -97,10 +97,10 @@ export function CartSheet() {
                   <div className="flex min-w-0 flex-1 flex-col">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <p className="truncate text-[13px] font-bold text-foreground">
+                        <p className="truncate text-caption font-bold text-foreground">
                           {item.name}
                         </p>
-                        <p className="mt-0.5 text-[11px] text-muted-foreground">
+                        <p className="mt-0.5 text-caption text-muted-foreground">
                           {item.brand}
                         </p>
                       </div>
@@ -141,7 +141,7 @@ export function CartSheet() {
               </span>
             </div>
             <Separator className="my-3" />
-            <p className="text-[11px] leading-6 text-muted-foreground">
+            <p className="text-caption leading-6 text-muted-foreground">
               هزینه و روش ارسال پس از ثبت سفارش و هماهنگی با شما نهایی می‌شود.
             </p>
             <div className="mt-4 flex flex-col gap-2">

@@ -55,7 +55,7 @@ export default async function FaqPage() {
         <h1 className="mt-3 text-2xl font-extrabold text-primary sm:text-3xl">
           سوالات متداول
         </h1>
-        <p className="mt-3 text-[13px] leading-8 text-muted-foreground">
+        <p className="mt-3 text-caption leading-8 text-muted-foreground">
           پاسخ پرتکرارترین سوالات درباره خرید، ارسال و خدمات. اگر پاسخ سوال
           خود را پیدا نکردید، با ما تماس بگیرید.
         </p>
@@ -76,7 +76,7 @@ export default async function FaqPage() {
             <h2 className="text-sm font-bold text-primary">
               پاسخ سوال خود را پیدا نکردید؟
             </h2>
-            <p className="mt-2 text-[11.5px] leading-6 text-muted-foreground">
+            <p className="mt-2 text-caption leading-6 text-muted-foreground">
               برای سوال فنی، استعلام موجودی یا هماهنگی خدمات با فروشگاه تماس
               بگیرید.
             </p>
@@ -104,16 +104,16 @@ export default async function FaqPage() {
           </div>
 
           <div className="rounded-2xl border border-border bg-surface-muted p-5">
-            <h2 className="text-[12px] font-bold text-primary">
+            <h2 className="text-caption font-bold text-primary">
               نیاز به بازدید فنی دارید؟
             </h2>
-            <p className="mt-2 text-[11px] leading-6 text-muted-foreground">
+            <p className="mt-2 text-caption leading-6 text-muted-foreground">
               برای بررسی عیب دستگاه، فرم درخواست خدمات را تکمیل کنید تا برای
               هماهنگی با شما تماس بگیریم.
             </p>
             <Link
               href="/services/request"
-              className="mt-3 inline-flex text-[11px] font-bold text-primary transition-colors hover:text-secondary-600"
+              className="mt-3 inline-flex text-caption font-bold text-primary transition-colors hover:text-secondary-700"
             >
               ثبت درخواست خدمات ←
             </Link>

@@ -50,14 +50,14 @@ export default async function ShopPage() {
           <h1 className="mt-3 text-2xl font-extrabold text-primary sm:text-3xl">
             تجهیزات گرمایشی، با مشاوره پیش از خرید
           </h1>
-          <p className="mt-3 text-[13px] leading-8 text-muted-foreground">
+          <p className="mt-3 text-caption leading-8 text-muted-foreground">
             پکیج، رادیاتور، قطعات یدکی و لوازم نصب را بررسی کنید. اگر در انتخاب
             ظرفیت یا سازگاری قطعه مطمئن نیستید، پیش از ثبت سفارش با ما تماس
             بگیرید.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-caption text-muted-foreground">
           {shopHighlights.map((item) => (
             <span key={item.label} className="inline-flex items-center gap-1.5">
               <item.icon className="h-4 w-4 text-secondary" aria-hidden="true" />
@@ -76,7 +76,7 @@ export default async function ShopPage() {
           <h2 className="text-sm font-bold text-foreground">
             محصول مورد نظر را پیدا نکردید؟
           </h2>
-          <p className="mt-1.5 text-[12px] leading-6 text-muted-foreground">
+          <p className="mt-1.5 text-caption leading-6 text-muted-foreground">
             برای استعلام مدل، ظرفیت یا موجودی قطعات با فروشگاه تماس بگیرید.
           </p>
         </div>

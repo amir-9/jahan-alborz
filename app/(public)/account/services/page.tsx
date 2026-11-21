@@ -42,7 +42,7 @@ export default async function AccountServicesPage() {
           <h2 className="text-base font-extrabold text-primary">
             درخواست‌های خدمات
           </h2>
-          <p className="mt-1 text-[11.5px] leading-6 text-muted-foreground">
+          <p className="mt-1 text-caption leading-6 text-muted-foreground">
             وضعیت درخواست‌های تعمیر، سرویس و نصب خود را پیگیری کنید. زمان مراجعه
             پس از تأیید تلفنی قطعی می‌شود.
           </p>
@@ -53,7 +53,7 @@ export default async function AccountServicesPage() {
       </div>
 
       {failed ? (
-        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11.5px] leading-6 text-amber-800">
+        <div className="flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-caption leading-6 text-amber-800">
           <CircleExclamationPoint
             className="mt-0.5 h-4 w-4 shrink-0"
             aria-hidden="true"
@@ -68,10 +68,10 @@ export default async function AccountServicesPage() {
           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 text-primary">
             <Wrench className="h-6 w-6" aria-hidden="true" />
           </span>
-          <p className="mt-4 text-[13px] font-bold text-primary">
+          <p className="mt-4 text-caption font-bold text-primary">
             هنوز درخواست خدماتی ثبت نشده است
           </p>
-          <p className="mx-auto mt-1.5 max-w-sm text-[11.5px] leading-6 text-muted-foreground">
+          <p className="mx-auto mt-1.5 max-w-sm text-caption leading-6 text-muted-foreground">
             برای تعمیر، سرویس دوره‌ای یا نصب تجهیزات گرمایشی، فرم درخواست خدمات
             را تکمیل کنید.
           </p>
@@ -89,10 +89,10 @@ export default async function AccountServicesPage() {
           >
             <div className="flex flex-wrap items-start justify-between gap-2">
               <div>
-                <p className="text-[12px] font-bold text-primary">
+                <p className="text-caption font-bold text-primary">
                   {request.serviceType}
                 </p>
-                <p className="mt-1 text-[10.5px] text-muted-foreground">
+                <p className="mt-1 text-caption text-muted-foreground">
                   ثبت در {formatDate(request.createdAt)}
                   {request.city ? ` · ${request.city}` : ""}
                 </p>
@@ -103,12 +103,12 @@ export default async function AccountServicesPage() {
             </div>
 
             {request.problemDescription ? (
-              <p className="mt-2 line-clamp-3 rounded-xl bg-surface-muted px-3 py-2 text-[11px] leading-6 text-muted-foreground">
+              <p className="mt-2 line-clamp-3 rounded-xl bg-surface-muted px-3 py-2 text-caption leading-6 text-muted-foreground">
                 {request.problemDescription}
               </p>
             ) : null}
 
-            <p className="mt-2 text-[10px] text-muted-foreground">
+            <p className="mt-2 text-caption text-muted-foreground">
               کد پیگیری:{" "}
               <span dir="ltr" className="font-semibold text-foreground">
                 {request.id.slice(0, 8)}

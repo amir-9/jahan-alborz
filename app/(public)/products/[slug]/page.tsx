@@ -173,7 +173,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <ProductVisual variant={product.visual} className="max-h-[22rem]" />
             </div>
 
-            <p className="relative mt-4 text-center text-[10.5px] leading-5 text-muted-foreground">
+            <p className="relative mt-4 text-center text-caption leading-5 text-muted-foreground">
               تصویر نمایشی و شماتیک است؛ تصویر واقعی محصول پس از افزودن
               گالری در پنل مدیریت نمایش داده می‌شود.
             </p>
@@ -186,7 +186,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {category ? (
               <Link
                 href={`/categories/${category.slug}`}
-                className="text-[11px] font-semibold text-secondary-600 transition-colors hover:text-secondary"
+                className="text-caption font-semibold text-secondary-700 transition-colors hover:text-secondary"
               >
                 {category.name}
               </Link>
@@ -194,7 +194,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <span className="text-muted-foreground/40" aria-hidden="true">
               /
             </span>
-            <span className="text-[11px] text-muted-foreground">
+            <span className="text-caption text-muted-foreground">
               {product.brand}
             </span>
           </div>
@@ -203,7 +203,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {product.name}
           </h1>
 
-          <div className="mt-3 flex flex-wrap items-center gap-4 text-[11px] text-muted-foreground">
+          <div className="mt-3 flex flex-wrap items-center gap-4 text-caption text-muted-foreground">
             <StarRating
               value={product.rating}
               reviewCount={product.reviewCount}
@@ -225,7 +225,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </span>
           </div>
 
-          <p className="mt-5 text-[13px] leading-8 text-muted-foreground">
+          <p className="mt-5 text-caption leading-8 text-muted-foreground">
             {product.description}
           </p>
 
@@ -233,31 +233,31 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {product.purchasingMode === "FIXED" ? (
               <div className="flex items-end justify-between gap-3">
                 <div>
-                  <p className="text-[11px] text-muted-foreground">قیمت</p>
+                  <p className="text-caption text-muted-foreground">قیمت</p>
                   <div className="mt-1 flex flex-wrap items-baseline gap-2">
                     <p className="text-xl font-extrabold text-primary sm:text-2xl">
                       {formatPrice(finalPrice)}
                     </p>
                     {discount ? (
-                      <p className="text-[12px] text-muted-foreground line-through">
+                      <p className="text-caption text-muted-foreground line-through">
                         {formatPrice(product.price)}
                       </p>
                     ) : null}
                   </div>
                 </div>
                 {discount ? (
-                  <span className="rounded-lg bg-secondary-50 px-2.5 py-1 text-[11px] font-bold text-secondary-600">
+                  <span className="rounded-lg bg-secondary-50 px-2.5 py-1 text-caption font-bold text-secondary-700">
                     {formatNumber(discount)}٪ تخفیف
                   </span>
                 ) : null}
               </div>
             ) : (
               <div>
-                <p className="text-[11px] text-muted-foreground">قیمت</p>
+                <p className="text-caption text-muted-foreground">قیمت</p>
                 <p className="mt-1 text-lg font-extrabold text-primary">
                   استعلام قیمت
                 </p>
-                <p className="mt-1 text-[11px] leading-6 text-muted-foreground">
+                <p className="mt-1 text-caption leading-6 text-muted-foreground">
                   قیمت این محصول بر اساس مدل، ظرفیت و موجودی اعلام می‌شود.
                 </p>
               </div>
@@ -269,7 +269,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
             <a
               href={toTelHref(siteConfig.contact.phone)}
-              className="mt-3 flex items-center justify-center gap-2 rounded-xl border border-border px-4 py-2.5 text-[11px] font-semibold text-foreground transition-colors hover:border-primary/30 hover:text-primary"
+              className="mt-3 flex items-center justify-center gap-2 rounded-xl border border-border px-4 py-2.5 text-caption font-semibold text-foreground transition-colors hover:border-primary/30 hover:text-primary"
               dir="ltr"
             >
               <Phone className="h-4 w-4 text-secondary" aria-hidden="true" />
@@ -281,7 +281,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {trustItems.map((item) => (
               <li
                 key={item.label}
-                className="flex items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2.5 text-[11px] text-muted-foreground"
+                className="flex items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2.5 text-caption text-muted-foreground"
               >
                 <item.icon className="h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
                 {item.label}
@@ -311,17 +311,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
                       : "grid grid-cols-2 gap-4 bg-surface-muted px-5 py-3.5"
                   }
                 >
-                  <dt className="text-[12px] text-muted-foreground">
+                  <dt className="text-caption text-muted-foreground">
                     {spec.label}
                   </dt>
-                  <dd className="text-[12px] font-semibold text-foreground">
+                  <dd className="text-caption font-semibold text-foreground">
                     {spec.value}
                   </dd>
                 </div>
               ))}
             </dl>
           </div>
-          <p className="mt-3 text-[10.5px] leading-5 text-muted-foreground">
+          <p className="mt-3 text-caption leading-5 text-muted-foreground">
             مشخصات جدول بر اساس اطلاعات نمونه است و پیش از خرید نهایی باید با
             دفترچه فنی محصول تطبیق داده شود.
           </p>
@@ -340,9 +340,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
             ].map((note) => (
               <div
                 key={note}
-                className="flex items-start gap-2.5 rounded-xl border border-border bg-surface px-4 py-3 text-[12px] leading-6 text-muted-foreground"
+                className="flex items-start gap-2.5 rounded-xl border border-border bg-surface px-4 py-3 text-caption leading-6 text-muted-foreground"
               >
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-secondary-50 text-secondary-600">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-secondary-50 text-secondary-700">
                   <Check className="h-3 w-3" aria-hidden="true" />
                 </span>
                 {note}
@@ -359,7 +359,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <h2 id="product-reviews" className="text-base font-bold text-primary">
               نظرات کاربران
             </h2>
-            <p className="mt-1 text-[11px] text-muted-foreground">
+            <p className="mt-1 text-caption text-muted-foreground">
               نظرات زیر نمونه نمایشی هستند و تأیید هویت یا صحت آن‌ها انجام
               نشده است.
             </p>
@@ -374,12 +374,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
               className="rounded-2xl border border-border bg-surface p-5 shadow-soft"
             >
               <div className="flex items-center justify-between gap-3">
-                <p className="text-[12px] font-bold text-foreground">
+                <p className="text-caption font-bold text-foreground">
                   {review.author}، {review.city}
                 </p>
                 <StarRating value={review.rating} />
               </div>
-              <p className="mt-2 text-[11.5px] leading-6 text-muted-foreground">
+              <p className="mt-2 text-caption leading-6 text-muted-foreground">
                 {review.comment}
               </p>
             </article>
@@ -394,7 +394,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <h2 id="related-products" className="text-base font-bold text-primary">
               محصولات مرتبط
             </h2>
-            <p className="mt-1 text-[11px] text-muted-foreground">
+            <p className="mt-1 text-caption text-muted-foreground">
               گزینه‌های دیگر در همین دسته یا پیشنهادهای فروشگاه
             </p>
           </div>

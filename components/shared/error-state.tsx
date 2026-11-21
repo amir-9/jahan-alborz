@@ -46,21 +46,21 @@ export function ErrorState({
       )}
       role="alert"
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-destructive/10 text-destructive">
+      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-danger/10 text-danger">
         <TriangleAlert className="h-7 w-7" aria-hidden="true" />
       </div>
 
       <h1 className="mt-5 text-lg font-extrabold text-foreground sm:text-xl">
         مشکلی پیش آمد
       </h1>
-      <p className="mt-2 max-w-md text-[12.5px] leading-7 text-muted-foreground">
+      <p className="mt-2 max-w-md text-caption leading-7 text-muted-foreground">
         نتوانستیم این صفحه را بارگذاری کنیم. لطفاً دوباره تلاش کنید. اگر مشکل
         ادامه داشت، با پشتیبانی فروشگاه تماس بگیرید.
       </p>
 
       {digest ? (
         <p
-          className="mt-2 max-w-md break-all font-mono text-[10px] text-muted-foreground/70"
+          className="mt-2 max-w-md break-all font-mono text-caption text-muted-foreground/70"
           dir="ltr"
         >
           کد خطا: {digest}

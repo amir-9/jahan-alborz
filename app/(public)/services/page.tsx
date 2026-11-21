@@ -67,7 +67,7 @@ export default function ServicesPage() {
             <h1 className="mt-4 text-2xl font-extrabold leading-[1.5] sm:text-3xl">
               تعمیر، سرویس و نصب تجهیزات گرمایشی
             </h1>
-            <p className="mt-4 max-w-xl text-[13px] leading-8 text-primary-foreground/70">
+            <p className="mt-4 max-w-xl text-caption leading-8 text-on-primary-muted">
               از عیب‌یابی و تعویض قطعه تا سرویس دوره‌ای و نصب استاندارد؛ خدمات
               میدانی با هماهنگی قبلی در شهر قزوین انجام می‌شود. پیش از مراجعه،
               محدوده هزینه و زمان تقریبی اعلام می‌شود.
@@ -100,7 +100,7 @@ export default function ServicesPage() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-[12px] text-primary-foreground/85 backdrop-blur-sm"
+                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-caption text-on-primary-muted backdrop-blur-sm"
               >
                 <item.icon className="h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
                 {item.label}
@@ -146,10 +146,10 @@ export default function ServicesPage() {
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-secondary">
                 <step.icon className="h-5 w-5" aria-hidden="true" />
               </span>
-              <h3 className="mt-4 text-[13px] font-bold text-primary">
+              <h3 className="mt-4 text-caption font-bold text-primary">
                 {step.title}
               </h3>
-              <p className="mt-2 text-[11.5px] leading-6 text-muted-foreground">
+              <p className="mt-2 text-caption leading-6 text-muted-foreground">
                 {step.description}
               </p>
             </div>
@@ -170,8 +170,8 @@ export default function ServicesPage() {
               "هزینه بازدید و قطعات پیش از انجام کار به‌صورت شفاف اعلام می‌شود.",
               "هرگونه دخالت در مسیر گاز و محفظه احتراق باید توسط تکنسین مجاز انجام شود.",
             ].map((item) => (
-              <li key={item} className="flex items-start gap-2.5 text-[12px] leading-7 text-muted-foreground">
-                <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-secondary-50 text-secondary-600">
+              <li key={item} className="flex items-start gap-2.5 text-caption leading-7 text-muted-foreground">
+                <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-secondary-50 text-secondary-700">
                   <Check className="h-2.5 w-2.5" aria-hidden="true" />
                 </span>
                 {item}
@@ -183,7 +183,7 @@ export default function ServicesPage() {
         <div className="flex flex-col justify-between rounded-2xl border border-border bg-primary-900 p-6 text-primary-foreground shadow-soft">
           <div>
             <h2 className="text-base font-bold">نوع خدمت را پیدا نکردید؟</h2>
-            <p className="mt-2 text-[12px] leading-7 text-primary-foreground/70">
+            <p className="mt-2 text-caption leading-7 text-on-primary-muted">
               مشکل دستگاه یا نیاز نصب خود را توضیح دهید؛ پس از بررسی اولیه،
               نزدیک‌ترین خدمت مناسب را پیشنهاد می‌دهیم. برای سوالات فنی هم
               می‌توانید تلفنی تماس بگیرید.

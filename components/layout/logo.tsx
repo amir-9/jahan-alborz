@@ -52,8 +52,8 @@ export function Logo({
         {withCaption ? (
           <span
             className={cn(
-              "text-[10px] font-medium",
-              isLight ? "text-white/60" : "text-muted-foreground",
+              "text-caption font-medium",
+              isLight ? "text-on-primary-muted" : "text-muted-foreground",
             )}
           >
             تجهیزات گرمایشی

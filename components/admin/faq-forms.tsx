@@ -120,7 +120,7 @@ export function FaqForm({ initial }: { initial?: FaqFormInitial }) {
               required
             />
             {fieldErrors.question ? (
-              <p className="text-[10px] text-danger">{fieldErrors.question[0]}</p>
+              <p className="text-caption text-danger">{fieldErrors.question[0]}</p>
             ) : null}
           </div>
 
@@ -135,7 +135,7 @@ export function FaqForm({ initial }: { initial?: FaqFormInitial }) {
               required
             />
             {fieldErrors.answer ? (
-              <p className="text-[10px] text-danger">{fieldErrors.answer[0]}</p>
+              <p className="text-caption text-danger">{fieldErrors.answer[0]}</p>
             ) : null}
           </div>
         </div>
@@ -165,15 +165,15 @@ export function FaqForm({ initial }: { initial?: FaqFormInitial }) {
               value={values.sortOrder}
               onChange={(event) => update("sortOrder", event.target.value)}
             />
-            <p className="text-[10px] leading-5 text-muted-foreground">
+            <p className="text-caption leading-5 text-muted-foreground">
               عدد کوچک‌تر بالاتر نمایش داده می‌شود.
             </p>
             {fieldErrors.sortOrder ? (
-              <p className="text-[10px] text-danger">{fieldErrors.sortOrder[0]}</p>
+              <p className="text-caption text-danger">{fieldErrors.sortOrder[0]}</p>
             ) : null}
           </div>
 
-          <label className="flex items-center gap-2 rounded-xl border border-border px-3 py-2.5 text-[11px] font-semibold text-foreground">
+          <label className="flex items-center gap-2 rounded-xl border border-border px-3 py-2.5 text-caption font-semibold text-foreground">
             <input
               type="checkbox"
               checked={values.isActive}
@@ -187,7 +187,7 @@ export function FaqForm({ initial }: { initial?: FaqFormInitial }) {
 
       {result ? (
         <p
-          className={`mt-3 flex items-start gap-2 rounded-xl border px-3 py-2 text-[10.5px] leading-5 ${
+          className={`mt-3 flex items-start gap-2 rounded-xl border px-3 py-2 text-caption leading-5 ${
             result.ok
               ? "border-teal-200 bg-teal-50 text-teal-800"
               : "border-red-200 bg-red-50 text-danger"
@@ -271,7 +271,7 @@ export function FaqRowActions({
       </Button>
 
       {result && !result.ok ? (
-        <p className="max-w-[12rem] text-end text-[9.5px] leading-4 text-danger">
+        <p className="max-w-[12rem] text-end text-caption leading-4 text-danger">
           {result.message}
         </p>
       ) : null}
