@@ -7,6 +7,7 @@ import { getSession, toSessionUser } from "@/lib/auth/session";
 import { hasRecentCheckoutVerification } from "@/lib/auth/otp";
 import { consumeRateLimit } from "@/lib/security/rate-limit";
 import { grantOrderAccess } from "@/lib/orders/access";
+import { notifyNewOrder } from "@/lib/orders/notifications";
 import { getPaymentProvider } from "@/lib/payments/payment-provider";
 import {
   checkoutSchema,
@@ -324,6 +325,21 @@ export async function createOrder(
       amount: Number(order.total),
       customerPhone: data.customerPhone,
     });
+
+    // Notifications are best-effort: the order is already committed and must
+    // not fail because an SMS provider is unavailable.
+    try {
+      await notifyNewOrder({
+        orderNumber: order.orderNumber,
+        customerName: data.customerName,
+        customerPhone: data.customerPhone,
+        total: Number(order.total),
+        itemCount: data.items.reduce((sum, item) => sum + item.quantity, 0),
+        paymentMethod: data.paymentMethod as "ONLINE" | "COD",
+      });
+    } catch (error) {
+      console.error("[orders] notification step failed", error);
+    }
 
     return {
       ok: true,

@@ -32,6 +32,8 @@ const quickLinks = [
   { label: "درباره ما", href: "/about" },
   { label: "وبلاگ", href: "/blog" },
   { label: "سوالات متداول", href: "/faq" },
+  { label: "قوانین و شرایط خرید", href: "/terms" },
+  { label: "حریم خصوصی", href: "/privacy" },
   { label: "تماس با ما", href: "/contact" },
 ];
 

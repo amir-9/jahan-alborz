@@ -66,7 +66,8 @@ All variables are documented in `.env.example`. Summary:
 | `NEXTAUTH_SECRET` | yes | Auth.js JWT/session signing secret |
 | `ORDER_ACCESS_SECRET` | recommended | HMAC key for guest order-access cookies (falls back to `NEXTAUTH_SECRET`) |
 | `SMS_PROVIDER` | yes | `mock` (development only) or `kavenegar` |
-| `KAVENEGAR_API_KEY`, `KAVENEGAR_SENDER`, `KAVENEGAR_TEMPLATE` | when Kavenegar | OTP delivery |
+| `KAVENEGAR_API_KEY`, `KAVENEGAR_SENDER`, `KAVENEGAR_TEMPLATE` | when Kavenegar | OTP delivery and order notifications |
+| `ADMIN_ORDER_NOTIFY_PHONE` | no | Phone that receives a text alert for each new order (empty disables the admin alert) |
 | `PAYMENT_PROVIDER` | yes | `manual` — no online gateway is bundled |
 | `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PHONE`, `SEED_ADMIN_PASSWORD` | seeding only | Creates/rotates the first `SUPER_ADMIN` |
 
@@ -121,7 +122,9 @@ or a self-hosted instance reachable over TLS.
 ### Post-deploy smoke check
 
 - `/` loads with real contact info and no demo banner.
-- `/shop`, a product page, `/blog`, `/faq` show database content.
+- `/shop`, a product page, `/blog`, `/faq`, `/terms`, `/privacy` load correctly.
+- Sharing the site shows the generated Open Graph image; the browser tab shows
+  the SVG icon.
 - Customer OTP login delivers a real SMS (Kavenegar configured).
 - Guest checkout: mobile verification → order created → confirmation page.
 - Admin: dashboard, orders, services, products, categories, blog, FAQ, users.
@@ -162,6 +165,19 @@ or a self-hosted instance reachable over TLS.
   `updateMany`. Cancelling an order restocks it; cancelled orders cannot reopen.
 - Editing cost fields is blocked once an order is marked `PAID`.
 - Products are soft-deleted (`isActive: false`) so order history stays intact.
+
+### SMS notifications
+
+- On a **new** order, the customer receives a text confirming the order number
+  and explaining that stock and shipping are checked before fulfilment. If
+  `ADMIN_ORDER_NOTIFY_PHONE` is set, the same event also alerts that number.
+- `lib/orders/notifications.ts` uses the existing `lib/sms/sms.ts` abstraction;
+  Kavenegar uses the plain `/sms/send.json` endpoint for these messages.
+- Delivery is **best effort**: a failed SMS never rolls back or fails an order
+  that was already committed. Failures are logged with `[orders] notification`.
+- With `SMS_PROVIDER=mock`, messages are printed to the server console in
+  development and the provider throws in production, so a misconfigured
+  deployment cannot silently pretend to send SMS.
 
 ### Connecting a real payment gateway
 
@@ -209,10 +225,21 @@ prisma              Schema, migrations, seed
 ```bash
 npm run lint
 npx tsc --noEmit
+npm test
 npm run build
 ```
 
-All three must pass before deploying.
+All four must pass before deploying.
+
+### Unit tests
+
+`tests/` contains Vitest unit tests for the critical pure modules: phone
+normalization, checkout validation, role permissions, signed order-access
+cookies, payment-provider honesty, and best-effort SMS notifications. Async
+Server Components are not supported by Vitest, so the end-to-end flows (OTP
+login, guest checkout, admin actions) are verified manually in the browser.
+
+Use `npm run test:watch` while developing.
 
 ## 11. Honest limitations
 

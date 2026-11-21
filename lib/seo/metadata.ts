@@ -36,12 +36,23 @@ export function buildPageMetadata({
       url: path,
       title,
       description,
+      // Declared explicitly so page-level metadata does not replace the
+      // generated opengraph-image route inherited from the root segment.
+      images: [
+        {
+          url: "/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: `${siteConfig.name} — ${siteConfig.tagline}`,
+        },
+      ],
       ...(type === "article" && publishedTime ? { publishedTime } : {}),
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
       description,
+      images: ["/opengraph-image"],
     },
     ...(noIndex
       ? {

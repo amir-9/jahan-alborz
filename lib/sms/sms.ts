@@ -3,7 +3,7 @@
  *
  * The provider is selected with SMS_PROVIDER. Only providers that are known to
  * work with Iranian numbers are supported. The mock provider is development
- * only and logs the code to the server console; it is never used in production.
+ * only and logs messages to the server console; it is never used in production.
  */
 
 export type SmsProvider = {
@@ -12,20 +12,27 @@ export type SmsProvider = {
     code: string,
     purpose: string,
   ) => Promise<void>;
+  /** Sends a plain text notification (used for order alerts, not OTP codes). */
+  sendTextMessage: (phone: string, message: string, purpose: string) => Promise<void>;
 };
 
-const MOCK_FROM_NUMBER = "10000000";
+function assertDevelopmentProvider(provider: string) {
+  if (process.env.NODE_ENV === "production") {
+    throw new Error(
+      `SMS_PROVIDER=${provider} is not allowed in production. Configure Kavenegar or another Iranian provider.`,
+    );
+  }
+}
 
 function createMockSmsProvider(): SmsProvider {
   return {
     sendVerificationCode: async (phone, code, purpose) => {
-      if (process.env.NODE_ENV === "production") {
-        throw new Error(
-          "SMS_PROVIDER=mock is not allowed in production. Configure Kavenegar or another Iranian provider.",
-        );
-      }
-
+      assertDevelopmentProvider("mock");
       console.info(`[SMS MOCK] To ${phone} for ${purpose}: ${code}`);
+    },
+    sendTextMessage: async (phone, message, purpose) => {
+      assertDevelopmentProvider("mock");
+      console.info(`[SMS MOCK] To ${phone} for ${purpose}: ${message}`);
     },
   };
 }
@@ -35,17 +42,23 @@ function createMockSmsProvider(): SmsProvider {
  * Requires KAVENEGAR_API_KEY and KAVENEGAR_SENDER.
  */
 function createKavenegarProvider(): SmsProvider {
+  const getCredentials = () => {
+    const apiKey = process.env.KAVENEGAR_API_KEY;
+    const sender = process.env.KAVENEGAR_SENDER;
+
+    if (!apiKey || !sender) {
+      throw new Error(
+        "KAVENEGAR_API_KEY and KAVENEGAR_SENDER are required for the Kavenegar provider.",
+      );
+    }
+
+    return { apiKey, sender };
+  };
+
   return {
     sendVerificationCode: async (phone, code, purpose) => {
-      const apiKey = process.env.KAVENEGAR_API_KEY;
-      const sender = process.env.KAVENEGAR_SENDER;
+      const { apiKey } = getCredentials();
       const template = process.env.KAVENEGAR_TEMPLATE ?? "jahan-alborz-otp";
-
-      if (!apiKey || !sender) {
-        throw new Error(
-          "KAVENEGAR_API_KEY and KAVENEGAR_SENDER are required for the Kavenegar provider.",
-        );
-      }
 
       const body = new URLSearchParams({
         receptor: phone,
@@ -68,6 +81,32 @@ function createKavenegarProvider(): SmsProvider {
         const detail = await response.text().catch(() => "");
         throw new Error(
           `Kavenegar request failed (${response.status}) for ${purpose}: ${detail.slice(0, 200)}`,
+        );
+      }
+    },
+    sendTextMessage: async (phone, message, purpose) => {
+      const { apiKey, sender } = getCredentials();
+
+      const body = new URLSearchParams({
+        receptor: phone,
+        sender,
+        message,
+      });
+
+      const response = await fetch(
+        `https://api.kavenegar.com/v1/${apiKey}/sms/send.json`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body,
+          cache: "no-store",
+        },
+      );
+
+      if (!response.ok) {
+        const detail = await response.text().catch(() => "");
+        throw new Error(
+          `Kavenegar text message failed (${response.status}) for ${purpose}: ${detail.slice(0, 200)}`,
         );
       }
     },
@@ -98,5 +137,3 @@ export function getSmsProvider(): SmsProvider {
 
   return provider;
 }
-
-export { MOCK_FROM_NUMBER };

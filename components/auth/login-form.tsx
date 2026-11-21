@@ -386,7 +386,21 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
       ) : null}
 
       <p className="mt-4 border-t border-border pt-4 text-center text-[10px] leading-5 text-muted-foreground">
-        با ورود، قوانین خرید و حریم خصوصی فروشگاه را می‌پذیرید.
+        با ورود،{" "}
+        <Link
+          href="/terms"
+          className="font-semibold text-primary hover:underline"
+        >
+          قوانین خرید
+        </Link>{" "}
+        و{" "}
+        <Link
+          href="/privacy"
+          className="font-semibold text-primary hover:underline"
+        >
+          حریم خصوصی
+        </Link>{" "}
+        فروشگاه را میپذیرید.
       </p>
     </div>
   );
