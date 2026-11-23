@@ -57,10 +57,14 @@ const visitSteps = [
 
 export default function ServicesPage() {
   return (
-    <div className="page-container pb-16 pt-6 sm:pt-8">
+    <div className="page-shell page-container pb-16 pt-6 sm:pt-8">
       <Breadcrumbs items={[{ name: "خدمات" }]} />
 
-      <div className="mt-6 overflow-hidden rounded-3xl border border-border bg-primary-900 text-primary-foreground shadow-soft">
+      <div className="relative isolate mt-6 overflow-hidden rounded-3xl border border-white/10 bg-mesh text-primary-foreground shadow-float">
+        <div
+          className="animate-mesh-drift pointer-events-none absolute -start-24 -top-24 h-80 w-80 rounded-full bg-secondary/20 blur-[90px]"
+          aria-hidden="true"
+        />
         <div className="relative grid gap-8 bg-grid-light p-6 sm:p-9 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <Badge variant="secondary">پوشش خدمات: {siteConfig.business.serviceCoverageCity}</Badge>
@@ -100,7 +104,7 @@ export default function ServicesPage() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-caption text-on-primary-muted backdrop-blur-sm"
+                className="lift-hover flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-caption text-on-primary-muted backdrop-blur-sm"
               >
                 <item.icon className="h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
                 {item.label}

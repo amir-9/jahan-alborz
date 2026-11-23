@@ -55,13 +55,13 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="page-container pb-16 pt-6 sm:pt-8">
+    <div className="page-shell page-container pb-16 pt-6 sm:pt-8">
       <Breadcrumbs items={[{ name: "درباره ما" }]} />
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div>
           <Badge variant="secondary">درباره جهان البرز</Badge>
-          <h1 className="mt-4 text-2xl font-extrabold leading-[1.5] text-primary sm:text-3xl">
+          <h1 className="animate-rise mt-4 text-2xl font-extrabold leading-[1.5] tracking-tight text-primary sm:text-3xl">
             تجهیزات گرمایشی، با نگاهی فنی و همراهی واقعی
           </h1>
           <p className="mt-4 text-caption leading-8 text-muted-foreground">

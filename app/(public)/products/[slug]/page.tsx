@@ -130,7 +130,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   };
 
   return (
-    <div className="page-container pb-16 pt-6 sm:pt-8">
+    <div className="page-shell page-container pb-16 pt-6 sm:pt-8">
       <Breadcrumbs
         items={[
           { name: "فروشگاه", href: "/shop" },
@@ -155,7 +155,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <div className="mt-6 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         {/* Visual */}
         <div className="lg:sticky lg:top-28">
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-primary-50 via-surface to-surface p-6 shadow-soft sm:p-10">
+          <div className="animate-pop relative overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-primary-50 via-surface to-surface p-6 shadow-float sm:p-10">
             <div className="absolute inset-0 bg-grid opacity-40" aria-hidden="true" />
             <div className="absolute inset-x-0 top-0 flex items-start justify-between p-4">
               <div className="flex flex-col gap-2">
@@ -199,7 +199,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </span>
           </div>
 
-          <h1 className="mt-2 text-2xl font-extrabold leading-[1.5] text-primary sm:text-3xl">
+          <h1 className="animate-rise mt-2 text-2xl font-extrabold leading-[1.5] tracking-tight text-primary sm:text-3xl">
             {product.name}
           </h1>
 

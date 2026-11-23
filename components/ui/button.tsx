@@ -6,18 +6,18 @@ import { cn } from "@/lib/utils/cn";
 export const buttonVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl font-semibold",
-    "transition-[background-color,border-color,color,box-shadow,transform] duration-200",
+    "transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-55",
-    "active:translate-y-px [&_svg]:shrink-0",
+    "hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] [&_svg]:shrink-0",
   ],
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-sm hover:bg-primary-600",
+          "bg-primary text-primary-foreground shadow-[0_10px_24px_-12px_rgba(20,45,78,0.75)] hover:bg-primary-600 hover:shadow-[0_16px_30px_-14px_rgba(20,45,78,0.85)]",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary-600",
+          "bg-secondary text-secondary-foreground shadow-[0_10px_24px_-12px_rgba(242,140,40,0.8)] hover:bg-secondary-600 hover:shadow-[0_16px_30px_-14px_rgba(242,140,40,0.9)]",
         outline:
           "border border-border bg-surface text-foreground hover:border-primary/30 hover:bg-primary-50 hover:text-primary",
         ghost: "text-foreground hover:bg-muted",

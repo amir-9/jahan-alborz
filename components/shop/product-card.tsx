@@ -34,12 +34,16 @@ export function ProductCard({
     <article
       className={cn(
         "group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft",
-        "transition-[transform,box-shadow,border-color] duration-300",
-        "hover:-translate-y-1 hover:border-primary/20 hover:shadow-lift",
+        "transition-[transform,box-shadow,border-color] duration-300 ease-out",
+        "hover:-translate-y-1.5 hover:border-secondary/35 hover:shadow-[0_28px_60px_-34px_rgba(20,45,78,0.55)]",
         className,
       )}
     >
-      <div className="relative overflow-hidden border-b border-border bg-surface-muted">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-20 h-0.5 bg-gradient-to-l from-secondary via-secondary/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        aria-hidden="true"
+      />
+      <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-surface-muted via-surface to-primary-50/60">
         <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-3">
           <div className="flex flex-col items-start gap-1.5">
             {discount ? (
@@ -70,7 +74,7 @@ export function ProductCard({
         >
           <ProductVisual
             variant={product.visual}
-            className="transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+            className="transition-transform duration-700 ease-out group-hover:scale-[1.08]"
           />
         </Link>
       </div>
@@ -121,7 +125,7 @@ export function ProductCard({
           )}
           <Link
             href={`/products/${product.slug}`}
-            className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="pressable inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary transition-colors hover:bg-secondary hover:text-secondary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label={`جزئیات ${product.name}`}
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />

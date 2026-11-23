@@ -42,18 +42,26 @@ export function SectionHeading({
         {eyebrow ? (
           <div
             className={cn(
-              "flex items-center gap-2 text-xs font-semibold",
-              isLight ? "text-secondary" : "text-secondary-700",
-              align === "center" && "justify-center",
+              "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold",
+              isLight
+                ? "border-orange-300/25 bg-orange-300/10 text-orange-200"
+                : "border-secondary/25 bg-secondary-50 text-secondary-700",
+              align === "center" && "mx-auto",
             )}
           >
-            <span className="h-px w-6 bg-current" aria-hidden="true" />
+            <span
+              className={cn(
+                "h-1.5 w-1.5 rounded-full",
+                isLight ? "bg-orange-300" : "bg-secondary",
+              )}
+              aria-hidden="true"
+            />
             {eyebrow}
           </div>
         ) : null}
         <Heading
           className={cn(
-            "mt-3 text-2xl font-extrabold leading-[1.5] sm:text-3xl lg:text-[2rem]",
+            "mt-3 text-2xl font-extrabold leading-[1.5] tracking-tight sm:text-3xl lg:text-[2rem]",
             isLight ? "text-white" : "text-primary",
           )}
         >

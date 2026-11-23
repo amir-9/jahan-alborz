@@ -40,7 +40,7 @@ export function FloatingContact() {
       <button
         type="button"
         onClick={() => setIsDismissed(true)}
-        className="flex h-6 w-6 items-center justify-center rounded-full border border-border bg-surface text-muted-foreground shadow-sm"
+        className="surface-glass flex h-7 w-7 items-center justify-center rounded-full text-muted-foreground"
         aria-label="بستن دکمه‌های تماس"
       >
         <X className="h-3.5 w-3.5" aria-hidden="true" />
@@ -61,7 +61,7 @@ export function FloatingContact() {
 
       <a
         href={toTelHref(siteConfig.contact.phone)}
-        className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-lift transition-transform active:scale-95"
+        className="animate-pulse-ring flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-[0_16px_36px_-14px_rgba(242,140,40,0.9)] transition-transform hover:scale-105 active:scale-95"
         aria-label="تماس تلفنی با فروشگاه"
       >
         <Phone className="h-5 w-5" aria-hidden="true" />

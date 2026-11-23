@@ -61,6 +61,15 @@
   --shadow-soft: 0 1px 2px rgb(20 45 78 / 0.04), 0 12px 32px -18px rgb(20 45 78 / 0.18);
   --shadow-lift: 0 2px 4px rgb(20 45 78 / 0.04), 0 24px 48px -24px rgb(20 45 78 / 0.28);
   --shadow-header: 0 8px 24px -20px rgb(20 45 78 / 0.45);
+  --shadow-glow: 0 22px 70px -34px rgb(242 140 40 / 0.55);
+  --shadow-float: 0 30px 90px -50px rgb(20 45 78 / 0.75);
+
+  /* Motion tokens: soft, fast, and safe for Persian RTL reading. */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 160ms;
+  --duration-base: 260ms;
+  --duration-slow: 520ms;
 }
 
 :root {
@@ -86,10 +95,10 @@
   --secondary-700: #a4510b;
 
   /* Neutrals */
-  --background: #f5f7fa;
-  --foreground: #263445;
+  --background: #f4f7fb;
+  --foreground: #223248;
   --surface: #ffffff;
-  --surface-muted: #f8fafc;
+  --surface-muted: #f7f9fc;
   --muted: #eef2f7;
   --muted-foreground: #5b6b7f;
   --border: #e2e8f0;
@@ -219,11 +228,122 @@
     background-size: 22px 22px;
   }
 
+  /* Stripe-inspired atmospheric mesh, tuned to the navy/orange identity. */
+  .bg-mesh {
+    background-color: var(--primary-900);
+    background-image:
+      radial-gradient(ellipse 55% 65% at 88% 8%, rgb(242 140 40 / 0.28), transparent 70%),
+      radial-gradient(ellipse 45% 60% at 8% 28%, rgb(42 79 122 / 0.85), transparent 72%),
+      radial-gradient(ellipse 60% 70% at 68% 92%, rgb(20 45 78 / 0.95), transparent 70%),
+      linear-gradient(135deg, #0c1e36 0%, #142d4e 48%, #0b1b30 100%);
+  }
+
+  .bg-mesh-soft {
+    background-color: var(--surface);
+    background-image:
+      radial-gradient(circle at 92% 0%, rgb(242 140 40 / 0.09), transparent 38%),
+      radial-gradient(circle at 4% 18%, rgb(20 45 78 / 0.06), transparent 34%),
+      linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+  }
+
   .surface-card {
     background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-2xl);
     box-shadow: var(--shadow-soft);
+  }
+
+  .surface-glass {
+    background: rgb(255 255 255 / 0.72);
+    border: 1px solid rgb(255 255 255 / 0.78);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(14px);
+  }
+
+  .surface-glass-dark {
+    background: rgb(255 255 255 / 0.07);
+    border: 1px solid rgb(255 255 255 / 0.15);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08);
+    backdrop-filter: blur(14px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(110deg, #ffffff 20%, #ffd9ad 92%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .lift-hover {
+    transition:
+      transform var(--duration-base) var(--ease-out-soft),
+      box-shadow var(--duration-base) var(--ease-out-soft),
+      border-color var(--duration-base) var(--ease-out-soft),
+      background-color var(--duration-base) var(--ease-out-soft);
+  }
+
+  .lift-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: rgb(20 45 78 / 0.12);
+  }
+
+  .lift-hover:active {
+    transform: translateY(-1px);
+  }
+
+  .pressable {
+    transition: transform var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .pressable:active {
+    transform: scale(0.98);
+  }
+
+  .ring-orange-focus {
+    outline: none;
+  }
+
+  .ring-orange-focus:focus-visible {
+    box-shadow: 0 0 0 3px rgb(242 140 40 / 0.35);
+  }
+
+  .hairline {
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    height: 1px;
+  }
+
+  /* Atmospheric wash behind the header area of public pages. */
+  .page-shell {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .page-shell::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 21rem;
+    content: "";
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 92% 2%, rgb(242 140 40 / 0.1), transparent 34%),
+      radial-gradient(circle at 4% 12%, rgb(20 45 78 / 0.06), transparent 32%),
+      linear-gradient(180deg, rgb(255 255 255 / 0.95), transparent 88%);
+  }
+
+  .page-shell > * {
+    position: relative;
+  }
+
+  .footer-link {
+    transition:
+      color var(--duration-fast) ease-out,
+      transform var(--duration-fast) ease-out;
+  }
+
+  .footer-link:hover {
+    transform: translateX(-3px);
   }
 
   .text-pretty {
@@ -363,6 +483,48 @@
   }
 }
 
+/* Ambient background drift: never hides content, only adds depth. */
+@keyframes mesh-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-2%, 1.5%, 0) scale(1.05);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(-160%);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgb(242 140 40 / 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgb(242 140 40 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(242 140 40 / 0);
+  }
+}
+
 .animate-rise {
   animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -381,6 +543,53 @@
 
 .animate-soft-glow {
   animation: soft-glow 7s ease-in-out infinite;
+}
+
+.animate-mesh-drift {
+  animation: mesh-drift 16s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.6s ease-out infinite;
+}
+
+.shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-sweep::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgb(255 255 255 / 0.28) 48%,
+    transparent 76%
+  );
+  animation: shimmer-sweep 2.8s ease-in-out infinite;
+}
+
+.stagger-1 { animation-delay: 80ms; }
+.stagger-2 { animation-delay: 160ms; }
+.stagger-3 { animation-delay: 240ms; }
+.stagger-4 { animation-delay: 320ms; }
+.stagger-5 { animation-delay: 400ms; }
+.stagger-6 { animation-delay: 480ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-mesh-drift,
+  .animate-float,
+  .animate-pulse-ring,
+  .shimmer-sweep::after {
+    animation: none !important;
+  }
 }
 
 .sheet-overlay[data-state="open"] {

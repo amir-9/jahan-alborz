@@ -81,7 +81,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-40 w-full">
       {/* Utility bar */}
-      <div className="hidden bg-primary-900 text-primary-foreground lg:block">
+      <div className="hidden bg-mesh text-primary-foreground lg:block">
         <div className="page-container flex h-9 items-center justify-between text-caption">
           <div className="flex items-center gap-6">
             <span className="inline-flex items-center gap-1.5">
@@ -134,10 +134,17 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
       <div
         className={cn(
           "border-b border-border/80 bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/85",
-          "transition-shadow duration-300",
-          isScrolled ? "shadow-header" : "",
+          "transition-[box-shadow,border-color] duration-300",
+          isScrolled ? "shadow-header border-secondary/20" : "",
         )}
       >
+        <div
+          className={cn(
+            "absolute inset-x-0 top-0 h-0.5 bg-gradient-to-l from-secondary via-secondary/50 to-transparent transition-opacity duration-300",
+            isScrolled ? "opacity-100" : "opacity-0",
+          )}
+          aria-hidden="true"
+        />
         <div className="page-container flex h-16 items-center justify-between gap-4 lg:h-[72px]">
           <div className="flex items-center gap-3">
             <Sheet open={isMobileOpen} onOpenChange={setIsMobileOpen}>
@@ -318,7 +325,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
           <div className="flex items-center gap-1.5 sm:gap-2">
             <a
               href={toTelHref(siteConfig.contact.phone)}
-              className="hidden items-center gap-2 rounded-xl border border-border px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:border-primary/30 hover:text-primary md:inline-flex"
+              className="pressable hidden items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:border-secondary/40 hover:bg-secondary-50 hover:text-secondary-700 md:inline-flex"
               dir="ltr"
             >
               <Phone className="h-4 w-4 text-secondary" aria-hidden="true" />
@@ -350,7 +357,7 @@ export function SiteHeader({ categories, viewer = null }: SiteHeaderProps) {
             >
               <ShoppingBag className="h-5 w-5" aria-hidden="true" />
               {hasHydrated && cartCount > 0 ? (
-                <span className="absolute -end-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-secondary px-1 text-caption font-bold text-secondary-foreground">
+                <span className="animate-pulse-ring absolute -end-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-secondary px-1 text-caption font-bold text-secondary-foreground">
                   {formatNumber(cartCount)}
                 </span>
               ) : null}

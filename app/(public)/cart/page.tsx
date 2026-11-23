@@ -13,13 +13,13 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function CartPage() {
   return (
-    <div className="page-container pb-16 pt-6 sm:pt-8">
+    <div className="page-shell page-container pb-16 pt-6 sm:pt-8">
       <Breadcrumbs items={[{ name: "سبد خرید" }]} />
 
       <div className="mt-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <Badge variant="secondary">سبد خرید</Badge>
-          <h1 className="mt-3 text-2xl font-extrabold text-primary sm:text-3xl">
+          <h1 className="animate-rise mt-3 text-2xl font-extrabold tracking-tight text-primary sm:text-3xl">
             بازبینی سبد خرید
           </h1>
           <p className="mt-2 text-caption leading-7 text-muted-foreground">

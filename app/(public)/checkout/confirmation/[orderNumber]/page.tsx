@@ -75,7 +75,7 @@ export default async function CheckoutConfirmationPage({
   const isAwaitingPayment = order.paymentStatus === "PENDING" && order.paymentMethod === "ONLINE";
 
   return (
-    <div className="page-container pb-16 pt-6 sm:pt-8">
+    <div className="page-shell page-container pb-16 pt-6 sm:pt-8">
       <div className="mx-auto max-w-3xl">
         <div className="rounded-3xl border border-border bg-surface p-6 text-center shadow-soft sm:p-9">
           <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-50 text-success">

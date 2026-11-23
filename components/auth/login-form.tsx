@@ -179,10 +179,11 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
   const isStaff = mode === "staff";
 
   return (
-    <div className="w-full max-w-md rounded-3xl border border-border bg-surface p-6 shadow-soft sm:p-8">
+    <div className="animate-rise w-full max-w-md rounded-3xl border border-border bg-surface/95 p-6 shadow-float backdrop-blur sm:p-8">
       <div className="text-center">
-        <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-50 text-primary">
-          <KeyRound className="h-6 w-6" aria-hidden="true" />
+        <span className="relative mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-50 text-primary">
+          <span className="absolute inset-0 rounded-2xl bg-secondary/10 blur-md" aria-hidden="true" />
+          <KeyRound className="relative h-6 w-6" aria-hidden="true" />
         </span>
         <h1 className="mt-4 text-xl font-extrabold text-primary">ورود به حساب</h1>
         <p className="mt-2 text-caption leading-6 text-muted-foreground">
@@ -192,7 +193,7 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
       </div>
 
       <div
-        className="mt-5 grid grid-cols-3 gap-1 rounded-xl bg-surface-muted p-1"
+        className="mt-5 grid grid-cols-3 gap-1 rounded-xl border border-border/70 bg-surface-muted p-1"
         role="tablist"
         aria-label="روش ورود"
       >

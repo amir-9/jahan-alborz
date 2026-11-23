@@ -30,7 +30,7 @@ const nextSteps = [
 
 export default function ServiceRequestPage() {
   return (
-    <div className="page-container pb-16 pt-6 sm:pt-8">
+    <div className="page-shell page-container pb-16 pt-6 sm:pt-8">
       <Breadcrumbs
         items={[
           { name: "خدمات", href: "/services" },

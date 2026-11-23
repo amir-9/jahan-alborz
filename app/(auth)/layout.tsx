@@ -17,9 +17,14 @@ export const instant = false;
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-background">
+    <div className="relative isolate flex min-h-screen flex-col overflow-hidden bg-background">
+      <div className="absolute inset-0 bg-mesh-soft" aria-hidden="true" />
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-primary-50 to-transparent"
+        className="animate-mesh-drift pointer-events-none absolute -start-32 -top-40 h-[28rem] w-[28rem] rounded-full bg-secondary/10 blur-[100px]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -end-40 top-1/3 h-[30rem] w-[30rem] rounded-full bg-primary-500/10 blur-[110px]"
         aria-hidden="true"
       />
 

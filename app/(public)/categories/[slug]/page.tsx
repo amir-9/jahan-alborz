@@ -63,7 +63,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   );
 
   return (
-    <div className="page-container pb-16 pt-6 sm:pt-8">
+    <div className="page-shell page-container pb-16 pt-6 sm:pt-8">
       <Breadcrumbs
         items={[
           { name: "دسته‌بندی محصولات", href: "/categories" },
@@ -85,7 +85,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <Badge variant="secondary">
               {formatNumber(categoryProducts.length)} محصول
             </Badge>
-            <h1 className="mt-3 text-2xl font-extrabold text-primary sm:text-3xl">
+            <h1 className="animate-rise mt-3 text-2xl font-extrabold tracking-tight text-primary sm:text-3xl">
               {category.name}
             </h1>
             <p className="mt-3 max-w-xl text-caption leading-8 text-muted-foreground">

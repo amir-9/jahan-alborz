@@ -90,7 +90,7 @@ export function Reveal({
     <div
       ref={ref}
       className={cn(
-        "transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none",
+        "transition-[transform,opacity] duration-700 ease-out motion-reduce:transition-none",
         className,
       )}
     >

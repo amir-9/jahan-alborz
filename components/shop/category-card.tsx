@@ -22,17 +22,17 @@ export function CategoryCard({
     <Link
       href={`/categories/${category.slug}`}
       className={
-        "group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring " +
+        "group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1.5 hover:border-secondary/35 hover:shadow-[0_28px_60px_-34px_rgba(20,45,78,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring " +
         (className ?? "")
       }
     >
-      <div className="relative h-32 overflow-hidden bg-primary-50">
+      <div className="relative h-36 overflow-hidden bg-primary-50">
         <Image
           src={media.src}
           alt={media.alt}
           fill
           sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
         <div
           className="absolute inset-0 bg-gradient-to-t from-primary-900/45 via-transparent to-transparent"
@@ -41,7 +41,10 @@ export function CategoryCard({
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="text-base font-bold text-primary">{category.name}</h3>
+        <div className="mb-2 h-1 w-9 rounded-full bg-secondary/70 transition-all duration-300 group-hover:w-16" aria-hidden="true" />
+        <h3 className="text-base font-bold text-primary transition-colors group-hover:text-secondary-700">
+          {category.name}
+        </h3>
         <p className="mt-1.5 line-clamp-2 text-caption leading-6 text-muted-foreground">
           {category.description}
         </p>

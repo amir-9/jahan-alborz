@@ -74,12 +74,20 @@ export function SiteFooter({
   services = repairServices,
 }: SiteFooterProps) {
   return (
-    <footer className="mt-20 bg-primary-900 text-primary-foreground">
-      <div className="page-container">
+    <footer className="relative isolate mt-20 overflow-hidden bg-mesh text-primary-foreground">
+      <div
+        className="pointer-events-none absolute -start-40 -top-52 h-[34rem] w-[34rem] rounded-full bg-secondary/10 blur-[110px]"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-l from-transparent via-secondary/60 to-transparent"
+        aria-hidden="true"
+      />
+      <div className="page-container relative">
         <div className="grid gap-4 border-b border-white/10 py-8 sm:grid-cols-3">
           {trustItems.map((item) => (
-            <div key={item.title} className="flex items-start gap-3">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-secondary">
+            <div key={item.title} className="lift-hover flex items-start gap-3 rounded-2xl border border-white/5 bg-white/[0.02] p-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-secondary ring-1 ring-inset ring-white/10">
                 <item.icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <div>
@@ -103,7 +111,7 @@ export function SiteFooter({
             <div className="mt-6 space-y-3 text-caption">
               <a
                 href={toTelHref(siteConfig.contact.phone)}
-                className="flex items-center gap-2.5 text-on-primary-muted transition-colors hover:text-secondary"
+                className="footer-link flex items-center gap-2.5 text-on-primary-muted transition-colors hover:text-secondary"
                 dir="ltr"
               >
                 <Phone className="h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
@@ -111,7 +119,7 @@ export function SiteFooter({
               </a>
               <a
                 href={toWhatsAppHref(siteConfig.contact.whatsapp)}
-                className="flex items-center gap-2.5 text-on-primary-muted transition-colors hover:text-secondary"
+                className="footer-link flex items-center gap-2.5 text-on-primary-muted transition-colors hover:text-secondary"
                 dir="ltr"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -121,7 +129,7 @@ export function SiteFooter({
               </a>
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="flex items-center gap-2.5 text-on-primary-muted transition-colors hover:text-secondary"
+                className="footer-link flex items-center gap-2.5 text-on-primary-muted transition-colors hover:text-secondary"
                 dir="ltr"
               >
                 <Mail className="h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
@@ -146,7 +154,7 @@ export function SiteFooter({
                 <li key={category.slug}>
                   <Link
                     href={`/categories/${category.slug}`}
-                    className="text-caption text-on-primary-muted transition-colors hover:text-secondary"
+                    className="footer-link text-caption text-on-primary-muted transition-colors hover:text-secondary"
                   >
                     {category.name}
                   </Link>
@@ -170,7 +178,7 @@ export function SiteFooter({
                 <li key={service.slug}>
                   <Link
                     href="/services"
-                    className="text-caption text-on-primary-muted transition-colors hover:text-secondary"
+                    className="footer-link text-caption text-on-primary-muted transition-colors hover:text-secondary"
                   >
                     {service.name}
                   </Link>
@@ -186,7 +194,7 @@ export function SiteFooter({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-caption text-on-primary-muted transition-colors hover:text-secondary"
+                    className="footer-link text-caption text-on-primary-muted transition-colors hover:text-secondary"
                   >
                     {link.label}
                   </Link>

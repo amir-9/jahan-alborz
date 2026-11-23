@@ -33,20 +33,28 @@ export function Hero({ featuredProduct }: HeroProps) {
       : null;
 
   return (
-    <section className="relative overflow-hidden bg-primary-900 text-primary-foreground">
+    <section className="relative isolate overflow-hidden bg-mesh text-primary-foreground">
       <div
-        className="absolute inset-0 bg-grid-light opacity-70"
+        className="absolute inset-0 bg-grid-light opacity-60"
         aria-hidden="true"
       />
       <div
-        className="animate-soft-glow absolute -start-32 -top-32 h-[26rem] w-[26rem] rounded-full bg-secondary/20 blur-3xl"
+        className="animate-mesh-drift pointer-events-none absolute -start-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-secondary/20 blur-[100px]"
+        aria-hidden="true"
+      />
+      <div
+        className="animate-soft-glow pointer-events-none absolute -end-32 bottom-[-12rem] h-[30rem] w-[30rem] rounded-full bg-primary-500/45 blur-[110px]"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-l from-transparent via-secondary/40 to-transparent"
         aria-hidden="true"
       />
 
       <div className="page-container relative grid items-center gap-12 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-24">
         <div>
           <span
-            className="animate-slide-start inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-caption font-medium text-on-primary-muted backdrop-blur"
+            className="animate-slide-start inline-flex items-center gap-2 rounded-full border border-orange-300/25 bg-orange-300/10 px-3.5 py-1.5 text-caption font-semibold text-orange-100 backdrop-blur-md"
             style={{ animationDelay: "0.04s" }}
           >
             <span className="relative flex h-2 w-2">
@@ -57,7 +65,7 @@ export function Hero({ featuredProduct }: HeroProps) {
           </span>
 
           <h1
-            className="animate-rise mt-6 max-w-xl text-[2rem] font-extrabold leading-[1.4] tracking-tight sm:text-4xl lg:text-[2.9rem] lg:leading-[1.35]"
+            className="animate-rise mt-6 max-w-xl text-[2rem] font-extrabold leading-[1.4] tracking-tight drop-shadow-[0_8px_30px_rgba(0,0,0,0.25)] sm:text-4xl lg:text-[2.9rem] lg:leading-[1.35]"
             style={{ animationDelay: "0.1s" }}
           >
             گرمای مطمئن خانه،

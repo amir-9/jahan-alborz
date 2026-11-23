@@ -57,13 +57,13 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="page-container pb-16 pt-6 sm:pt-8">
+    <div className="page-shell page-container pb-16 pt-6 sm:pt-8">
       <Breadcrumbs items={[{ name: "تماس با ما" }]} />
 
       <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-2xl">
           <Badge variant="secondary">در دسترس شما</Badge>
-          <h1 className="mt-3 text-2xl font-extrabold text-primary sm:text-3xl">
+          <h1 className="animate-rise mt-3 text-2xl font-extrabold tracking-tight text-primary sm:text-3xl">
             تماس با جهان البرز
           </h1>
           <p className="mt-3 text-caption leading-8 text-muted-foreground">

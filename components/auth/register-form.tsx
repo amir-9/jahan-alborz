@@ -93,7 +93,7 @@ export function RegisterForm({ callbackUrl }: RegisterFormProps) {
 
   if (success) {
     return (
-      <div className="w-full max-w-md rounded-3xl border border-border bg-surface p-7 text-center shadow-soft">
+      <div className="animate-rise w-full max-w-md rounded-3xl border border-border bg-surface/95 p-7 text-center shadow-float backdrop-blur">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-teal-50 text-success">
           <CircleCheck className="h-7 w-7" aria-hidden="true" />
         </span>
@@ -114,7 +114,7 @@ export function RegisterForm({ callbackUrl }: RegisterFormProps) {
   }
 
   return (
-    <div className="w-full max-w-md rounded-3xl border border-border bg-surface p-6 shadow-soft sm:p-8">
+    <div className="animate-rise w-full max-w-md rounded-3xl border border-border bg-surface/95 p-6 shadow-float backdrop-blur sm:p-8">
       <div className="text-center">
         <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-50 text-primary">
           <UserPlus className="h-6 w-6" aria-hidden="true" />

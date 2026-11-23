@@ -173,13 +173,13 @@ export default async function HomePage() {
 
       {/* Trust strip */}
       <div className="page-container relative z-10 -mt-8">
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-soft sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-white/70 bg-border/80 shadow-float sm:grid-cols-2 lg:grid-cols-4">
           {trustItems.map((item) => (
             <div
               key={item.title}
-              className="flex items-start gap-3 bg-surface p-5"
+              className="flex items-start gap-3 bg-surface/95 p-5 backdrop-blur"
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary ring-1 ring-inset ring-primary/5">
                 <item.icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <div>
@@ -318,17 +318,21 @@ export default async function HomePage() {
       </section>
 
       {/* Why us */}
-      <section className="relative overflow-hidden bg-primary-900 py-16 text-primary-foreground sm:py-20 lg:py-24">
+      <section className="relative isolate overflow-hidden bg-mesh py-16 text-primary-foreground sm:py-20 lg:py-24">
         <div className="absolute inset-0 bg-grid-light opacity-60" aria-hidden="true" />
         <div
-          className="absolute -end-32 top-10 h-80 w-80 rounded-full bg-secondary/15 blur-3xl"
+          className="animate-mesh-drift pointer-events-none absolute -end-32 top-10 h-96 w-96 rounded-full bg-secondary/20 blur-[100px]"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -start-40 -bottom-52 h-96 w-96 rounded-full bg-primary-500/40 blur-[110px]"
           aria-hidden="true"
         />
         <div className="page-container relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <Reveal>
             <div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-secondary">
-                <span className="h-px w-6 bg-current" aria-hidden="true" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange-300/25 bg-orange-300/10 px-3 py-1 text-xs font-bold text-orange-200">
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-300" aria-hidden="true" />
                 چرا جهان البرز
               </div>
               <h2 className="mt-3 text-2xl font-extrabold leading-[1.5] sm:text-3xl">
@@ -375,7 +379,7 @@ export default async function HomePage() {
           <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
             {whyUs.map((item, index) => (
               <Reveal key={item.title} delay={index * 0.08}>
-                <div className="flex h-full gap-4 border-s-2 border-secondary/40 ps-4">
+                <div className="surface-glass-dark lift-hover flex h-full gap-4 rounded-2xl border-s-2 border-secondary/50 p-4">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary/15 text-secondary">
                     <item.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
@@ -411,7 +415,7 @@ export default async function HomePage() {
             />
             {processSteps.map((step, index) => (
               <Reveal key={step.title} delay={index * 0.08} variant="end">
-                <div className="relative h-full rounded-2xl border border-border bg-surface p-5 shadow-soft">
+                <div className="lift-hover relative h-full rounded-2xl border border-border bg-surface p-5 shadow-soft">
                   <div className="flex items-center justify-between">
                     <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-secondary shadow-sm">
                       <step.icon className="h-5 w-5" aria-hidden="true" />
@@ -477,7 +481,7 @@ export default async function HomePage() {
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {customerReviews.map((review, index) => (
               <Reveal key={review.id} delay={index * 0.08} variant="scale">
-                <figure className="flex h-full flex-col rounded-2xl border border-border bg-surface p-6 shadow-soft">
+                <figure className="lift-hover flex h-full flex-col rounded-2xl border border-border bg-surface p-6 shadow-soft">
                   <Quote className="h-7 w-7 text-secondary/40" aria-hidden="true" />
                   <blockquote className="mt-3 text-caption leading-7 text-muted-foreground">
                     {review.comment}
@@ -527,14 +531,14 @@ export default async function HomePage() {
 
               return (
                 <Reveal key={post.id} delay={index * 0.07} variant="start">
-                  <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift">
-                    <div className="relative h-44 overflow-hidden border-b border-border bg-primary-50">
+                  <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-secondary/30 hover:shadow-lift">
+                    <div className="relative h-44 overflow-hidden border-b border-border bg-gradient-to-br from-primary-50 to-surface">
                       <Image
                         src={media.src}
                         alt={media.alt}
                         fill
                         sizes="(max-width: 768px) 90vw, 30vw"
-                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                       />
                     </div>
                     <div className="flex flex-1 flex-col p-5">
@@ -582,7 +586,7 @@ export default async function HomePage() {
               />
 
               <div className="mt-8 space-y-4">
-                <div className="flex items-start gap-3 rounded-2xl border border-border bg-surface p-4">
+                <div className="lift-hover flex items-start gap-3 rounded-2xl border border-border bg-surface p-4">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
                     <MapPin className="h-5 w-5" aria-hidden="true" />
                   </span>
@@ -597,7 +601,7 @@ export default async function HomePage() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <a
                     href={toTelHref(siteConfig.contact.phone)}
-                    className="flex items-start gap-3 rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-primary/25"
+                    className="lift-hover flex items-start gap-3 rounded-2xl border border-border bg-surface p-4"
                   >
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
                       <Phone className="h-5 w-5" aria-hidden="true" />
@@ -610,7 +614,7 @@ export default async function HomePage() {
                     </div>
                   </a>
 
-                  <div className="flex items-start gap-3 rounded-2xl border border-border bg-surface p-4">
+                  <div className="lift-hover flex items-start gap-3 rounded-2xl border border-border bg-surface p-4">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
                       <Clock className="h-5 w-5" aria-hidden="true" />
                     </span>
@@ -627,7 +631,7 @@ export default async function HomePage() {
 
                 <a
                   href={`mailto:${siteConfig.contact.email}`}
-                  className="flex items-start gap-3 rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-primary/25"
+                  className="lift-hover flex items-start gap-3 rounded-2xl border border-border bg-surface p-4"
                 >
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary">
                     <Mail className="h-5 w-5" aria-hidden="true" />
@@ -700,10 +704,14 @@ export default async function HomePage() {
       {/* Final CTA */}
       <section className="page-container pb-20">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl bg-primary-900 px-6 py-12 text-primary-foreground sm:px-10 lg:px-14">
+          <div className="relative isolate overflow-hidden rounded-3xl bg-mesh px-6 py-12 text-primary-foreground sm:px-10 lg:px-14">
             <div className="absolute inset-0 bg-grid-light opacity-70" aria-hidden="true" />
             <div
-              className="absolute -start-16 -top-16 h-56 w-56 rounded-full bg-secondary/20 blur-3xl"
+              className="animate-mesh-drift pointer-events-none absolute -start-24 -top-24 h-80 w-80 rounded-full bg-secondary/20 blur-[90px]"
+              aria-hidden="true"
+            />
+            <div
+              className="pointer-events-none absolute -end-20 -bottom-24 h-64 w-64 rounded-full bg-primary-500/40 blur-[90px]"
               aria-hidden="true"
             />
             <div className="relative flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
