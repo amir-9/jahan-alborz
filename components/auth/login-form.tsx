@@ -59,10 +59,12 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
   }, [cooldown]);
 
   function switchMode(nextMode: LoginMode) {
+    if (nextMode === mode) return;
     setMode(nextMode);
     setError(null);
     setNotice(null);
     setCode("");
+    setOtpSent(false);
   }
 
   /** Roving tabindex keyboard support for the RTL login-mode tablist. */
@@ -212,13 +214,20 @@ export function LoginForm({ callbackUrl, initialError }: LoginFormProps) {
             onClick={() => switchMode(item.value)}
             onKeyDown={(event) => handleTabKeyDown(event, index)}
             className={cn(
-              "rounded-lg px-2 py-2 text-caption font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              "relative cursor-pointer rounded-lg px-2 py-2 text-caption font-bold transition-all duration-200",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
               mode === item.value
-                ? "bg-surface text-primary shadow-sm"
-                : "text-muted-foreground hover:text-primary",
+                ? "bg-primary text-primary-foreground shadow-[0_8px_18px_-10px_rgba(20,45,78,0.9)]"
+                : "text-muted-foreground hover:bg-primary-50 hover:text-primary",
             )}
           >
             {item.label}
+            {mode === item.value ? (
+              <span
+                className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-secondary"
+                aria-hidden="true"
+              />
+            ) : null}
           </button>
         ))}
       </div>
